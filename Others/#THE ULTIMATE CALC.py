@@ -1,7 +1,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-02-2
-#Version: 1.63
+#Version: 1.631
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, , 
 pythagoras therom,
@@ -19,6 +19,8 @@ Standard form and more!
 import math
 import os
 import fractions
+import tkinter
+
 def operation_dialogue():
     print("Please select an operation:")
     print("1. Surface Area")
@@ -41,6 +43,10 @@ def count_lines(file_path):
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
 version = 1.63
+lenght_units = "Line units"
+angle_units = "Angle units"
+volume_units = "Cubic units"
+area_units = "Area units"
 while True:
     print("Welcome to the ULTIMATE calc!")
     print("""Please select a category:
@@ -53,7 +59,8 @@ while True:
     7. Scale factors
     8. Decimal to fraction to percentage conversions
     9. Legal Info on ULTIMATE CALC™
-    More function are coming soon!!!!!""")
+    10. Settings(unavailable as of ver 1.631)
+    More functions are coming soon!!!!!""")
     category = int(input("Enter the number of the category you want to use: "))
     
 
@@ -73,7 +80,7 @@ while True:
                 print("You have selected Surface Area!")
                 side = float(input("Enter the side length of the cube: "))
                 sa = 6 * (side ** 2)
-                print(f"The surface area of the cube is {sa} square units.")
+                print(f"The surface area of the cube is {sa} {area_units}.")
             elif operation == 2:
                 print("You have selected Volume!")
                 side = float(input("Enter the side length of the cube: "))
@@ -85,7 +92,7 @@ while True:
                 sa = 6 * (side ** 2)
                 vol = side ** 3
                 ratio = sa / vol
-                print(f"The surface area of the cube is {sa} square units.")
+                print(f"The surface area of the cube is {sa} {area_units}.")
                 print(f"The volume of the cube is {vol} cubic units.")
                 print(f"The SA:VOL ratio of the cube is {ratio}.")
             else:
@@ -100,7 +107,7 @@ while True:
                 width = float(input("Enter the width of the rectangular prism: "))
                 height = float(input("Enter the height of the rectangular prism: "))
                 sa = 2 * ((length * width) + (width * height) + (height * length))
-                print(f"The surface area of the rectangular prism is {sa} square units.")
+                print(f"The surface area of the rectangular prism is {area_units}.")
             elif operation == 2:
                 print("You have selected Volume!")
                 length = float(input("Enter the length of the rectangular prism: "))
@@ -116,7 +123,7 @@ while True:
                 sa = 2 * ((length * width) + (width * height) + (height * length))
                 vol = length * width * height
                 ratio = sa / vol
-                print(f"The surface area of the rectangular prism is {sa} square units.")
+                print(f"The surface area of the rectangular prism is {sa}.")
                 print(f"The volume of the rectangular prism is {vol} cubic units.")
                 print(f"The SA:VOL ratio of the rectangular prism is {ratio}.")
             else:
@@ -132,7 +139,7 @@ while True:
                 radius = float(input("Enter the radius of the cylinder: "))
                 height = float(input("Enter the height of the cylinder: "))
                 sa = (2 * pi * radius * height) + (2 * pi * (radius ** 2))
-                print(f"The surface area of the cylinder is {sa} square units.")
+                print(f"The surface area of the cylinder is {area_units}.")
             elif operation == 2:
                 print("You have selected Volume!")
                 radius = float(input("Enter the radius of the cylinder: "))
@@ -146,7 +153,7 @@ while True:
                 sa = (2 * pi * radius * height) + (2 * pi * (radius ** 2))
                 vol = pi * (radius ** 2) * height
                 ratio = sa / vol
-                print(f"The surface area of the cylinder is {sa} square units.")
+                print(f"The surface area of the cylinder is {area_units}.")
                 print(f"The volume of the cylinder is {vol} cubic units.")
                 print(f"The SA:VOL ratio of the cylinder is {ratio}.")
             else:
@@ -161,7 +168,7 @@ while True:
                 radius = float(input("Enter the radius of the cone: "))
                 slant_height = float(input("Enter the slant height of the cone: "))
                 sa = pi * radius * (radius + slant_height)
-                print(f"The surface area of the cone is {sa} square units.")
+                print(f"The surface area of the cone is {area_units}.")
             elif operation == 2:
                 print("You have selected Volume!")
                 radius = float(input("Enter the radius of the cone: "))
@@ -175,7 +182,7 @@ while True:
                 sa = pi * radius * (radius + slant_height)
                 vol = (1/3) * pi * (radius ** 2) * height
                 ratio = sa / vol
-                print(f"The surface area of the cone is {sa} square units.")
+                print(f"The surface area of the cone is {area_units}.")
                 print(f"The volume of the cone is {vol} cubic units.")
                 print(f"The SA:VOL ratio of the cone is {ratio}.")
             else:
@@ -189,7 +196,7 @@ while True:
                 print("You have selected Surface Area!")
                 radius = float(input("Enter the radius of the sphere: "))
                 sa = 4 * pi * (radius ** 2)
-                print(f"The surface area of the sphere is {sa} square units.")
+                print(f"The surface area of the sphere is {area_units}.")
             elif operation == 2:
                 print("You have selected Volume!")
                 radius = float(input("Enter the radius of the sphere: "))
@@ -201,7 +208,7 @@ while True:
                 sa = 4 * pi * (radius ** 2)
                 vol = (4/3) * pi * (radius ** 3)
                 ratio = sa / vol
-                print(f"The surface area of the sphere is {sa} square units.")
+                print(f"The surface area of the sphere is {area_units}.")
                 print(f"The volume of the sphere is {vol} cubic units.")
                 print(f"The SA:VOL ratio of the sphere is {ratio}.")
             else:
@@ -250,7 +257,7 @@ while True:
                 print("You have selected Area!")
                 side = float(input("Enter the length of a side of the square: "))
                 area = side ** 2
-                print(f"The area of the square is {area} square units.")
+                print(f"The area of the square is{area_units}.")
             elif operation == 3:
                 print("You have selected Both!")
                 side = float(input("Enter the length of a side of the square: "))
@@ -258,7 +265,7 @@ while True:
                 area = side ** 2
                 ratio = perimiter / area
                 print(f"The perimiter of the square is {perimiter} units.")
-                print(f"The area of the square is {area} square units.")
+                print(f"The area of the square is{area_units}.")
                 print(f"The P:A ratio of the square is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
@@ -276,7 +283,7 @@ while True:
                 length = float(input("Enter the length of the rectangle: "))
                 width = float(input("Enter the width of the rectangle: "))
                 area = length * width
-                print(f"The area of the rectangle is {area} square units.")
+                print(f"The area of the rectangle is{area_units}.")
             elif operation == 3:
                 print("You have selected Both!")
                 length = float(input("Enter the length of the rectangle: "))
@@ -285,7 +292,7 @@ while True:
                 area = length * width
                 ratio = perimiter / area
                 print(f"The perimiter of the rectangle is {perimiter} units.")
-                print(f"The area of the rectangle is {area} square units.")
+                print(f"The area of the rectangle is{area_units}.")
                 print(f"The P:A ratio of the rectangle is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
@@ -304,7 +311,7 @@ while True:
                 base = float(input("Enter the length of the base of the triangle: "))
                 height = float(input("Enter the height of the triangle: "))
                 area = (1/2) * base * height
-                print(f"The area of the triangle is {area} square units.")
+                print(f"The area of the triangle is{area_units}.")
             elif operation == 3:
                 print("You have selected Both!")
                 side1 = float(input("Enter the length of the first side: "))
@@ -316,7 +323,7 @@ while True:
                 area = (1/2) * base * height
                 ratio = perimiter / area
                 print(f"The perimiter of the triangle is {perimiter} units.")
-                print(f"The area of the triangle is {area} square units.")
+                print(f"The area of the triangle is{area_units}.")
                 print(f"The P:A ratio of the triangle is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
@@ -333,7 +340,7 @@ while True:
                 print("You have selected Area!")
                 radius = float(input("Enter the radius of the circle: "))
                 area = pi * (radius ** 2)
-                print(f"The area of the circle is {area} square units.")
+                print(f"The area of the circle is {area_units}.")
             elif operation == 3:
                 print("You have selected Both!")
                 radius = float(input("Enter the radius of the circle: "))
@@ -341,7 +348,7 @@ while True:
                 area = pi * (radius ** 2)
                 ratio = perimiter / area
                 print(f"The perimiter of the circle is {perimiter} units.")
-                print(f"The area of the circle is {area} square units.")
+                print(f"The area of the circle is {area_units}.")
                 print(f"The P:A ratio of the circle is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
@@ -539,6 +546,36 @@ Please note this calc only supports ENG notation""")
         print(f"Lines of code: {count_lines(file_path)}")
         print(f"Size:{file_size} bytes")
         print(f"Version: {version}")
+#Note:Category 10 under consturction
+'''    elif category == 10:
+        print("Settings")
+        print("Please select an operation:")
+        print("""1.Change units
+2.Copy answer to keyboard""")
+        operation = int(input("Enter the number of the operation you want to perform: "))
+        if operation == 1:
+            print("You have selected Change units!")
+            print("Please select a unit to change:")
+            print("""1. Length
+2.Angle
+3.Volume
+4.Area""")
+            unit = int(input("Enter the number of the unit you want to change: "))
+            if unit == 1:
+                print("You have selected Length!")
+                print("Please select the current unit:(Default is lenght units)")
+                print("""1. Meters
+2. Kilometers
+3. Centimeters
+4. Millimeters
+5. Inches
+6. Feet
+7. Yards
+8. Miles""")
+                current_unit = int(input("Enter the number of the current unit: "))
+                print("Please select the new unit:(Default is lenght units)")'''
+                
+   
 
 
 
