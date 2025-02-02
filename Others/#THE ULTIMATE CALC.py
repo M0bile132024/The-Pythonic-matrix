@@ -1,21 +1,24 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-02-1
-#Version: 1.53
+#Date: 2025-02-2
+#Version: 1.63
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, , 
 pythagoras therom,
 Perimiter/Area,
 The basics,
 Ordering,
+Scale factors,
+Decimal to fraction to percentage conversions,
 Planetary time and arcs/sectors/chords(included in others(in a future update)),
 Standard form and more!
-'''#Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
+'''
+#Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 import math
 import os
-import sys
+import fractions
 def operation_dialogue():
     print("Please select an operation:")
     print("1. Surface Area")
@@ -37,6 +40,7 @@ def count_lines(file_path):
         return len(lines)
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
+version = 1.63
 while True:
     print("Welcome to the ULTIMATE calc!")
     print("""Please select a category:
@@ -46,7 +50,9 @@ while True:
     4. Standard form
     5. The Basics
     6. Ordering
-    7. Legal Info on ULTIMATE CALC™
+    7. Scale factors
+    8. Decimal to fraction to percentage conversions
+    9. Legal Info on ULTIMATE CALC™
     More function are coming soon!!!!!""")
     category = int(input("Enter the number of the category you want to use: "))
     
@@ -84,7 +90,7 @@ while True:
                 print(f"The SA:VOL ratio of the cube is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 2:
             print("You have selected the Rectangular Prism!")
             operation = operation_dialogue()
@@ -115,7 +121,7 @@ while True:
                 print(f"The SA:VOL ratio of the rectangular prism is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 3:
             print("You have selected the Cylinder!")
             
@@ -145,7 +151,7 @@ while True:
                 print(f"The SA:VOL ratio of the cylinder is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 4:
             print("You have selected the Cone!")
             operation = operation_dialogue()   
@@ -174,7 +180,7 @@ while True:
                 print(f"The SA:VOL ratio of the cone is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 5:
             print("You have selected the Sphere!")
             operation = operation_dialogue()
@@ -200,10 +206,10 @@ while True:
                 print(f"The SA:VOL ratio of the sphere is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         else:
             print("Invalid shape!Please try again.")
-            sys.exit()
+            continue 
     elif category == 2:
         print("Welcome to the Pythagoras therom category!")
         print("Please select an operation:")
@@ -224,7 +230,7 @@ while True:
             print(f"The length of the unknown side is {unknown_side}.")
         else:
             print("Invalid operation!Please try again.")
-            sys.exit()
+            continue 
     elif category == 3:
         print("Welcome to the Perimiter and Area category!")
         print("""Please select a shape:
@@ -256,7 +262,7 @@ while True:
                 print(f"The P:A ratio of the square is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 2:
             operation = twod_operation_dialogue("Rectangle")
             if operation == 1:
@@ -283,7 +289,7 @@ while True:
                 print(f"The P:A ratio of the rectangle is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 3:
             operation = twod_operation_dialogue("Triangle")
             if operation == 1:
@@ -314,7 +320,7 @@ while True:
                 print(f"The P:A ratio of the triangle is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         elif shape == 4:
             operation = twod_operation_dialogue("Circle")
             pi = math.pi
@@ -339,10 +345,10 @@ while True:
                 print(f"The P:A ratio of the circle is {ratio}.")
             else:
                 print("Invalid operation!Please try again.")
-                sys.exit()
+                continue 
         else:
             print("Invalid shape!Please try again.")
-            sys.exit()
+            continue 
     elif category == 4:
         print("Welcome to the Standard form category!")
         print("Please select an operation:")
@@ -363,10 +369,10 @@ Please note this calc only supports ENG notation""")
                 print(f"The number in standard form is {number}.")
             except:
                 print("Invalid notation!Please try again,using ENG Noation.")
-                sys.exit()
+                continue 
         else:
             print("Invalid operation!Please try again.")
-            sys.exit()
+            continue 
     elif category == 5:
         print("Welcome to the Basics category(of course....)!")
         print("Please select an operation:")
@@ -415,7 +421,7 @@ Please note this calc only supports ENG notation""")
             print(f"The {root} root of the number is {result}.")
         else:
             print("Invalid operation!Please try again.")
-            sys.exit()
+            continue 
     elif category == 6:
         print("Welcome to the Ordering category!")
         print("Please select an operation:")
@@ -448,8 +454,81 @@ Please note this calc only supports ENG notation""")
             print(f"The numbers in descending order are {ordering_list}.",sep=",")
         else:
             print("Invalid operation!Please try again.")
-            sys.exit()
+            continue 
     elif category == 7:
+        print("Welcome to the Scale factors category!")
+        print("Please select an operation:")
+        print("""1. Calculate the scale factor
+        2. Calculate the new length
+        3. Calcuate the original length""")
+        operation = int(input("Enter the number of the operation you want to perform: "))
+        if operation == 1:
+            print("You have selected Calculate the scale factor!")
+            original_length = float(input("Enter the original length: "))
+            new_length = float(input("Enter the new length: "))
+            scale_factor = new_length / original_length
+            print(f"The scale factor is {scale_factor}.")
+        elif operation == 2:
+            print("You have selected Calculate the new length!")
+            original_length = float(input("Enter the original length: "))
+            scale_factor = float(input("Enter the scale factor: "))
+            new_length = original_length * scale_factor
+            print(f"The new length is {new_length}.")
+        elif operation == 3:
+            print("You have selected Calculate the original length!")
+            new_length = float(input("Enter the new length: "))
+            scale_factor = float(input("Enter the scale factor: "))
+            original_length = new_length / scale_factor
+            print(f"The original length is {original_length}.")
+        else:
+            print("Invalid operation!Please try again.")
+            continue
+    elif category == 8:
+        print("Welcome to the Decimal to fraction to percentage conversions category!")
+        print("""Please select an operation:
+        1. Decimal to fraction
+        2. Fraction to decimal
+        3. Decimal to percentage
+        4. Percentage to decimal
+        5. Fraction to percentage
+        6. Percentage to fraction""")
+        operation = int(input("Enter the number of the operation you want to perform: "))
+        if operation == 1:
+            print("You have selected Decimal to fraction!")
+            decimal = float(input("Enter the decimal you want to convert to a fraction: "))
+            fraction = fractions.Fraction(decimal).limit_denominator()
+            print(f"The fraction is {fraction}.")
+        elif operation == 2:
+            print("You have selected Fraction to decimal!")
+            numerator = float(input("Enter the numerator of the fraction: "))
+            denominator = float(input("Enter the denominator of the fraction: "))
+            decimal = numerator / denominator
+            print(f"The decimal is {decimal}.")
+        elif operation == 3:
+            print("You have selected Decimal to percentage!")
+            decimal = float(input("Enter the decimal you want to convert to a percentage: "))
+            percentage = decimal * 100
+            print(f"The percentage is {percentage}%.")
+        elif operation == 4:
+            print("You have selected Percentage to decimal!")
+            percentage = float(input("Enter the percentage you want to convert to a decimal: "))
+            decimal = percentage / 100
+            print(f"The decimal is {decimal}.")
+        elif operation == 5:
+            print("You have selected Fraction to percentage!")
+            numerator = float(input("Enter the numerator of the fraction: "))
+            denominator = float(input("Enter the denominator of the fraction: "))
+            percentage = (numerator / denominator) * 100
+            print(f"The percentage is {percentage}%.")
+        elif operation == 6:
+            print("You have selected Percentage to fraction!")
+            percentage = float(input("Enter the percentage you want to convert to a fraction: "))
+            fraction = fractions.Fraction(percentage / 100).limit_denominator()
+            print(f"The fraction is {fraction}.")
+        else:
+            print("Invalid operation!Please try again.")
+            continue
+    elif category == 9:
         print("Legal Info on ULTIMATE CALC™")
         print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
         print("© 2025 M0bile132022. All rights reserved.")
@@ -459,6 +538,7 @@ Please note this calc only supports ENG notation""")
         print("Other statstics:")
         print(f"Lines of code: {count_lines(file_path)}")
         print(f"Size:{file_size} bytes")
+        print(f"Version: {version}")
 
 
 
