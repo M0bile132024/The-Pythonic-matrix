@@ -1,7 +1,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-08-2
-#Version: 1.8
+#Version: 1.84
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, , 
 pythagoras therom,
@@ -11,7 +11,8 @@ Ordering,
 Scale factors,
 Decimal to fraction to percentage conversions,
 Planetary time and arcs/sectors/chords(included in others(in a future update)),
-Compound intrest
+intrest
+trigomentry
 Standard form and more!
 '''
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
@@ -55,14 +56,14 @@ def copy_to_keyboard(text,true_or_false):
         return
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 1.8
+version = 1.84
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
 area_units = "Area units"
 money_units = "Money units"
 time_units = "Time units"
-copy_to_keyboard_true = False
+copy_to_keyboard_true = True
 while True:
     print(f"Welcome to the ULTIMATE calc Ver {version}!")
     print("""Please select a category:
@@ -75,8 +76,9 @@ while True:
     7. Scale factors
     8. Decimal to fraction to percentage conversions
     9. Intrest
-    10. Legal/Other Info on ULTIMATE CALC™
-    11. Settings(coming 1.9)
+    10. Trigomentry
+    11. Legal/Other Info on ULTIMATE CALC™
+    12. Settings(coming 1.9)
     More functions are coming soon!!!!!""")
     category = int(input("Enter the number of the category you want to use: "))
     
@@ -717,12 +719,110 @@ Please note this calc only supports ENG notation""")
         else:
             print("Invalid sub-category!Please try again.")
             continue
+    elif category == 10:
+#      FORMULAS TO REMEMBER(in case it breaks again):
+#      sin(x) = opposite/hypotnuse
+#      cos(x) = adjacent/hypotnuse
+#      tan(x) = opposite/adjacent
+        print("Welcome to the Trigomentry category!")
+        print("Please select an operation:")
+        print("""1. Finding sin(x) 
+2. Finding cos(x)
+3. Finding tan(x)
+4. Finding hypotnuse(using sin(x))
+5. Finding hypotnuse(using cos(x))
+6. Finding opposite(using sin(x))
+7. Finding opposite(using tan(x))
+8. Finding adjacent(using cos(x))
+9. Finding adjacent(using tan(x))
+
+Please note that the angles are in degrees""")
+        operation = int(input("Enter the number of the operation you want to perform: "))
+        if operation == 1:
+            print("You have selected Finding sin(x)!")
+            opposite = float(input("Enter the length of the opposite side: "))
+            hypotnuse = float(input("Enter the length of the hypotnuse: "))
+            sin = opposite / hypotnuse
+            angle = math.degrees(math.asin(sin))
+            print(f"The sin(x) is {sin} and the angle is {angle}°.")
+            copy_to_keyboard(f"The sin(x) is {sin} and the angle is {angle}°.", copy_to_keyboard_true)
+        elif operation == 2:
+            print("You have selected Finding cos(x)!")
+            adjacent = float(input("Enter the length of the adjacent side: "))
+            hypotnuse = float(input("Enter the length of the hypotnuse: "))
+            cos = adjacent / hypotnuse
+            angle = math.degrees(math.acos(cos))
+            print(f"The cos(x) is {cos} and the angle is {angle}°.")
+            copy_to_keyboard(f"The cos(x) is {cos} and the angle is {angle}°.", copy_to_keyboard_true)
+        elif operation == 3:
+            print("You have selected Finding tan(x)!")
+            opposite = float(input("Enter the length of the opposite side: "))
+            adjacent = float(input("Enter the length of the adjacent side: "))
+            tan = opposite / adjacent
+            angle = math.degrees(math.atan(tan))
+            print(f"The tan(x) is {tan} and the angle is {angle}°.")
+            copy_to_keyboard(f"The tan(x) is {tan} and the angle is {angle}°.", copy_to_keyboard_true)
+        elif operation == 4:
+            print("You have selected Finding hypotnuse(using sin(x))!")
+            opposite = float(input("Enter the length of the opposite side: "))
+            angle = float(input("Enter the angle(degrees): "))
+            sin = math.sin(math.radians(angle))
+            hypotnuse = opposite / sin
+            print(f"The hypotnuse is {hypotnuse} {lenght_units}.")
+            copy_to_keyboard(hypotnuse, copy_to_keyboard_true)
+        elif operation == 5:
+            print("You have selected Finding hypotnuse(using cos(x))!")
+            adjacent = float(input("Enter the length of the adjacent side: "))
+            angle = float(input("Enter the angle(degrees): "))
+            cos = math.cos(math.radians(angle))
+            hypotnuse = adjacent / cos
+            print(f"The hypotnuse is {hypotnuse} {lenght_units}.")
+            copy_to_keyboard(hypotnuse, copy_to_keyboard_true)
+        elif operation == 6:
+            print("You have selected Finding opposite(using sin(x))!")
+            hypotnuse = float(input("Enter the length of the hypotnuse: "))
+            angle = float(input("Enter the angle(degrees): "))
+            sin = math.sin(math.radians(angle))
+            opposite = hypotnuse * sin
+            print(f"The opposite is {opposite} {lenght_units}.")
+            copy_to_keyboard(opposite, copy_to_keyboard_true)
+        elif operation == 7:
+            print("You have selected Finding opposite(using tan(x))!")
+            adjacent = float(input("Enter the length of the adjacent side: "))
+            angle = float(input("Enter the angle(degrees): "))
+            tan = math.tan(math.radians(angle))
+            opposite = adjacent * tan
+            print(f"The opposite is {opposite} {lenght_units}.")
+            copy_to_keyboard(opposite, copy_to_keyboard_true)
+        elif operation == 8:
+            print("You have selected Finding adjacent(using cos(x))!")
+            hypotnuse = float(input("Enter the length of the hypotnuse: "))
+            angle = float(input("Enter the angle(degrees): "))
+            cos = math.cos(math.radians(angle))
+            adjacent = hypotnuse * cos
+            print(f"The adjacent is {adjacent} {lenght_units}.")
+            copy_to_keyboard(adjacent, copy_to_keyboard_true)
+        elif operation == 9:
+            print("You have selected Finding adjacent(using tan(x))!")
+            opposite = float(input("Enter the lenght of the opposite:"))
+            angle = float(input("Enter the angle(degrees):"))
+            tan = math.tan(math.radians(angle))
+            adjacent = opposite * tan
+            print(f"The adjacent is {adjacent} {lenght_units}.")
+            copy_to_keyboard(adjacent,copy_to_keyboard_true)
+        else:
+            print("Invalid operation!Please try again.")
+            continue
+        
+
+              
+              
 
         
 
             
 
-    elif category == 10:
+    elif category == 11:
         print("Legal Info on ULTIMATE CALC™")
         print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
         print("© 2025 M0bile132022. All rights reserved.")
