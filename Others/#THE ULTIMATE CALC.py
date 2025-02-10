@@ -1,7 +1,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-08-2
-#Version: 1.84
+#Date: 2025-10-2
+#Version: 1.845
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, , 
 pythagoras therom,
@@ -56,7 +56,7 @@ def copy_to_keyboard(text,true_or_false):
         return
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 1.84
+version = 1.845
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -131,7 +131,7 @@ while True:
                 width = float(input("Enter the width of the rectangular prism: "))
                 height = float(input("Enter the height of the rectangular prism: "))
                 sa = 2 * ((length * width) + (width * height) + (height * length))
-                print(f"The surface area of the rectangular prism is {area_units}.")
+                print(f"The surface area of the rectangular prism is {sa} {area_units}.")
                 copy_to_keyboard(sa,copy_to_keyboard_true)
             elif operation == 2:
                 print("You have selected Volume!")
@@ -149,7 +149,7 @@ while True:
                 sa = 2 * ((length * width) + (width * height) + (height * length))
                 vol = length * width * height
                 ratio = sa / vol
-                print(f"The surface area of the rectangular prism is {sa}.")
+                print(f"The surface area of the rectangular prism is {sa} {area_units}.")
                 copy_to_keyboard(sa,copy_to_keyboard_true)
                 print(f"The volume of the rectangular prism is {vol} {volume_units}.")
                 copy_to_keyboard(vol,copy_to_keyboard_true)
@@ -168,7 +168,7 @@ while True:
                 radius = float(input("Enter the radius of the cylinder: "))
                 height = float(input("Enter the height of the cylinder: "))
                 sa = (2 * pi * radius * height) + (2 * pi * (radius ** 2))
-                print(f"The surface area of the cylinder is {area_units}.")
+                print(f"The surface area of the cylinder is {sa} {area_units}.")
                 copy_to_keyboard(sa,copy_to_keyboard_true)
             elif operation == 2:
                 print("You have selected Volume!")
@@ -184,7 +184,7 @@ while True:
                 sa = (2 * pi * radius * height) + (2 * pi * (radius ** 2))
                 vol = pi * (radius ** 2) * height
                 ratio = sa / vol
-                print(f"The surface area of the cylinder is {area_units}.")
+                print(f"The surface area of the cylinder is {sa} {area_units}.")
                 copy_to_keyboard(sa,copy_to_keyboard_true)
                 print(f"The volume of the cylinder is {vol} {volume_units}.")
                 copy_to_keyboard(vol,copy_to_keyboard_true)
@@ -202,7 +202,7 @@ while True:
                 radius = float(input("Enter the radius of the cone: "))
                 slant_height = float(input("Enter the slant height of the cone: "))
                 sa = pi * radius * (radius + slant_height)
-                print(f"The surface area of the cone is {area_units}.")
+                print(f"The surface area of the cone is {sa} {area_units}.")
                 copy_to_keyboard(sa,copy_to_keyboard_true)
             elif operation == 2:
                 print("You have selected Volume!")
@@ -215,15 +215,14 @@ while True:
                 print("You have selected Both!")
                 radius = float(input("Enter the radius of the cone: "))
                 height = float(input("Enter the height of the cone: "))
+                slant_height = float(input("Enter the slant height:"))
                 sa = pi * radius * (radius + slant_height)
                 vol = (1/3) * pi * (radius ** 2) * height
                 ratio = sa / vol
-                print(f"The surface area of the cone is {area_units}.")
-                copy_to_keyboard(sa,copy_to_keyboard_true)
+                print(f"The surface area of the cone is {sa} {area_units}")
                 print(f"The volume of the cone is {vol} {volume_units}.")
-                copy_to_keyboard(vol,copy_to_keyboard_true)
                 print(f"The SA:VOL ratio of the cone is {ratio}.")
-                copy_to_keyboard(ratio,copy_to_keyboard_true)
+                copy_to_keyboard(f"{sa},{vol},{ratio}",copy_to_keyboard_true)
             else:
                 print("Invalid operation!Please try again.")
                 continue 
@@ -456,7 +455,8 @@ Please note this calc only supports ENG notation""")
 3. Multiplication
 4. Division
 5. Exponents
-6. Square/cube/any root""")
+6. Square/cube/any root
+7.Bring up "The Lists"....""")
         operation = int(input("Enter the number of the operation you want to perform: "))
         if operation == 1:
             print("You have selected Addition!")
@@ -500,6 +500,34 @@ Please note this calc only supports ENG notation""")
             result = num ** (1/root)
             print(f"The {root} root of the number is {result}.")
             copy_to_keyboard(result, copy_to_keyboard_true)
+        elif operation == 7:
+            print("Standard Multiplication grid:")
+            # Define the size of the times table grid
+            size = 20
+
+            # Print the header row
+            print("    ", end="")
+            for i in range(1, size + 1):
+                print(f"{i:4}", end="")
+            print()
+
+            # Print the separator line
+            print("    " + "-" * (size * 4))
+
+            # Print the times table grid
+            for i in range(1, size + 1):
+                print(f"{i:2} |", end="")
+                for j in range(1, size + 1):
+                    print(f"{i * j:4}", end="")
+                print()
+            print("Standard list of sqaures and cubes:")
+            print("Number |",end="")
+            print("Squares |",end="")
+            print("Cubes |")
+
+            for i in range(1,21):
+                print(i,i**2,i**3,sep="   |")
+
         else:
             print("Invalid operation!Please try again.")
             continue 
@@ -724,7 +752,7 @@ Please note this calc only supports ENG notation""")
 #      sin(x) = opposite/hypotnuse
 #      cos(x) = adjacent/hypotnuse
 #      tan(x) = opposite/adjacent
-        print("Welcome to the Trigomentry category!")
+        print("Welcome to the Trigomentry(SOHCAHTOA) category!")
         print("Please select an operation:")
         print("""1. Finding sin(x) 
 2. Finding cos(x)
