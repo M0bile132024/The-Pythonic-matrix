@@ -859,7 +859,9 @@ Please note that the angles are in degrees""")
 3. Calculate the x-intercept
 4. Calculate the equation of the line
 5. Calculate the distance between two points
-6.Calcuate the midpoint of two points""")
+6.Calcuate the midpoint of two points
+7. Calcuate gradient of perpendicular line
+8. Calcuate gradient of parallel line""")
         operation = int(input("Enter the number of the operation you want to perform: "))
         if operation == 1:
             print("You have selected Calculate the gradient/slope!")
@@ -912,9 +914,16 @@ Please note that the angles are in degrees""")
             x2 = float(input("Enter the x-coordinate of the second point: "))
             y2 = float(input("Enter the y-coordinate of the second point: "))
             midpoint_x = (x1 + x2) / 2
-            mid_point_y = (y1 + y2) / 2
-            print(f"The midpoint of the two points is ({midpoint_x},{mid_point_y}).")
-            copy_to_keyboard(f"The midpoint of the two points is ({midpoint_x},{mid_point_y}).", copy_to_keyboard_true)
+            midpoint_y = (y1 + y2) / 2
+            print(f"The midpoint of the two points is ({midpoint_x},{midpoint_y}).")
+            copy_to_keyboard(f"The midpoint of the two points is ({midpoint_x},{midpoint_y}).", copy_to_keyboard_true)
+        elif operation == 7:
+            print("You have selected Calculate gradient of perpendicular line!")
+            gradient = float(input("Enter the gradient of the other line: "))
+            perpendicular_gradient = -1 / gradient
+            print(f"The gradient of the perpendicular line is {perpendicular_gradient}.")
+        elif operation == 8:
+            print("The gradient of the parallel line is the same as the other line!")
         else:
             print("Invalid operation!Please try again.")
             continue

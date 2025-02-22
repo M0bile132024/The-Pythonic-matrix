@@ -1,6 +1,6 @@
-#INTERNET LORE TEXT ADVENTURE 1.2
+#INTERNET LORE TEXT ADVENTURE(PT.1) 1.3
 #BY: A Mobile Developer
-#DATE: 2025-01-30
+#DATE: 2025-02-22
 #LICENSE: MIT
 #DESCRIPTION: A text adventure game that takes place in the internet lore universe.
 #             The player will navigate through the internet lore universe and make choices
@@ -153,8 +153,10 @@ if q4 == 1:
     print("It says: 'I'm sorry, I had to go. I can't explain now, but I'll be back soon.'")
     time.sleep(2)  
     if random_event == 1:
+        was_it_alexa = True
         print("And at once, you knew exactly who that figure was.")
     elif random_event == 2:
+        was_it_alexa = False
         print("You are left confused and worried.")
     else:
         print("How does this even happen?")
@@ -167,3 +169,8 @@ elif q4 == 2:
     print("You decide to investigate the firewall yourself.")
     time.sleep(2)
     print("You rush to the kitchen and grab a flashlight,and a couple of supplies,then leave the house immediately for the firewall.")
+else:
+    print("Invalid input.")
+    sys.exit()
+print("But that's for next time , on INTERNET LORE TEXT ADVENTURE(PT.1)")
+print("Thank you for playing!")

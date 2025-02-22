@@ -1,6 +1,6 @@
-#INTERNET LORE TEXT ADVENTURE 1.1
+#INTERNET LORE TEXT ADVENTURE 1.2
 #BY: A Mobile Developer
-#DATE: 2025-01-25
+#DATE: 2025-02-22
 #LICENSE: MIT
 #DESCRIPTION: A text adventure game that takes place in the internet lore universe.
 #             The player will navigate through the internet lore universe and make choices
@@ -34,7 +34,7 @@ q1 = int(input("Should you 1.Go to investigate or 2.Continue with your morning r
 if q1 == 1:
     print("You decide to go investigate the commotion.")
     time.sleep(2)
-    print("You walk out of your room and see your parents(Google search and Google Images),arguing over the breakfast table as usual.")
+    print("You walk out of your room and see your parents(Google search and Google search Images),arguing over the breakfast table as usual.")
     time.sleep(2)
     print("Suddenly you hear a loud shout coming from your sister(Alexa) room.")
     time.sleep(2)
@@ -103,4 +103,7 @@ print("""Location: The Google servers, 2 year ago, 19 Redfern St, Sector 5
 time.sleep(3)
 print("You wake up in the middle of the night to a strange noise.")
 time.sleep(2)
-print("Although")
+print("And although,noises are common in the Google servers,you can't shake the feeling that something is wrong.")
+time.sleep(2)
+print("You get up and walk to the living room.")
+time.sleep(2)
