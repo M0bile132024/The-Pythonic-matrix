@@ -1,9 +1,9 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-10-2
-#Version: 1.845
+#Date: 2025-22-2
+#Version: 1.92
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
-PHYSIC EQUATIONS, , 
+PHYSIC EQUATIONS, 
 pythagoras therom,
 Perimiter/Area,
 The basics,
@@ -54,9 +54,16 @@ def copy_to_keyboard(text,true_or_false):
         return
     else:
         return
+#Alt functions
+def find_x_intercept(m, b):
+    if m == 0:
+        print("The slope (m) cannot be zero for a valid x-intercept.")
+        return None
+    x_intercept = -b / m
+    return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 1.845
+version = 1.92
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -72,13 +79,16 @@ while True:
     3. Perimiter and Area(P:A ratio)
     4. Standard form
     5. The Basics
-    6. Ordering
+    6. Ordering/Mass operations
     7. Scale factors
     8. Decimal to fraction to percentage conversions
     9. Intrest
     10. Trigomentry
-    11. Legal/Other Info on ULTIMATE CALC™
-    12. Settings(coming 1.9)
+    11. Lines(beta)
+    12. Circles(coming in update 2.0)
+    13. Planetary time(coming in update 2.0)
+    14. Legal/Other Info on ULTIMATE CALC™
+    15. Settings
     More functions are coming soon!!!!!""")
     category = int(input("Enter the number of the category you want to use: "))
     
@@ -672,7 +682,7 @@ Please note this calc only supports ENG notation""")
                 rate = float(input("Enter the rate(%): "))
                 time = float(input("Enter the time(years): "))
                 simple_intrest = (principal * rate * time) / 100
-                print(f"The simple intrest is {simple_intrest} {money_units}.")
+                print(f"The simple intrest is {money_units} {simple_intrest} .")
                 copy_to_keyboard(simple_intrest, copy_to_keyboard_true)
             elif operation == 2:
                 print("You have selected Calculate the principal!")
@@ -680,7 +690,7 @@ Please note this calc only supports ENG notation""")
                 rate = float(input("Enter the rate(%): "))
                 time = float(input("Enter the time(years): "))
                 principal = (simple_intrest * 100) / (rate * time)
-                print(f"The principal is {principal} {money_units}.")
+                print(f"The principal is {money_units} {principal} .")
                 copy_to_keyboard(principal, copy_to_keyboard_true)
             elif operation == 3:
                 print("You have selected Calculate the rate(%)!")
@@ -715,7 +725,7 @@ Please note this calc only supports ENG notation""")
                 rate = float(input("Enter the rate(%): "))
                 time = float(input("Enter the time(years): "))
                 compound_intrest = principal * ((1 + (rate / 100)) ** time)
-                print(f"The compound intrest is {compound_intrest} {money_units}.")
+                print(f"The compound intrest is {money_units} {compound_intrest} .")
                 copy_to_keyboard(compound_intrest, copy_to_keyboard_true)
             elif operation == 2:
                 print("You have selected Calculate the principal!")
@@ -723,7 +733,7 @@ Please note this calc only supports ENG notation""")
                 rate = float(input("Enter the rate(%): "))
                 time = float(input("Enter the time(years): "))
                 principal = compound_intrest / ((1 + (rate / 100)) ** time)
-                print(f"The principal is {principal} {money_units}.")
+                print(f"The principal is {money_units} {principal} .")
                 copy_to_keyboard(principal, copy_to_keyboard_true)
             elif operation == 3:
                 print("You have selected Calculate the rate(%)!")
@@ -841,7 +851,147 @@ Please note that the angles are in degrees""")
         else:
             print("Invalid operation!Please try again.")
             continue
-        
+    elif category == 11:
+        print("You have selected the Line category!")
+        print("Please select an operation:")
+        print("""1. Calculate the gradient/slope
+2. Calculate the y-intercept
+3. Calculate the x-intercept
+4. Calculate the equation of the line
+5. Calculate the distance between two points
+6.Calcuate the midpoint of two points""")
+        operation = int(input("Enter the number of the operation you want to perform: "))
+        if operation == 1:
+            print("You have selected Calculate the gradient/slope!")
+            x1 = float(input("Enter the x-coordinate of the first point: "))
+            y1 = float(input("Enter the y-coordinate of the first point: "))
+            x2 = float(input("Enter the x-coordinate of the second point: "))
+            y2 = float(input("Enter the y-coordinate of the second point: "))
+            gradient = (y2 - y1) / (x2 - x1)
+            print(f"The gradient/slope is {gradient}.")
+            copy_to_keyboard(gradient, copy_to_keyboard_true)
+        elif operation == 2:
+            print("You have selected Calculate the y-intercept!")
+            x = float(input("Enter the x-coordinate of a point on the line: "))
+            y = float(input("Enter the y-coordinate of the point on the line: "))
+            gradient = float(input("Enter the gradient/slope of line: "))
+            y_intercept = y - (gradient * x)
+            print(f"The y-intercept is {y_intercept}.")
+            copy_to_keyboard(y_intercept, copy_to_keyboard_true)
+        elif operation == 3:
+            print("You have selected Calculate the x-intercept!")
+            y = float(input("Enter the y-coordinate of a point on the line: "))
+            x = float(input("Enter the x-coordinate of the point on the line: "))
+            gradient = float(input("Enter the gradient/slope of line: "))
+            x_intercept = find_x_intercept(gradient, y)
+            print(f"The x-intercept is {x_intercept}.")
+            copy_to_keyboard(x_intercept, copy_to_keyboard_true)
+        elif operation == 4:
+            print("You have selected Calculate the equation of the line!")
+            x1 = float(input("Enter the x-coordinate of the first point: "))
+            y1 = float(input("Enter the y-coordinate of the first point: "))
+            x2 = float(input("Enter the x-coordinate of the second point: "))
+            y2 = float(input("Enter the y-coordinate of the second point: "))
+            gradient = (y2 - y1) / (x2 - x1)
+            y_intercept = y1 - (gradient * x1)#what if y-intercept negiative?
+            print(f"The equation of the line is y = {gradient}x{y_intercept:+}.")
+            copy_to_keyboard(f"The equation of the line is y = {gradient}x{y_intercept:+}.", copy_to_keyboard_true)
+        elif operation == 5:
+            print("You have selected Calculate the distance between two points!")
+            x1 = float(input("Enter the x-coordinate of the first point: "))
+            y1 = float(input("Enter the y-coordinate of the first point: "))
+            x2 = float(input("Enter the x-coordinate of the second point: "))
+            y2 = float(input("Enter the y-coordinate of the second point: "))
+            distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+            print(f"The distance between the two points is {distance} {lenght_units}.")
+            copy_to_keyboard(distance, copy_to_keyboard_true)
+        elif operation == 6:
+            print("You have selected Calculate the midpoint of two points!")
+            x1 = float(input("Enter the x-coordinate of the first point: "))
+            y1 = float(input("Enter the y-coordinate of the first point: "))
+            x2 = float(input("Enter the x-coordinate of the second point: "))
+            y2 = float(input("Enter the y-coordinate of the second point: "))
+            midpoint_x = (x1 + x2) / 2
+            mid_point_y = (y1 + y2) / 2
+            print(f"The midpoint of the two points is ({midpoint_x},{mid_point_y}).")
+            copy_to_keyboard(f"The midpoint of the two points is ({midpoint_x},{mid_point_y}).", copy_to_keyboard_true)
+        else:
+            print("Invalid operation!Please try again.")
+            continue
+
+    elif category == 12:
+        print("Circles will be added soon!(Update 2.0)")
+        continue
+    
+    elif category == 13:
+        continue
+        # This category split into two parts: Planet > earth (and vice versa(noting earth>planet will do it in days)) then optional prompt to convert converted time to different units
+        # 1 SOLAR day on mercury = 176 days on earth/4224 hours on earth/253440 minutes on earth/15206400 seconds on earth/25.4 weeks on earth/5.7 months on earth/0.48 years on earth
+        # 1 SOLAR hour on mercury = 7.33 days on earth
+        # 1 SOLAR minute on mercury = 0.122 days on earth
+        # 1 SOLAR second on mercury = 0.00203 days on earth
+        # 1 SOLAR week on mercury = 1232 days on earth
+        # 1 SOLAR month on mercury(1/12 of year as has no moon) = 7.33 days on earth
+        # 1 SOLAR year on mercury = 88 days on earth
+        # 1 SOLAR day on Venus = 117 days on earth
+        # 1 SOLAR day on Mars = 1.03 days on earth
+        print("Welcome to the Planetary time category!")
+        print("Please note, that this is an experimental category and may not be accurate.")
+        print("Please aslo note this calcuator is based off solar time, as we would use on Earth")
+        print("Please select a planet/celestial body:")
+        print("""1. Mercury
+2. Venus
+3. Earth
+4. Moon
+5. Mars
+6. Phobos
+7. Deimos
+8. Jupiter
+9. Saturn
+10. Uranus
+11. Neptune
+12. Pluto
+13. Ceres
+14. Sun""")
+        planet = int(input("Enter the number of the planet you want to use: "))
+        if planet == 1:
+            print("You have selected Mercury!")
+            print("Please select an operation:")
+            print("""1. Convert a period of Earth time to Mercury time
+    2. Convert a period of Mercury time to Earth time""")
+            operation = int(input("Enter the number of the operation you want to perform: "))
+            if operation == 1:
+                print("You have selected Convert a period of Earth time to Mercury time!")
+                print("Please chose a unit of Earth time:")
+                print("""1. Seconds
+    2. Minutes
+    3. Hours
+    4. Days
+    5. Weeks
+    6. Months
+    7. Years""")
+                unit = int(input("Enter the number of the unit you want to use: "))
+                earth_time = float(input("Enter the period of Earth time: "))
+                if unit == 1:
+                    mercury_time = earth_time / 15206400
+                elif unit == 2:
+                    mercury_time = earth_time / 253440
+                elif unit == 3:
+                    mercury_time = earth_time / 4224
+                elif unit == 4:
+                    mercury_time = earth_time / 176
+                elif unit == 5:
+                    mercury_time = earth_time / 25.4
+                elif unit == 6:
+                    mercury_time = earth_time / 5.7
+                elif unit == 7:
+                    mercury_time = earth_time / 0.48
+                else:
+                    print("Invalid unit!Please try again.")
+                    continue
+
+
+    
 
               
               
@@ -850,7 +1000,7 @@ Please note that the angles are in degrees""")
 
             
 
-    elif category == 11:
+    elif category == 14:
         print("Legal Info on ULTIMATE CALC™")
         print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
         print("© 2025 M0bile132022. All rights reserved.")
@@ -863,4 +1013,148 @@ Please note that the angles are in degrees""")
         print(f"Version: {version}")
         print(f"File path: {file_path}")
         copy_to_keyboard(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.© 2025 M0bile132022. All rights reserved. This program is protected by the GNU General Public License v3.0. This program is provided as is with no warranty. For more information, visit https://www.ultimatecalc.com. Other statstics: Lines of code: {count_lines(file_path)} Size:{file_size} bytes Version: {version} File path: {file_path}", copy_to_keyboard_true)
-    #units next update i'm tired
+    elif category == 15:
+        print("Welcome to settings!")
+        print("Please select an operation:")
+        print("""1. Change the lenght units
+2. Change the area units
+3. Change the volume units
+4. Change the money units
+5.Copy to keyboard setting""")
+        operation = int(input("Enter the number of the operation you want to perform: "))
+        if operation == 1:
+            print("You have selected Change the lenght units!")
+            print("Please select a unit:")
+            print("""1. Metres
+                2. Centimetres
+                3. Millimetres
+                4. Kilometres
+                5. Inches
+                6. Feet
+                7. Yards
+                8. Miles""")
+            unit = int(input("Enter the number of the unit you want to use: "))
+            if unit == 1:
+                lenght_units = "m"
+            elif unit == 2:
+                lenght_units = "cm"
+            elif unit == 3:
+                lenght_units = "mm"
+            elif unit == 4:
+                lenght_units = "km"
+            elif unit == 5:
+                lenght_units = "in"
+            elif unit == 6:
+                lenght_units = "ft"
+            elif unit == 7:
+                lenght_units = "yd"
+            elif unit == 8:
+                lenght_units = "mi"
+            else:
+                print("Invalid unit!Please try again.")
+                continue
+        elif operation == 2:
+            print("You have selected Change the area units!")
+            print("Please select a unit:")
+            print("""1. Square metres
+                2.Square centimetres
+                3. Square millimetres
+                4. Square kilometres
+                5. Square inches
+                6. Square feet
+                7. Square yards
+                8. Square miles""")
+            unit = int(input("Enter the number of the unit you want to use: "))
+            if unit == 1:
+                area_units = "m²"
+            elif unit == 2:
+                area_units = "cm²"
+            elif unit == 3:
+                area_units = "mm²"
+            elif unit == 4:
+                area_units = "km²"
+            elif unit == 5:
+                area_units = "in²"
+            elif unit == 6:
+                area_units = "ft²"
+            elif unit == 7:
+                area_units = "yd²"
+            elif unit == 8:
+                area_units = "mi²"
+            else:
+                print("Invalid unit!Please try again.")
+                continue
+        elif operation == 3:
+            print("You have selected Change the volume units!")
+            print("Please select a unit:")
+            print("""1. Cubic metres
+                2. Cubic centimetres
+                3. Cubic millimetres
+                4. Cubic kilometres
+                5. Cubic inches
+                6. Cubic feet
+                7. Cubic yards
+                8. Cubic miles""")
+            unit = int(input("Enter the number of the unit you want to use: "))
+            if unit == 1:
+                volume_units = "m³"
+            elif unit == 2:
+                volume_units = "cm³"
+            elif unit == 3:
+                volume_units = "mm³"
+            elif unit == 4:
+                volume_units = "km³"
+            elif unit == 5:
+                volume_units = "in³"
+            elif unit == 6:
+                volume_units = "ft³"
+            elif unit == 7:
+                volume_units = "yd³"
+            elif unit == 8:
+                volume_units = "mi³"
+            else:
+                print("Invalid unit!Please try again.")
+                continue
+        elif operation == 4:
+            print("You have selected Change the money units!")
+            print("Please select a unit:")
+            print("""1. Pounds
+                2. Dollars
+                3. Euros
+                4. Yen/Yuan
+                5. Rupees
+                6. Ruble
+                7. Won""")
+            unit = int(input("Enter the number of the unit you want to use: "))
+            if unit == 1:
+                money_units = "£"
+            elif unit == 2:
+                money_units = "$"
+            elif unit == 3:
+                money_units = "€"
+            elif unit == 4:
+                money_units = "¥"
+            elif unit == 5:
+                money_units = "₹"
+            elif unit == 6:
+                money_units = "₽"
+            elif unit == 7:
+                money_units = "₩"
+            else:
+                print("Invalid unit!Please try again.")
+                continue
+        elif operation == 5:
+            print("You have selected Copy to keyboard setting!")
+            print("Please select an operation:")
+            print("""1. Enable
+2. Disable""")
+            operation = int(input("Enter the number of the operation you want to perform: "))
+            if operation == 1:
+                copy_to_keyboard_true = True
+                print("Copy to keyboard has been enabled.") 
+            elif operation == 2:
+                copy_to_keyboard_true = False
+                print("Copy to keyboard has been disabled.")
+            else:
+                print("Invalid operation!Please try again.")
+                continue
