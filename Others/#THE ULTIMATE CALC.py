@@ -1,7 +1,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-03-11
-#Version: 2.0
+#Version: 2.0.1
 #Milestones:
 #UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -58,10 +58,6 @@ def find_x_intercept(m, b):
         return None
     x_intercept = -b / m
     return x_intercept
-for i in range(1):
-    def invalid_input(invalid_text):
-        print(invalid_text)
-        continue
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
 version = 2.0
