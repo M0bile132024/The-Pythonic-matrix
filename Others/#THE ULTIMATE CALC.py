@@ -1,7 +1,9 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-22-2
-#Version: 1.92
+#Date: 2025-03-11
+#Version: 2.0
+#Milestones:
+#UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, 
 pythagoras therom,
@@ -19,9 +21,10 @@ Standard form and more!
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 import math
+import time
 import os
 import fractions
-import tkinter as tk
+import pyperclip
 
 def operation_dialogue():
     print("Please select an operation:")
@@ -44,14 +47,8 @@ def count_lines(file_path):
         return len(lines)
 def copy_to_keyboard(text,true_or_false):
     if true_or_false == True:    
-        root = tk.Tk()
-        root.withdraw()
-        root.clipboard_clear()
-        root.clipboard_append(text)
-        root.update()
-        print("Text copied to clipboard!")
-        root.destroy()
-        return
+        pyperclip.copy(text)
+        print("Text copied sucessfully")
     else:
         return
 #Alt functions
@@ -61,9 +58,13 @@ def find_x_intercept(m, b):
         return None
     x_intercept = -b / m
     return x_intercept
+for i in range(1):
+    def invalid_input(invalid_text):
+        print(invalid_text)
+        continue
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 1.92
+version = 2.0
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -85,10 +86,8 @@ while True:
     9. Intrest
     10. Trigomentry
     11. Lines(beta)
-    12. Circles(coming in update 2.0)
-    13. Planetary time(coming in update 2.0)
-    14. Legal/Other Info on ULTIMATE CALC™
-    15. Settings
+    13. Legal/Other Info on ULTIMATE CALC™
+    14. Settings
     More functions are coming soon!!!!!""")
     category = int(input("Enter the number of the category you want to use: "))
     
@@ -100,7 +99,11 @@ while True:
         2. Rectangular Prism
         3. Cylinder
         4. Cone
-        5. Sphere""")
+        5. Sphere
+        6. Hemisphere
+        6. Other prisms(required to know cross section area)
+        7. Other pyrimids(required to know base area)
+        """)
         shape = int(input("Enter the number of the shape you want to use: "))
         if shape == 1:
             print("You have selected the Cube!")
@@ -267,6 +270,44 @@ while True:
             else:
                 print("Invalid operation!Please try again.")
                 continue 
+        elif shape == 6:
+            #Total Surface Area (TSA) = 2 × Base Area + Base Perimeter × Height.
+            print("You have selected the Other prisms!")
+            operation = operation_dialogue()
+            if operation == 1:
+                print("You have selected Surface Area!")
+                base_area = float(input("Enter the cross section area of the prism: "))
+                base_perimeter = float(input("Enter the perimeter of the prism: "))
+                height = float(input("Enter the height of the prism: "))
+                sa = (2 * base_area) + (base_perimeter * height)
+                print(f"The surface area of the prism is {sa} {area_units}.")#
+                copy_to_keyboard(sa,copy_to_keyboard_true)
+            elif operation == 2:
+                print("You have selected Volume!")   
+                area = float(input("Enter the cross section area of the prism: "))
+                height = float(input("Enter the height of the prism: "))
+                vol = area * height
+                print(f"The volume of the prism is {vol} {volume_units}.")
+                copy_to_keyboard(vol,copy_to_keyboard_true)
+        elif shape == 7:
+            print("You have selected the Other pyrimids!")
+            operation = operation_dialogue()
+            if operation == 1:
+                print("You have selected Surface Area!")
+                base_area = float(input("Enter the base area of the pyrimid: "))
+                base_perimeter = float(input("Enter the perimeter of the pyrimid: "))
+                slant_height= float(input("Enter the slant height of the pyrimid: "))
+                sa = base_area + ((1/2) * base_perimeter * slant_height)
+                print(f"The surface area of the pyrimid is {sa} {area_units}.")
+                copy_to_keyboard(sa,copy_to_keyboard_true)
+            elif operation == 2:
+                print("You have selected Volume!")
+                area = float(input("Enter the base area of the pyrimid: "))
+                height = float(input("Enter the height of the pyrimid: "))
+                vol = (1/3) * area * height
+                print(f"The volume of the pyrimid is {vol} {volume_units}.")
+                copy_to_keyboard(vol,copy_to_keyboard_true)
+            
         else:
             print("Invalid shape!Please try again.")
             continue 
@@ -297,9 +338,14 @@ while True:
         print("Welcome to the Perimiter and Area category!")
         print("""Please select a shape:
         1. Square
-        2. Rectangle
+        2. Rectangle/Pallelogram
         3. Triangle
-        4. Circle""")
+        4. Circle
+        5. Semicircle
+        6. Trapezium
+        7. Kite(coming 2.1)
+        8. Rhombus(coming 2.1)
+        9. Other polygons(coming 2.1)""")
         shape = int(input("Enter the number of the shape you want to use: "))
         if shape == 1:
             operation = twod_operation_dialogue("Square")
@@ -427,7 +473,73 @@ while True:
                 copy_to_keyboard(ratio,copy_to_keyboard_true)
             else:
                 print("Invalid operation!Please try again.")
-                continue 
+                continue
+        elif shape == 5:
+            print("You have selected the Semicircle!")
+            operation = twod_operation_dialogue("Semicircle")
+            pi = math.pi
+            if operation == 1:
+                print("You have selected Perimiter!")
+                radius = float(input("Enter the radius of the semicircle: "))
+                perimiter = (pi * radius) + (2 * radius)
+                print("The perimiter of the semicircle is {perimiter} {lenght_units}.")
+                copy_to_keyboard(perimiter,copy_to_keyboard_true)
+            elif operation == 2:
+                print("You have selected Area!")
+                radius = float(input("Enter the radius of the semicircle: "))
+                area = (1/2) * pi * (radius ** 2)
+                print(f"The area of the semicircle is {area} {area_units}.")
+                copy_to_keyboard(area,copy_to_keyboard_true)
+            elif operation == 3:
+                print("You have selected Both!")
+                radius = float(input("Enter the radius of the semicircle: "))
+                perimiter = (pi * radius) + (2 * radius)
+                area = (1/2) * pi * (radius ** 2)
+                ratio = perimiter / area
+                print(f"The perimiter of the semicircle is {perimiter} {lenght_units}.")
+                print(f"The area of the semicircle is {area} {area_units}.")
+                print("The P:A ratio is {ratio}.")
+                copy_to_keyboard(f"{perimiter},{area},{ratio}",copy_to_keyboard_true)
+            else:
+                print("Invalid operation!Please try again.")
+                continue
+        elif shape == 6:
+            print("You have selected the Trapezium!")
+            operation = twod_operation_dialogue("Trapezium")
+            if operation == 1:
+                print("You have selected Perimiter!")
+                a = float(input("Enter the length of the top side(a): "))
+                b = float(input("Enter the length of the bottom side(b): "))
+                c = float(input("Enter the length of the left side(c): "))
+                d = float(input("Enter the length of the right side(d): "))
+                perimiter = a + b + c + d
+                print(f"The perimiter of the trapezium is {perimiter} {lenght_units}.")
+                copy_to_keyboard(perimiter,copy_to_keyboard_true)
+            elif operation == 2:
+                print("You have selected Area!")
+                a = float(input("Enter the length of the top side(a): "))
+                b = float(input("Enter the length of the bottom side(b): "))
+                height = float(input("Enter the height of the trapezium: "))
+                area = (1/2) * (a + b) * height
+                print(f"The area of the trapezium is {area} {area_units}.")
+                copy_to_keyboard(area,copy_to_keyboard_true)
+            elif operation == 3:
+                print("You have selected Both!")
+                a = float(input("Enter the length of the top side(a): "))
+                b = float(input("Enter the length of the bottom side(b): "))
+                c = float(input("Enter the length of the left side(c): "))
+                d = float(input("Enter the length of the right side(d): "))
+                perimiter = a + b + c + d
+                height = float(input("Enter the height of the trapezium: "))
+                area = (1/2) * (a + b) * height
+                print(f"The perimiter of the trapezium is {perimiter} {lenght_units}.")
+                print(f"The area of the trapezium is {area} {area_units}.")
+                ratio = perimiter / area
+                print(f"The P:A ratio of the trapezium is {ratio}.")
+                copy_to_keyboard(f"{perimiter},{area},{ratio}",copy_to_keyboard_true)
+            else:
+                print("Invalid operation!Please try again.")
+                continue
         else:
             print("Invalid shape!Please try again.")
             continue 
@@ -466,7 +578,10 @@ Please note this calc only supports ENG notation""")
 4. Division
 5. Exponents
 6. Square/cube/any root
-7.Bring up "The Lists"....""")
+7. Bring up "The Lists"....
+8. Sin()
+9. Cos()
+10. Tan()""")
         operation = int(input("Enter the number of the operation you want to perform: "))
         if operation == 1:
             print("You have selected Addition!")
@@ -537,6 +652,24 @@ Please note this calc only supports ENG notation""")
 
             for i in range(1,21):
                 print(i,i**2,i**3,sep="   |")
+        elif operation == 8:
+            print("You have selected Sin()!")
+            num = float(input("Enter the number you want to find the sin of: "))
+            sin = math.sin(num)
+            print(f"The sin of the number is {sin}.")
+            copy_to_keyboard(sin, copy_to_keyboard_true)
+        elif operation == 9:
+            print("You have selected Cos()!")
+            num = float(input("Enter the number you want to find the cos of: "))
+            cos = math.cos(num)
+            print(f"The cos of the number is {cos}.")
+            copy_to_keyboard(cos, copy_to_keyboard_true)
+        elif operation == 10:
+            print("You have selected Tan()!")
+            num = float(input("Enter the number you want to find the tan of: "))
+            tan = math.tan(num)
+            print(f"The tan of the number is {tan}.")
+            copy_to_keyboard(tan, copy_to_keyboard_true)
 
         else:
             print("Invalid operation!Please try again.")
