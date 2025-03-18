@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-03-11
-#Version: 2.0.1
+#Version: 2.1
 #Milestones:
 #UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -26,6 +26,7 @@ import time
 import os
 import fractions
 import pyperclip
+import equations as eq
 
 def operation_dialogue():
     print("Please select an operation:")
@@ -61,7 +62,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.0
+version = 2.1
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -84,6 +85,7 @@ if __name__ == "__main__":
         9. Intrest
         10. Trigomentry
         11. Lines(beta)
+        12. Equations
         13. Legal/Other Info on ULTIMATE CALC™
         14. Settings
         More functions are coming soon!!!!!""")
@@ -1060,76 +1062,24 @@ if __name__ == "__main__":
                 continue
 
         elif category == 12:
-            print("Circles will be added soon!(Update 2.0)")
-            continue
-        
-        elif category == 13:
-            continue
-            # This category split into two parts: Planet > earth (and vice versa(noting earth>planet will do it in days)) then optional prompt to convert converted time to different units
-            # 1 SOLAR day on mercury = 176 days on earth/4224 hours on earth/253440 minutes on earth/15206400 seconds on earth/25.4 weeks on earth/5.7 months on earth/0.48 years on earth
-            # 1 SOLAR hour on mercury = 7.33 days on earth
-            # 1 SOLAR minute on mercury = 0.122 days on earth
-            # 1 SOLAR second on mercury = 0.00203 days on earth
-            # 1 SOLAR week on mercury = 1232 days on earth
-            # 1 SOLAR month on mercury(1/12 of year as has no moon) = 7.33 days on earth
-            # 1 SOLAR year on mercury = 88 days on earth
-            # 1 SOLAR day on Venus = 117 days on earth
-            # 1 SOLAR day on Mars = 1.03 days on earth
-            print("Welcome to the Planetary time category!")
-            print("Please note, that this is an experimental category and may not be accurate.")
-            print("Please aslo note this calcuator is based off solar time, as we would use on Earth")
-            print("Please select a planet/celestial body:")
-            print("""1. Mercury
-    2. Venus
-    3. Earth
-    4. Moon
-    5. Mars
-    6. Phobos
-    7. Deimos
-    8. Jupiter
-    9. Saturn
-    10. Uranus
-    11. Neptune
-    12. Pluto
-    13. Ceres
-    14. Sun""")
-            planet = int(input("Enter the number of the planet you want to use: "))
-            if planet == 1:
-                print("You have selected Mercury!")
-                print("Please select an operation:")
-                print("""1. Convert a period of Earth time to Mercury time
-        2. Convert a period of Mercury time to Earth time""")
-                operation = int(input("Enter the number of the operation you want to perform: "))
-                if operation == 1:
-                    print("You have selected Convert a period of Earth time to Mercury time!")
-                    print("Please chose a unit of Earth time:")
-                    print("""1. Seconds
-        2. Minutes
-        3. Hours
-        4. Days
-        5. Weeks
-        6. Months
-        7. Years""")
-                    unit = int(input("Enter the number of the unit you want to use: "))
-                    earth_time = float(input("Enter the period of Earth time: "))
-                    if unit == 1:
-                        mercury_time = earth_time / 15206400
-                    elif unit == 2:
-                        mercury_time = earth_time / 253440
-                    elif unit == 3:
-                        mercury_time = earth_time / 4224
-                    elif unit == 4:
-                        mercury_time = earth_time / 176
-                    elif unit == 5:
-                        mercury_time = earth_time / 25.4
-                    elif unit == 6:
-                        mercury_time = earth_time / 5.7
-                    elif unit == 7:
-                        mercury_time = earth_time / 0.48
-                    else:
-                        print("Invalid unit!Please try again.")
-                        continue
-
+            print("Welcome to the Equation category!")
+            print("Please select an operation:")
+            print("""1. Solve a equation
+2.Solve two simultaoenous equations""")
+            operation = int(input("Enter the number of the operation you want to perform(note:only supports x/y as vars): "))
+            if operation == 1:
+                print("You have selected Solve a equation!")
+                eq.equation_calc()
+            elif operation == 2:
+                print("You have selected Solve two simultaoenous equations!")
+                eq.simultaneous_equations_calc()
+                
+            else:
+                print("Invalid operation!Please try again.")
+                continue
+                
+    
+                  
 
         
 
