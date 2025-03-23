@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-03-23
-#Version: 2.3
+#Version: 2.4
 #Milestones:
 #UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -62,7 +62,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.3
+version = 2.4
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -86,8 +86,9 @@ if __name__ == "__main__":
         10. Trigomentry
         11. Lines
         12. Equations(beta)
-        13. Legal/Other Info on ULTIMATE CALC™
-        14. Settings
+        13. Circles(is out)/Spheres(coming 2.5)
+        14. Legal/Other Info on ULTIMATE CALC™
+        15. Settings
         More functions are coming soon!!!!!""")
         category = int(input("Enter the number of the category you want to use: "))
         
@@ -1093,6 +1094,121 @@ if __name__ == "__main__":
             else:
                 print("Invalid operation!Please try again.")
                 continue
+        elif category == 13:
+            pi = math.pi
+            print("Welcome to the Circles/Sphere category!")
+            print("Please select a shape:")
+            print("""1. Circle
+2. Sphere""")
+            shape = int(input("Enter the number of the shape you want to use: "))
+            if shape == 1:
+                print("You have selected Circle!")
+                print("Please select an operation:")
+                print("""
+1. Calculate the diameter
+2. Calculate the radius
+3.Calcuate area of sector
+4.Calcuate arc length
+5.Calcuate area of segment
+6.Calcuate chord lenght""")
+                operation = int(input("Enter the number of the operation you want to perform: "))
+                if operation == 1:
+                    print("You have selected Calculate the diameter!")
+                    print("Please select a method:")
+                    print("""1. Using the radius
+2. Using the circumference""")
+                    method = int(input("Enter the number of the method you want to use: "))
+                    if method == 1:
+                        radius = float(input("Enter the radius of the circle: "))
+                        diameter = radius * 2
+                        print(f"The diameter of the circle is {diameter} {lenght_units}.")
+                        copy_to_keyboard(diameter, copy_to_keyboard_true)
+                    elif method == 2:
+                        circumference = float(input("Enter the circumference of the circle: "))
+                        diameter = circumference / pi
+                        print(f"The diameter of the circle is {diameter} {lenght_units}.")
+                        copy_to_keyboard(diameter, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 2:
+                    print("You have selected Calculate the radius!")
+                    print("Please select a method:")
+                    print("""1. Using the diameter
+2. Using the circumference""")
+                    method = int(input("Enter the number of the method you want to use: "))
+                    if method == 1:
+                        print("You have selected Using the diameter!")
+                        diameter = float(input("Enter the diameter of the circle: "))
+                        radius = diameter / 2
+                        print(f"The radius of the circle is {radius} {lenght_units}.")
+                        copy_to_keyboard(radius, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Using the circumference!")
+                        circumference = float(input("Enter the circumference of the circle: "))
+                        radius = circumference / (2 * pi)
+                        print(f"The radius of the circle is {radius} {lenght_units}.")
+                        copy_to_keyboard(radius, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 3:
+                    print("You have selected Calcuate area of sector!")
+                    radius = float(input("Enter the radius of the circle: "))
+                    angle = float(input("Enter the angle of the sector(degrees): "))
+                    area = (angle / 360) * pi * (radius ** 2)
+                    print(f"The area of the sector is {area} {area_units}.")
+                    copy_to_keyboard(area, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Calcuate arc length!")
+                    radius = float(input("Enter the radius of the circle: "))
+                    angle = float(input("Enter the angle of the sector(degrees): "))
+                    arc_length = (angle / 360) * 2 * pi * radius
+                    print(f"The arc length is {arc_length} {lenght_units}.")
+                    copy_to_keyboard(arc_length, copy_to_keyboard_true)
+                elif operation == 5:
+                    #Apply the segment area formula: 0.5 × r² × (α – sin(α)).(a=central angle)
+                    #Alt:Area of a sector-Area of triangle of sector
+                    print("You have selected Calcuate area of segment!")
+                    print("Please select a method:")
+                    print("""1. Using the radius and the central angle
+                          2. Using the radius and the chord length""")
+                    method = int(input("Enter the number of the method you want to use: "))
+                    if method == 1:
+                        print("You have selected Using the radius and the central angle!")
+                        radius = float(input("Enter the radius of the circle: "))
+                        angle = float(input("Enter the central angle of the segment(degrees): "))
+                        area = 0.5 * (radius ** 2) * (angle - math.sin(math.radians(angle)))
+                        print(f"The area of the segment is {area} {area_units}.")
+                        copy_to_keyboard(area, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Using the radius and the chord length!")
+                        radius = float(input("Enter the radius of the circle: "))
+                        chord_lenght = float(input("Enter the chord length of the segment: "))
+                        area = 0.5 * (radius ** 2) * (2 * math.asin(chord_lenght / (2 * radius)) - math.sin(2 * math.asin(chord_lenght / (2 * radius))))
+                        print(f"The area of the segment is {area} {area_units}.")
+                        copy_to_keyboard(area, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 6:
+                    print("You have selected Calcuate chord lenght!")
+                    radius = float(input("Enter the radius of the circle: "))
+                    angle = float(input("Enter the central angle of the segment(degrees): "))
+                    chord_length = 2 * radius * math.sin(math.radians(angle / 2))
+                    print(f"The chord length is {chord_length} {lenght_units}.")
+                    copy_to_keyboard(chord_length, copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif shape == 2:
+                print("The sphere category will come in 2.5.0!")
+            else:
+                print("Invalid shape!Please try again.")
+                continue
+            
+
+
                 
     
                   
