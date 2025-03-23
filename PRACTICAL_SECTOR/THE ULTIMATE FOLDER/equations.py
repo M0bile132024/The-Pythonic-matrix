@@ -16,8 +16,8 @@ def simultanous_calc():
     eq1 = Eq(parse_expr(equation1), int(answer1))
     eq2 = Eq(parse_expr(equation2), int(answer2))
     solution = solve((eq1, eq2), (x, y))
-    print(f"x = {solution[x]}, y = {solution[y]}")
-    copy_to_keyboard(f"x = {solution[x]}, y = {solution[y]}",copy_to_keyboard_true)
+    print(solution)
+    copy_to_keyboard(solution,copy_to_keyboard_true)
     
 
 #simultanous_calc()
@@ -29,7 +29,7 @@ def equation_calc():
     answer = input("Enter the answer of the expression: ")
     eq = Eq(parse_expr(equation), int(answer))
     solution = solve(eq, (x, y))
-    print(f"x = {solution[x]}, y = {solution[y]}")
-    copy_to_keyboard(f"x = {solution[x]}, y = {solution[y]}",copy_to_keyboard_true)
+    print(solution)
+    copy_to_keyboard(solution,copy_to_keyboard_true)
 #equation_calc()
     

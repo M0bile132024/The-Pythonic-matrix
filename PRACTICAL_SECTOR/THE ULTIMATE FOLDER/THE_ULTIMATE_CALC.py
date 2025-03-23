@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-03-11
-#Version: 2.1
+#Date: 2025-03-23
+#Version: 2.3
 #Milestones:
 #UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -62,7 +62,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.1
+version = 2.3
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -84,8 +84,8 @@ if __name__ == "__main__":
         8. Decimal to fraction to percentage conversions
         9. Intrest
         10. Trigomentry
-        11. Lines(beta)
-        12. Equations
+        11. Lines
+        12. Equations(beta)
         13. Legal/Other Info on ULTIMATE CALC™
         14. Settings
         More functions are coming soon!!!!!""")
@@ -181,26 +181,30 @@ if __name__ == "__main__":
                     radius = float(input("Enter the radius of the cylinder: "))
                     height = float(input("Enter the height of the cylinder: "))
                     sa = (2 * pi * radius * height) + (2 * pi * (radius ** 2))
-                    print(f"The surface area of the cylinder is {sa} {area_units}.")
-                    copy_to_keyboard(sa,copy_to_keyboard_true)
+                    terms_of_pi = sa/pi
+                    print(f"The surface area of the cylinder is {sa} {area_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{sa},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 2:
                     print("You have selected Volume!")
                     radius = float(input("Enter the radius of the cylinder: "))
                     height = float(input("Enter the height of the cylinder: "))
                     vol = pi * (radius ** 2) * height
-                    print(f"The volume of the cylinder is {vol} {volume_units}.")
-                    copy_to_keyboard(vol,copy_to_keyboard_true)
+                    terms_of_pi = vol/pi
+                    print(f"The volume of the cylinder is {vol} {volume_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{vol},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 3:
                     print("You have selected Both!")
                     radius = float(input("Enter the radius of the cylinder: "))
                     height = float(input("Enter the height of the cylinder: "))
                     sa = (2 * pi * radius * height) + (2 * pi * (radius ** 2))
+                    sa_terms_of_pi = sa/pi
                     vol = pi * (radius ** 2) * height
+                    vol_terms_of_pi = vol/pi
                     ratio = sa / vol
-                    print(f"The surface area of the cylinder is {sa} {area_units}.")
-                    copy_to_keyboard(sa,copy_to_keyboard_true)
-                    print(f"The volume of the cylinder is {vol} {volume_units}.")
-                    copy_to_keyboard(vol,copy_to_keyboard_true)
+                    print(f"The surface area of the cylinder is {sa} {area_units}(Terms of Pi={sa_terms_of_pi}pi).")
+                    copy_to_keyboard(f"{sa},{sa_terms_of_pi}",copy_to_keyboard_true)
+                    print(f"The volume of the cylinder is {vol} {volume_units}(Terms of Pi={vol_terms_of_pi}pi).")
+                    copy_to_keyboard(f"{vol},{vol_terms_of_pi}",copy_to_keyboard_true)
                     print(f"The SA:VOL ratio of the cylinder is {ratio}.")
                     copy_to_keyboard(ratio,copy_to_keyboard_true)
                 else:
@@ -215,15 +219,17 @@ if __name__ == "__main__":
                     radius = float(input("Enter the radius of the cone: "))
                     slant_height = float(input("Enter the slant height of the cone: "))
                     sa = pi * radius * (radius + slant_height)
-                    print(f"The surface area of the cone is {sa} {area_units}.")
-                    copy_to_keyboard(sa,copy_to_keyboard_true)
+                    terms_of_pi = sa/pi
+                    print(f"The surface area of the cone is {sa} {area_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{sa},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 2:
                     print("You have selected Volume!")
                     radius = float(input("Enter the radius of the cone: "))
                     height = float(input("Enter the height of the cone: "))
                     vol = (1/3) * pi * (radius ** 2) * height
-                    print(f"The volume of the cone is {vol} {volume_units}.")
-                    copy_to_keyboard(vol,copy_to_keyboard_true)
+                    terms_of_pi = vol/pi
+                    print(f"The volume of the cone is {vol} {volume_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{vol},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 3:
                     print("You have selected Both!")
                     radius = float(input("Enter the radius of the cone: "))
@@ -232,10 +238,12 @@ if __name__ == "__main__":
                     sa = pi * radius * (radius + slant_height)
                     vol = (1/3) * pi * (radius ** 2) * height
                     ratio = sa / vol
-                    print(f"The surface area of the cone is {sa} {area_units}")
-                    print(f"The volume of the cone is {vol} {volume_units}.")
+                    sa_terms_of_pi = sa/pi
+                    vol_terms_of_pi = vol/pi
+                    print(f"The surface area of the cone is {sa} {area_units}(Terms of Pi={sa_terms_of_pi}pi).")
+                    print(f"The volume of the cone is {vol} {volume_units}(Terms of Pi={vol_terms_of_pi}pi).")
                     print(f"The SA:VOL ratio of the cone is {ratio}.")
-                    copy_to_keyboard(f"{sa},{vol},{ratio}",copy_to_keyboard_true)
+                    copy_to_keyboard(f"{sa},{vol},{ratio},{sa_terms_of_pi},{vol_terms_of_pi}",copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue 
@@ -247,26 +255,28 @@ if __name__ == "__main__":
                     print("You have selected Surface Area!")
                     radius = float(input("Enter the radius of the sphere: "))
                     sa = 4 * pi * (radius ** 2)
-                    print(f"The surface area of the sphere is {area_units}.")
-                    copy_to_keyboard(sa,copy_to_keyboard_true)
+                    terms_of_pi = sa/pi
+                    print(f"The surface area of the sphere is {area_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{sa},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 2:
                     print("You have selected Volume!")
                     radius = float(input("Enter the radius of the sphere: "))
                     vol = (4/3) * pi * (radius ** 3)
-                    print(f"The volume of the sphere is {vol} {volume_units}.")
-                    copy_to_keyboard(vol,copy_to_keyboard_true)
+                    terms_of_pi = vol/pi
+                    print(f"The volume of the sphere is {vol} {volume_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{vol},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 3:
                     print("You have selected Both!")
                     radius = float(input("Enter the radius of the sphere: "))
                     sa = 4 * pi * (radius ** 2)
                     vol = (4/3) * pi * (radius ** 3)
                     ratio = sa / vol
-                    print(f"The surface area of the sphere is {area_units}.")
-                    copy_to_keyboard(sa,copy_to_keyboard_true)
-                    print(f"The volume of the sphere is {vol} {volume_units}.")
-                    copy_to_keyboard(vol,copy_to_keyboard_true)
+                    sa_terms_of_pi = sa/pi
+                    vol_terms_of_pi = vol/pi
+                    print(f"The surface area of the sphere is {sa} {area_units}(Terms of Pi={sa_terms_of_pi}pi).")
+                    print(f"The volume of the sphere is {vol} {volume_units}(Terms of Pi={vol_terms_of_pi}pi).")
                     print(f"The SA:VOL ratio of the sphere is {ratio}.")
-                    copy_to_keyboard(ratio,copy_to_keyboard_true)
+                    copy_to_keyboard(f"{sa},{vol},{ratio},{sa_terms_of_pi},{vol_terms_of_pi}",copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue 
@@ -451,26 +461,28 @@ if __name__ == "__main__":
                     print("You have selected Perimiter!")
                     radius = float(input("Enter the radius of the circle: "))
                     perimiter = 2 * pi * radius
-                    print(f"The perimiter of the circle is {perimiter} {lenght_units}.")
-                    copy_to_keyboard(perimiter,copy_to_keyboard_true)
+                    terms_of_pi = perimiter/pi
+                    print(f"The perimiter of the circle is {perimiter} {lenght_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{perimiter},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 2:
                     print("You have selected Area!")
                     radius = float(input("Enter the radius of the circle: "))
                     area = pi * (radius ** 2)
-                    print(f"The area of the circle is {area} {area_units}.")
-                    copy_to_keyboard(area,copy_to_keyboard_true)
+                    terms_of_pi = area/pi
+                    print(f"The area of the circle is {area} {area_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{area},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 3:
                     print("You have selected Both!")
                     radius = float(input("Enter the radius of the circle: "))
                     perimiter = 2 * pi * radius
                     area = pi * (radius ** 2)
                     ratio = perimiter / area
-                    print(f"The perimiter of the circle is {perimiter} {lenght_units}.")
-                    copy_to_keyboard(perimiter,copy_to_keyboard_true)
-                    print(f"The area of the circle is {area} {area_units}.")
-                    copy_to_keyboard(area,copy_to_keyboard_true)
+                    perimiter_terms_of_pi = perimiter/pi
+                    area_terms_of_pi = area/pi
+                    print(f"The perimiter of the circle is {perimiter} {lenght_units}(Terms of Pi={perimiter_terms_of_pi}pi).")
+                    print(f"The area of the circle is {area} {area_units}(Terms of Pi={area_terms_of_pi}pi).")
                     print(f"The P:A ratio of the circle is {ratio}.")
-                    copy_to_keyboard(ratio,copy_to_keyboard_true)
+                    copy_to_keyboard(f"{perimiter},{area},{ratio},{perimiter_terms_of_pi},{area_terms_of_pi}",copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue
@@ -482,24 +494,28 @@ if __name__ == "__main__":
                     print("You have selected Perimiter!")
                     radius = float(input("Enter the radius of the semicircle: "))
                     perimiter = (pi * radius) + (2 * radius)
-                    print("The perimiter of the semicircle is {perimiter} {lenght_units}.")
-                    copy_to_keyboard(perimiter,copy_to_keyboard_true)
+                    terms_of_pi = perimiter/pi
+                    print(f"The perimiter of the semicircle is {perimiter} {lenght_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{perimiter},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 2:
                     print("You have selected Area!")
                     radius = float(input("Enter the radius of the semicircle: "))
                     area = (1/2) * pi * (radius ** 2)
-                    print(f"The area of the semicircle is {area} {area_units}.")
-                    copy_to_keyboard(area,copy_to_keyboard_true)
+                    terms_of_pi = area/pi
+                    print(f"The area of the semicircle is {area} {area_units}(Terms of Pi={terms_of_pi}pi).")
+                    copy_to_keyboard(f"{area},{terms_of_pi}",copy_to_keyboard_true)
                 elif operation == 3:
                     print("You have selected Both!")
                     radius = float(input("Enter the radius of the semicircle: "))
                     perimiter = (pi * radius) + (2 * radius)
                     area = (1/2) * pi * (radius ** 2)
                     ratio = perimiter / area
-                    print(f"The perimiter of the semicircle is {perimiter} {lenght_units}.")
-                    print(f"The area of the semicircle is {area} {area_units}.")
-                    print("The P:A ratio is {ratio}.")
-                    copy_to_keyboard(f"{perimiter},{area},{ratio}",copy_to_keyboard_true)
+                    perimiter_terms_of_pi = perimiter/pi
+                    area_terms_of_pi = area/pi
+                    print(f"The perimiter of the semicircle is {perimiter} {lenght_units}(Terms of Pi={perimiter_terms_of_pi}pi).")
+                    print(f"The area of the semicircle is {area} {area_units}(Terms of Pi={area_terms_of_pi}pi).")
+                    print(f"The P:A ratio of the semicircle is {ratio}.")
+                    copy_to_keyboard(f"{perimiter},{area},{ratio},{perimiter_terms_of_pi},{area_terms_of_pi}",copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue
@@ -1054,7 +1070,7 @@ if __name__ == "__main__":
                 print("You have selected Calculate gradient of perpendicular line!")
                 gradient = float(input("Enter the gradient of the other line: "))
                 perpendicular_gradient = -1 / gradient
-                print(f"The gradient of the perpendicular line is {perpendicular_gradient}.")
+                print(f"The gradient of the perpendicular line is {perpendicular_gradient}(Fraction=-1/{gradient}).")
             elif operation == 8:
                 print("The gradient of the parallel line is the same as the other line!")
             else:
@@ -1072,7 +1088,7 @@ if __name__ == "__main__":
                 eq.equation_calc()
             elif operation == 2:
                 print("You have selected Solve two simultaoenous equations!")
-                eq.simultaneous_equations_calc()
+                eq.simultanous_calc()
                 
             else:
                 print("Invalid operation!Please try again.")
