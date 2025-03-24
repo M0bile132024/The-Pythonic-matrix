@@ -1,9 +1,4 @@
-NOTES FOR THE ULTIMATE CALC 2.2:
-Terms of Pi support(later)
-fractional support for perpendicular lines(SUCESS)
-extension:Equations and sympy(maybe)
-12 is not on the menu.....for some reason(yeah it is)
-DONE BY SATURDAY(ie.Friday)
+
 Bookwork 1a:18
 Bookwork 1b:10
 Bookwork 1c:32
@@ -33,3 +28,10 @@ Bookwork 4d:[2.1e-07, 0.0567, 8930.0, 320000.0]
 Bookwork 4e:6.20e-01
 Bookwork 4f:2.70e+06
 Bookwork 4g:7.49e+07
+Bookwork 5a:53.61651462126581
+Bookwork 5b:16pi
+Bookwork 5c:83.61798784912082
+Bookwork 6a:3/4,-4/3,-7,1/7
+Bookwork 6b:0(explained)
+Bookwork 6c:The equation of the line is y = -5/3x+58.0
+Bookwork 6d:1/2x-5/2

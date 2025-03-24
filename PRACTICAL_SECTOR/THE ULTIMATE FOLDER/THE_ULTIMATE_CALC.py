@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-03-23
-#Version: 2.4
+#Date: 2025-03-24
+#Version: 2.43
 #Milestones:
 #UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -62,7 +62,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.4
+version = 2.43
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -598,7 +598,8 @@ if __name__ == "__main__":
     7. Bring up "The Lists"....
     8. Sin()
     9. Cos()
-    10. Tan()""")
+    10. Tan()
+    11. Terms of Pi()""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Addition!")
@@ -687,6 +688,13 @@ if __name__ == "__main__":
                 tan = math.tan(num)
                 print(f"The tan of the number is {tan}.")
                 copy_to_keyboard(tan, copy_to_keyboard_true)
+            elif operation == 11:
+                print("You have selected Terms Of Pi()!")
+                pi = math.pi
+                num = float(input("Enter the number you want to find the terms of pi of: "))
+                terms_of_pi = num / pi
+                print(f"The terms of pi of the number is {terms_of_pi}.")
+                copy_to_keyboard(terms_of_pi, copy_to_keyboard_true)
 
             else:
                 print("Invalid operation!Please try again.")
@@ -1116,7 +1124,11 @@ if __name__ == "__main__":
                     print("You have selected Calculate the diameter!")
                     print("Please select a method:")
                     print("""1. Using the radius
-2. Using the circumference""")
+2. Using the circumference
+3. Using the sector area
+4. Using arc lenght
+5. Using the segment area
+6. Using the chord lenght""")
                     method = int(input("Enter the number of the method you want to use: "))
                     if method == 1:
                         radius = float(input("Enter the radius of the circle: "))
@@ -1128,6 +1140,54 @@ if __name__ == "__main__":
                         diameter = circumference / pi
                         print(f"The diameter of the circle is {diameter} {lenght_units}.")
                         copy_to_keyboard(diameter, copy_to_keyboard_true)
+                    elif method == 3:
+                        sector_area = float(input("Enter the area of the sector: "))
+                        radius = math.sqrt((sector_area * 360) / (pi))
+                        diameter = radius * 2
+                        print("The diameter of the circle is {diameter} {lenght_units}.")
+                        copy_to_keyboard(diameter, copy_to_keyboard_true)
+                    elif method == 4:
+                        arc_lenght =  float(input("Enter the arc lenght of the circle: "))
+                        angle = float(input("Enter the angle of the sector(degrees): "))
+                        radius = arc_lenght / (math.radians(angle))
+                        diameter = radius * 2
+                        print(f"The diameter of the circle is {diameter} {lenght_units}.")
+                        copy_to_keyboard(diameter, copy_to_keyboard_true)
+                    elif method == 5:
+                        print("Please chose a method:")
+                        print("""1. Using the central angle
+2. Using the chord length""")
+                        sub_method = int(input("Enter the number of the method you want to use: "))
+                        if sub_method == 1:
+                            print("You have chosen Using the central angle!")
+                            segment_area = float(input("Enter the area of the segment: "))
+                            angle = float(input("Enter the central angle of the segment(degrees): "))
+                            radius = math.sqrt((segment_area * 360) / (pi))
+                            diameter = radius * 2
+                            print(f"The diameter of the circle is {diameter} {lenght_units}.")
+                            copy_to_keyboard(diameter, copy_to_keyboard_true)
+                        elif sub_method == 2:
+                            print("You have chosen Using the chord length!")
+                            segment_area = float(input("Enter the area of the segment: "))
+                            chord_length = float(input("Enter the chord length of the segment: "))
+                            radius = math.sqrt((segment_area * 360) / (pi))
+                            diameter = radius * 2
+                            print(f"The diameter of the circle is {diameter} {lenght_units}.")
+                            copy_to_keyboard(diameter, copy_to_keyboard_true)
+                        else:
+                            print("Invalid method!Please try again.")
+                            continue
+                    elif method == 6:
+                        print("You have chosen Using the chord length!")
+                        chord_length = float(input("Enter the chord length of the circle: "))
+                        angle = float(input("Enter the central angle of the segment(degrees): "))
+                        radius = (chord_length / 2) / math.sin(math.radians(angle / 2))
+                        diameter = radius * 2
+                        print(f"The diameter of the circle is {diameter} {lenght_units}.")
+                        copy_to_keyboard(diameter, copy_to_keyboard_true)
+                        
+                            
+
                     else:
                         print("Invalid method!Please try again.")
                         continue
@@ -1163,7 +1223,7 @@ if __name__ == "__main__":
                     print("You have selected Calcuate arc length!")
                     radius = float(input("Enter the radius of the circle: "))
                     angle = float(input("Enter the angle of the sector(degrees): "))
-                    arc_length = (angle / 360) * 2 * pi * radius
+                    arc_length = radius * math.radians(angle)
                     print(f"The arc length is {arc_length} {lenght_units}.")
                     copy_to_keyboard(arc_length, copy_to_keyboard_true)
                 elif operation == 5:
