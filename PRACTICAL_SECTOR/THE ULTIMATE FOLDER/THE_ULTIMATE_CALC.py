@@ -53,6 +53,30 @@ def copy_to_keyboard(text,true_or_false):
         print("Text copied sucessfully")
     else:
         return
+def reciprocal(number):
+    if number == 0:
+        return "N/A(Cannot find reciprocal of zero)"
+    return 1 / number
+def subtract_list(values):
+    result = values[0]
+    for value in values[1:]:
+        result -= value
+    return result
+def multiply_list(values):
+    result = 0
+    for value in values[1:]:
+        result *= value
+    return result
+def divide_list(values):
+    result = values[0]
+    for value in values[1:]:
+        result /= value
+    return result
+
+
+# Example usage
+#print(reciprocal(5))  # Output: 0.2
+
 #Alt functions
 def find_x_intercept(m, b):
     if m == 0:
@@ -62,7 +86,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.44
+version = 2.45
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -590,16 +614,17 @@ if __name__ == "__main__":
             print("Welcome to the Basics category(of course....)!")
             print("Please select an operation:")
             print("""1. Addition
-    2. Subtraction
-    3. Multiplication
-    4. Division
-    5. Exponents
-    6. Square/cube/any root
-    7. Bring up "The Lists"....
-    8. Sin()
-    9. Cos()
-    10. Tan()
-    11. Terms of Pi()""")
+2. Subtraction
+3. Multiplication
+4. Division
+5. Exponents
+6. Square/cube/any root
+7. Bring up "The Lists"....
+8. Sin()
+9. Cos()
+10. Tan()
+11. Terms of Pi()
+12. Recipicoral()""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Addition!")
@@ -644,9 +669,9 @@ if __name__ == "__main__":
                 print(f"The {root} root of the number is {result}.")
                 copy_to_keyboard(result, copy_to_keyboard_true)
             elif operation == 7:
-                print("Standard Multiplication grid:")
+                print("Multiplication grid:")
                 # Define the size of the times table grid
-                size = 20
+                size = int(input("Please input the size of multiplication grid: "))
 
                 # Print the header row
                 print("    ", end="")
@@ -693,17 +718,28 @@ if __name__ == "__main__":
                 pi = math.pi
                 num = float(input("Enter the number you want to find the terms of pi of: "))
                 terms_of_pi = num / pi
-                print(f"The terms of pi of the number is {terms_of_pi}.")
-                copy_to_keyboard(terms_of_pi, copy_to_keyboard_true)
+                print(f"The terms of pi of the number is {terms_of_pi}pi.")
+                copy_to_keyboard(f"{terms_of_pi}pi", copy_to_keyboard_true)
+            elif operation == 12:
+                print("You have selected Recipicoral()")
+                num = float(input("Enter the number you want to find the recipicoral of: "))
+                reciprocal_num = reciprocal(num)
+                print(f"The recipicoral of {num} is {reciprocal_num}")
+                copy_to_keyboard(reciprocal_num,copy_to_keyboard_true)
 
             else:
                 print("Invalid operation!Please try again.")
                 continue 
         elif category == 6:
-            print("Welcome to the Ordering category!")
+            print("Welcome to the Ordering/Mass operations category!")
             print("Please select an operation:")
             print("""1. Ascending order
-    2. Descending order""")
+    2. Descending order
+    3. Mass addition
+                  (coming 2.5)
+    4. Mass subtraction
+    5. Mass multiplication
+    6. Mass division""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Ascending order!")
@@ -731,9 +767,23 @@ if __name__ == "__main__":
                 ordering_list.sort(reverse=True)
                 print(f"The numbers in descending order are {ordering_list}.",sep=",")
                 copy_to_keyboard(ordering_list, copy_to_keyboard_true)
+            elif operation == 3:
+                print("You have selected Mass addition!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                sum_of_numbers = sum(ordering_list) 
+                print(f"The sum of the numbers are {sum_of_numbers}.")
+                copy_to_keyboard(sum_of_numbers, copy_to_keyboard_true)
+
             else:
                 print("Invalid operation!Please try again.")
-                continue 
+                continue
         elif category == 7:
             print("Welcome to the Scale factors category!")
             print("Please select an operation:")
@@ -1140,7 +1190,8 @@ if __name__ == "__main__":
 2.Calcuate area of sector
 3.Calcuate arc length
 4.Calcuate area of segment
-5.Calcuate chord lenght""")
+5.Calcuate chord lenght
+6.Calcuate central angle""")
                 operation = int(input("Enter the number of the operation you want to perform: "))
                 if operation == 1:
                     print("You have selected Calculate the diameter/radius!")
@@ -1170,7 +1221,8 @@ if __name__ == "__main__":
                         copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
                     elif method == 4:
                         sector_area = float(input("Enter the area of the sector: "))
-                        radius = math.sqrt((sector_area * 360) / (pi))
+                        angle = float(input("Enter the angle of the sector(degrees): "))
+                        radius = math.sqrt((sector_area * angle) / (pi))
                         diameter = radius * 2
                         print(f"The diameter of the circle is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
                         copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
@@ -1266,6 +1318,49 @@ if __name__ == "__main__":
                     chord_length = 2 * radius * math.sin(math.radians(angle / 2))
                     print(f"The chord length is {chord_length} {lenght_units}.")
                     copy_to_keyboard(chord_length, copy_to_keyboard_true)
+                elif operation == 6:
+                    print("You have selected Calcuate the central angle!")
+                    print("Please chose a method:")
+                    print("""1.Using area of sector+radius
+2.Using the arc lenght+radius
+3. Using the segment area+radius
+4. Using the chord lenght+radius""")
+                    method = int(input("Enter the number of the method you want to use: "))
+                    if method == 1:
+                        print("You have selected Using area of sector+radius!")
+                        radius = float(input("Enter the radius of the sector: "))
+                        sector_area = float(input("Enter the area of the sector: "))
+                        angle = (sector_area / (0.5 * pi * (radius ** 2))) * 360
+                        print(f"The central angle is {angle}°.")
+                        copy_to_keyboard(angle, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Using the arc lenght+radius!")
+                        radius = float(input("Enter the radius of the sector: "))
+                        arc_lenght = float(input("Enter the arc lenght of the sector: "))
+                        angle = arc_lenght / radius
+                        angle = math.degrees(angle)
+                        print(f"The central angle is {angle}°.")
+                        copy_to_keyboard(angle, copy_to_keyboard_true)
+                    elif method == 3:
+                        print("You have selected Using the segment area+radius!")
+                        radius = float(input("Enter the radius of the sector: "))
+                        segment_area = float(input("Enter the area of the segment: "))
+                        angle = (segment_area / (0.5 * (radius ** 2))) + math.sin(segment_area / (0.5 * (radius ** 2)))
+                        angle = math.degrees(angle)
+                        print(f"The central angle is {angle}°.")
+                        copy_to_keyboard(angle, copy_to_keyboard_true)
+                    elif method == 4:
+                        print("You have selected Using the chord lenght+radius!")
+                        radius = float(input("Enter the radius of the sector: "))
+                        chord_lenght = float(input("Enter the chord lenght of the sector: "))
+                        angle = 2 * math.asin(chord_lenght / (2 * radius))
+                        angle = math.degrees(angle)
+                        print(f"The central angle is {angle}°.")
+                        copy_to_keyboard(angle, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                    
                 else:
                     print("Invalid operation!Please try again.")
                     continue
@@ -1274,6 +1369,12 @@ if __name__ == "__main__":
             else:
                 print("Invalid shape!Please try again.")
                 continue
+ 
+
+                
+                
+
+            
             
 
 
