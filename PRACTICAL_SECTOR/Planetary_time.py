@@ -113,7 +113,7 @@ try:
         
         print("Mercury date:", planet_date(176,88))
         print("Venus date:", planet_date(243,224.7))
-        print("Earth date:", planet_date(1,365))
+        print("Earth(sidereal) date:", planet_date(1,365.25))
         print("Mars date:", planet_date(1.027,687))
         print("Jupiter date:", planet_date(0.4125,4331.6))
         print("Saturn date:", planet_date(0.4375,10759.22))
