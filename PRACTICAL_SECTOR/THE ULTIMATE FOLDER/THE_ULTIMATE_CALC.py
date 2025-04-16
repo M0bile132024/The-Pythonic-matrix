@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-03-24
-#Version: 2.44
+#Date: 2025-04-16
+#Version: 2.5
 #Milestones:
 #UPDATE 2.0:11/03/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -63,7 +63,7 @@ def subtract_list(values):
         result -= value
     return result
 def multiply_list(values):
-    result = 0
+    result = 1
     for value in values[1:]:
         result *= value
     return result
@@ -86,7 +86,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.45
+version = 2.5
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -98,21 +98,22 @@ if __name__ == "__main__":
     while True:
         print(f"Welcome to the ULTIMATE calc Ver {version}!")
         print("""Please select a category:
-        1. Surface Area and Volume
+        1. Surface Area and Volume(SA:VOL ratio)
         2. Pythagoras therom
         3. Perimiter and Area(P:A ratio)
         4. Standard form
         5. The Basics
-        6. Ordering/Mass operations
+        6. Ordering/Mass operations(Beta)
         7. Scale factors
         8. Decimal to fraction to percentage conversions
         9. Intrest
         10. Trigomentry
         11. Lines
         12. Equations(beta)
-        13. Circles(is out)/Spheres(coming 2.5)
-        14. Legal/Other Info on ULTIMATE CALC™
-        15. Settings
+        13. Circles/Spheres
+        14. Others(coming soon)
+        15. Legal/Other Info on ULTIMATE CALC™
+        16. Settings
         More functions are coming soon!!!!!""")
         category = int(input("Enter the number of the category you want to use: "))
         
@@ -734,12 +735,11 @@ if __name__ == "__main__":
             print("Welcome to the Ordering/Mass operations category!")
             print("Please select an operation:")
             print("""1. Ascending order
-    2. Descending order
-    3. Mass addition
-                  (coming 2.5)
-    4. Mass subtraction
-    5. Mass multiplication
-    6. Mass division""")
+2. Descending order
+3. Mass addition
+4. Mass subtraction
+5. Mass multiplication
+6. Mass division""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Ascending order!")
@@ -777,9 +777,61 @@ if __name__ == "__main__":
                     else:
                         number = float(number)
                         ordering_list.append(number)
-                sum_of_numbers = sum(ordering_list) 
-                print(f"The sum of the numbers are {sum_of_numbers}.")
-                copy_to_keyboard(sum_of_numbers, copy_to_keyboard_true)
+                try:    
+                    sum_of_numbers = sum(ordering_list) 
+                    print(f"The sum of the numbers are {sum_of_numbers}.")
+                    copy_to_keyboard(sum_of_numbers, copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
+            elif operation == 4:
+                print("You have selected Mass subtraction!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                try:
+                    print(f"The difference of the numbers is {subtract_list(ordering_list)}.")
+                    copy_to_keyboard(subtract_list(ordering_list), copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
+            elif operation == 5:
+                print("You have selected Mass multiplication!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                try:    
+                    print(f"The product of the numbers is {multiply_list(ordering_list)}.")
+                    copy_to_keyboard(multiply_list(ordering_list), copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
+            elif operation == 6:
+                print("You have selected Mass division!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                try:    
+                    print(f"The quotient of the numbers is {divide_list(ordering_list)}.")
+                    copy_to_keyboard(divide_list(ordering_list), copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
 
             else:
                 print("Invalid operation!Please try again.")
@@ -1217,6 +1269,7 @@ if __name__ == "__main__":
                     elif method == 3:
                         circumference = float(input("Enter the circumference of the circle: "))
                         diameter = circumference / pi
+                        radius = diameter / 2
                         print(f"The diameter of the circle is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
                         copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
                     elif method == 4:
@@ -1365,7 +1418,93 @@ if __name__ == "__main__":
                     print("Invalid operation!Please try again.")
                     continue
             elif shape == 2:
-                print("The sphere category will come in 2.5.0!")
+                #V=2/3piR^2h
+                print("You have selected Sphere!")
+                print("Please select an operation:")
+                print("""
+1. Calculate the diameter/radius
+2.Calcuate volume of spherical cone
+3.Calcuate lenght of Great circle
+4.Calcuate volume of spherical cap
+5.Calcuate volume of spherical segment
+6.Calcuate volume of spherical wedge""")
+                operation = int(input("Enter the number of the operation you want to perform: "))
+                if operation == 1:
+                    print("You have selected Calculate the diameter/radius!")
+                    print("Please select a method:")
+                    print("""1. Using the radius
+2. Using diameter
+3. Using the great circle circumference""")
+                    method = int(input("Enter the number of the method you want to use: "))
+                    if method == 1:
+                        radius = float(input("Enter the radius of the sphere: "))
+                        diameter = radius * 2
+                        print(f"The diameter of the sphere is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
+                        copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
+                    elif method == 2:
+                        diameter = float(input("Enter the diameter of the sphere: "))
+                        radius = diameter / 2
+                        print("The radius of the sphere is {radius} {lenght_units} and the diameter is {diameter} {lenght_units}.")
+                        copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
+                    elif method == 3:
+                        circumference = float(input("Enter the circumference of the great circle: "))
+                        diameter = circumference / pi
+                        radius = diameter / 2
+                        print(f"The diameter of the sphere is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
+                        copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
+                    
+                        
+                            
+
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                
+                elif operation == 2:
+                    print("You have selected Calcuate volume of spherical cone!")
+                    radius = float(input("Enter the radius of the cone: "))
+                    height = float(input("Enter the height of the cone: "))
+                    area = (2/3) * pi * (radius ** 2) * height
+                    print(f"The volume of the spherical cone is {area} {volume_units}.")
+                    copy_to_keyboard(area, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Calcuate lenght of Great Circle!")
+                    radius = float(input("Enter the radius of the sphere: "))
+                    x = float(input("Enter the frist angle of latitude of the sphere(degrees): "))
+                    y = float(input("Enter the second angle of latitude of the sphere(degrees): "))
+                    a = float(input("Enter the first angle of longitude of the sphere(degrees): "))
+                    b = float(input("Enter the second angle of longitude of the sphere(degrees): "))
+                    arc_length = radius * math.acos(math.sin(math.radians(x)) * math.sin(math.radians(y)) + math.cos(math.radians(x)) * math.cos(math.radians(y)) * math.cos(math.radians(a - b)))
+                    print(f"The lenght of the Great Circle is {arc_length} {lenght_units}.")
+                    copy_to_keyboard(arc_length, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Calcuate volume of a spherical cap!")
+                    radius = float(input("Enter the radius of the cap: "))
+                    height = float(input("Enter the height of the cap: "))
+                    area = (1/3) * pi * (height ** 2) * ((3 * radius) - height)
+                    print(f"The volume of the cap is {area} {volume_units}.")
+                    copy_to_keyboard(area, copy_to_keyboard_true)
+                elif operation == 5:
+                    # (1/6)πh((3r1)^2 + (3r2)^2 + h^2)
+                    print("You have selected Calcuate volume of spherical segment!")
+                    r1 = float(input("Enter the radius of the base circle of segment: "))
+                    r2 = float(input("Enter the radius of the top circle of segment: "))
+                    h = float(input("Enter the height of the segment: "))
+                    volume = (1/6) * pi * h * ((3 * (r1 ** 2)) + (3 * (r2 ** 2)) + (h ** 2))
+                    print(f"The volume of the segment is {volume} {volume_units}.")
+                    copy_to_keyboard(volume, copy_to_keyboard_true)
+                elif operation == 6:
+                    #(θ/360°)(4/3)π(R^3)
+                    print("You have selected Calcuate the volume of spherical wedge!")
+                    radius = float(input("Enter the radius of the wedge: "))
+                    angle = float(input("Enter the angle of the wedge(degrees): "))
+                    volume = (angle / 360) * ((4/3) * pi * (radius ** 3))
+                    print("The volume of the wedge is {volume} {volume_units}.")
+                    copy_to_keyboard(volume, copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+                
             else:
                 print("Invalid shape!Please try again.")
                 continue
@@ -1390,8 +1529,18 @@ if __name__ == "__main__":
             
 
                 
-
         elif category == 14:
+            print("The Others category will be coming soon!")
+            time.sleep(2)
+            print("However you can get a little sneak peak of's what already planned including:")
+            print("""1.Statistics calc
+                  2. Chemistry/physics calc
+                  3. Planetary calc
+                  4. Triangle calc(or category for that matter)
+                  5 And a lot of other minor things I can't tell you about yet""")
+            time.sleep(2)
+            continue
+        elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
             print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
             print("© 2025 M0bile132022. All rights reserved.")
@@ -1404,7 +1553,7 @@ if __name__ == "__main__":
             print(f"Version: {version}")
             print(f"File path: {file_path}")
             copy_to_keyboard(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.© 2025 M0bile132022. All rights reserved. This program is protected by the GNU General Public License v3.0. This program is provided as is with no warranty. For more information, visit https://www.ultimatecalc.com. Other statstics: Lines of code: {count_lines(file_path)} Size:{file_size} bytes Version: {version} File path: {file_path}", copy_to_keyboard_true)
-        elif category == 15:
+        elif category == 16:
             print("Welcome to settings!")
             print("Please select an operation:")
             print("""1. Change the lenght units
