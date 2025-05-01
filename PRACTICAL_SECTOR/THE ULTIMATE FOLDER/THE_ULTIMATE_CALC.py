@@ -2,9 +2,9 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-04-16
-#Version: 2.5
+#Version: 2.505(snapshot)
 #Milestones:
-#UPDATE 2.0:11/03/2025
+#UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, 
 pythagoras therom,
@@ -72,6 +72,15 @@ def divide_list(values):
     for value in values[1:]:
         result /= value
     return result
+def calc(name,options,operation_or_calc):
+    print(f"You have selected {name}" if operation_or_calc == 1 else f"Welcome to the {name} category!")
+    print("Please select an operation:" if operation_or_calc == 1 else "Please select a calculation:" if operation_or_calc == 2 else "Please select a method:")
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    operation = int(input("Enter the number of the operation you want to perform: "))
+    return operation
+
+       
 
 
 # Example usage
@@ -86,7 +95,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.5
+version = 2.505
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -1530,15 +1539,36 @@ if __name__ == "__main__":
 
                 
         elif category == 14:
-            print("The Others category will be coming soon!")
-            time.sleep(2)
-            print("However you can get a little sneak peak of's what already planned including:")
-            print("""1.Statistics calc
-                  2. Chemistry/physics calc
-                  3. Planetary calc
-                  4. Triangle calc(or category for that matter)
-                  5 And a lot of other minor things I can't tell you about yet""")
-            time.sleep(2)
+            operation = calc("Others",["Chemistry/Physics calc","Statistics calc","Finance calc","Unit conversion calc","Miscellaneous calc"],2)
+            if operation == 1:
+                operation = calc("Chemistry/Physics calc",["Relative mass calc","Concentration calc","Gas laws calc","Thermodynamics calc","Electrochemistry calc"],1)
+                if operation == 1:
+                    print("You have selected Relative mass calc!")
+                    mass_list = []
+                    abundance_list = []
+                    while True:
+                        mass = float(input("Enter the mass of a isotope:(type done to stop recording) "))
+                        abundance = float(input("Enter the abundance of the isotope(%): "))
+                        if mass == "done":
+                            break
+                        mass_list.append(mass)
+                        abundance_list.append(abundance)
+                    product_list = []
+                    for i in range(len(mass_list)):
+                        product = mass_list[i] * abundance_list[i]
+                        product_list.append(product)
+
+                    relative_mass = sum(product_list) / 100
+                    print(f"The relative mass of the element is {relative_mass}.")
+                    copy_to_keyboard(relative_mass, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Concentration calc!")
+                    concentration = float(input("Enter the concentration of the solution(mol/L): "))
+                    volume = float(input("Enter the volume of the solution(L): "))
+                    moles = concentration * volume
+                    print(f"The number of moles in the solution is {moles} mol.")
+                    copy_to_keyboard(moles, copy_to_keyboard_true)
+                
             continue
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
