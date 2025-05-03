@@ -1,17 +1,20 @@
-XP Boost for Tuesday 15th April 10pm 
-Bookwork 1a:402.1238596594935,128.0pi
-Bookwork 1b:477.5220833456485,152.0
-Bookwork 1c:829.3804605477054,264.0
-Bookwork 1d:2777.1679057733772,884.0
-Bookwork 2a:(6y^2)+18y
-Bookwork 2b:(w^2)+10w+37
-Bookwork 2c:24f+10
-Bookwork 2d:12t-16
-Bookwork 3a:300*(1.07^n)
-Targets for Tuesday 15th April 10pm
-Bookwork 1a:N/A
-Bookwork 1b:0.1
-Bookwork 1c:yes
-Bookwork 1d:3/2
-Bookwork 1e:50
-Bookwork 1f:The equation of the perpendicular line is y = 0.2857142857142857x+1.5714285714285716.
+Bookwork 1a:21
+Bookwork 1b:42
+Bookwork 1c:28
+Bookwork 1d:1/14
+Bookwork 1e:120
+Bookwork 2a:72
+Bookwork 2b:N/A
+Bookwork 2c:162
+Bookwork 2d:1/5
+Bookwork 3a:-5
+Bookwork 3b:27.4
+Bookwork 3c:81
+Bookwork 3d:8
+Bookwork 3e:24.8
+Bookwork 3f:24
+Bookwork 4a:73040
+Bookwork 4b:5/12
+Bookwork 4c:54
+Bookwork 4d:90
+Bookwork 4e:9.04e+03

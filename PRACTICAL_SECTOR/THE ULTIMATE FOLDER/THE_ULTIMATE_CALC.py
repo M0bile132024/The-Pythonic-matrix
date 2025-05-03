@@ -2,9 +2,9 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-04-16
-#Version: 2.5
+#Version: 2.59
 #Milestones:
-#UPDATE 2.0:11/03/2025
+#UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, 
 pythagoras therom,
@@ -72,6 +72,31 @@ def divide_list(values):
     for value in values[1:]:
         result /= value
     return result
+def calc(name,options,operation_or_calc):
+    print(f"You have selected {name}!" if operation_or_calc == 1 else f"Welcome to the {name} category!")
+    print("Please select an operation:" if operation_or_calc == 1 else "Please select a calculation:" if operation_or_calc == 2 else "Please select a method:")
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    operation = int(input("Enter the number of the operation you want to perform: "))
+    return operation
+#3rd party subroutines
+#yzfargo/yu https://github.com/yzfargo/yu
+def calculate_displacement(initial_velocity, acceleration, time):
+    """Calculates the displacement using the SVT equation."""
+    displacement = initial_velocity * time + 0.5 * acceleration * time**2
+    return displacement
+
+def calculate_final_velocity(initial_velocity, acceleration, time):
+    """Calculates the final velocity using the SVT equation."""
+    final_velocity = initial_velocity + acceleration * time
+    return final_velocity
+
+def calculate_time(initial_velocity, final_velocity, acceleration):
+    """Calculates the time using the SVT equation."""
+    time = (final_velocity - initial_velocity) / acceleration
+    return time
+
+       
 
 
 # Example usage
@@ -86,7 +111,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.5
+version = 2.59
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -1530,16 +1555,205 @@ if __name__ == "__main__":
 
                 
         elif category == 14:
-            print("The Others category will be coming soon!")
-            time.sleep(2)
-            print("However you can get a little sneak peak of's what already planned including:")
-            print("""1.Statistics calc
-                  2. Chemistry/physics calc
-                  3. Planetary calc
-                  4. Triangle calc(or category for that matter)
-                  5 And a lot of other minor things I can't tell you about yet""")
-            time.sleep(2)
-            continue
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Unit conversion calc","Miscellaneous calc"],2)
+            if operation == 1:
+                operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc"],1)
+                if operation == 1:
+                    print("You have selected Relative mass calc!")
+                    mass_list = []
+                    abundance_list = []
+                    while True:
+                        mass = input("Enter the mass of a isotope:(type done to stop recording) ")
+                        abundance = input("Enter the abundance of the isotope(%): ")
+                        if mass == "done":
+                            break
+                        mass_list.append(float(mass))
+                        abundance_list.append(float(abundance))
+                    product_list = []
+                    for i in range(len(mass_list)):
+                        product = mass_list[i] * abundance_list[i]
+                        product_list.append(product)
+
+                    relative_mass = sum(product_list) / 100
+                    print(f"The relative mass of the element is {relative_mass}.")
+                    copy_to_keyboard(relative_mass, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Atomic weight using relative mass calc!")
+                    mass_list = []
+                    abundance_list = []
+                    product_list = []
+                    while True:
+                    
+                    
+                        mass = input("Enter the mass of a known isotope (or type 'done' to finish): ")
+                        if mass == 'done':
+                            break
+                        else:
+                            abundance = input("Enter the abundance of the known isotope: ")
+                            mass_list.append(float(mass))
+                            abundance_list.append(float(abundance))
+                            product = float(mass) * float(abundance)
+                            product_list.append(product)
+                    relative_mass = float(input("Enter the relative mass of the isotope: "))
+                    abunance = 100 - sum(abundance_list)
+                    atomic_weight = relative_mass * 100
+                    for i in range(len(mass_list)):
+                        atomic_weight -= product_list[i]
+                    atomic_weight /= abunance
+                    print("The atomic weight of the unknown isotope is: ", atomic_weight)
+                    copy_to_keyboard(atomic_weight, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Moles calc!")
+                    concentration = float(input("Enter the concentration of the solution (mol/L): "))
+                    volume = float(input("Enter the volume of the solution (L): "))
+                    moles = concentration * volume
+                    print(f"The number of moles is {moles}.")
+                    copy_to_keyboard(moles, copy_to_keyboard_true)
+                elif operation == 4:
+                    method = calc("Thermodynamics calc",["Enthalpy calc","Entropy calc","Gibbs free energy calc","Heat capacity calc"],3)
+                    if method == 1:
+                        print("You have selected Enthalpy calc!")
+                        enthalpy = float(input("Enter the enthalpy (kJ/mol): "))
+                        temperature = float(input("Enter the temperature (K): "))
+                        enthalpy_change = enthalpy / temperature
+                        print(f"The enthalpy change is {enthalpy_change} kJ/mol/K.")
+                        copy_to_keyboard(enthalpy_change, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Entropy calc!")
+                        entropy = float(input("Enter the entropy (J/mol/K): "))
+                        temperature = float(input("Enter the temperature (K): "))
+                        entropy_change = entropy / temperature
+                        print(f"The entropy change is {entropy_change} J/mol/K.")
+                        copy_to_keyboard(entropy_change, copy_to_keyboard_true)
+                    elif method == 3:
+                        print("You have selected Gibbs free energy calc!")
+                        enthalpy = float(input("Enter the enthalpy (kJ/mol): "))
+                        entropy = float(input("Enter the entropy (J/mol/K): "))
+                        temperature = float(input("Enter the temperature (K): "))
+                        gibbs_free_energy = enthalpy - (temperature * entropy)
+                        print(f"The Gibbs free energy is {gibbs_free_energy} kJ/mol.")
+                        copy_to_keyboard(gibbs_free_energy, copy_to_keyboard_true)
+                    elif method == 4:
+                        print("You have selected Heat capacity calc!")
+                        heat_capacity = float(input("Enter the heat capacity (J/mol/K): "))
+                        temperature_change = float(input("Enter the temperature change (K): "))
+                        heat_capacity_change = heat_capacity * temperature_change
+                        print(f"The heat capacity change is {heat_capacity_change} J/mol.")
+                        copy_to_keyboard(heat_capacity_change, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 5:
+                    method = calc("Electrochemistry calc",["Electrochemical cell calc","Electrolysis calc","Faraday's law calc"],3)
+                    if method == 1:
+                        print("You have selected Electrochemical cell calc!")
+                        cell_potential = float(input("Enter the cell potential (V): "))
+                        current = float(input("Enter the current (A): "))
+                        time = float(input("Enter the time (s): "))
+                        charge = cell_potential * current * time
+                        print(f"The charge is {charge} C.")
+                        copy_to_keyboard(charge, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Electrolysis calc!")
+                        current = float(input("Enter the current (A): "))
+                        time = float(input("Enter the time (s): "))
+                        charge = current * time
+                        print(f"The charge is {charge} C.")
+                        copy_to_keyboard(charge, copy_to_keyboard_true)
+                    elif method == 3:
+                        print("You have selected Faraday's law calc!")
+                        current = float(input("Enter the current (A): "))
+                        time = float(input("Enter the time (s): "))
+                        charge = current * time
+                        faraday_constant = 96485.3329
+                        moles = charge / faraday_constant
+                        print(f"The number of moles is {moles}.")
+                        copy_to_keyboard(moles, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 6:
+                    operation = calc("SVT calc",["Calcuate displacement","Calcuate final velocity","Calcuate time"],1)
+                    if operation == 1:
+                        print("You have selected Calcuate displacement!")
+                        initial_velocity = float(input("Enter the initial velocity (m/s): "))
+                        final_velocity = float(input("Enter the final velocity (m/s): "))
+                        time = float(input("Enter the time (s): "))
+                        displacement = calculate_displacement(initial_velocity, final_velocity, time)
+                        print(f"The displacement is {displacement} {lenght_units}.")
+                        copy_to_keyboard(displacement, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calcuate final velocity!")
+                        initial_velocity = float(input("Enter the initial velocity (m/s): "))
+                        acceleration = float(input("Enter the acceleration (m/s²): "))
+                        time = float(input("Enter the time (s): "))
+                        final_velocity = calculate_final_velocity(initial_velocity, acceleration, time)
+                        print(f"The final velocity is {final_velocity} {lenght_units}.")
+                        copy_to_keyboard(final_velocity, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calcuate time!")
+                        initial_velocity = float(input("Enter the initial velocity (m/s): "))
+                        final_velocity = float(input("Enter the final velocity (m/s): "))
+                        acceleration = float(input("Enter the acceleration (m/s²): "))
+                        time = calculate_time(initial_velocity, final_velocity, acceleration)
+                        print(f"The time is {time} seconds.")
+                        copy_to_keyboard(time, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif operation == 2:
+                operation = calc("Ratio calc",["Finding all amounts in ratio","Finding total of ratio and unknwon amounts","Listing equinvant ratios"],2)
+                if operation == 1:
+                    print("You have selected Finding all amounts in ratio!")
+                    ratio = input("Enter the ratio (e.g. 2:3): ")
+                    total_amount = float(input("Enter the total amount: "))
+                    ratio_parts = ratio.split(":")
+                    ratio_sum = sum(int(part) for part in ratio_parts)
+                    amounts = [int(part) / ratio_sum * total_amount for part in ratio_parts]
+                    print(f"The amounts are: {amounts}")
+                    copy_to_keyboard(amounts, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Finding total of ratio and unknwon amounts!")
+                    ratio = input("Enter the ratio with known value at forefront(eg.2:3,2 being known): ")
+                    part = input("Enter value of known part: ")
+                    ratio_parts = ratio.split(":")
+                    ratio_parts = [int(x) for x in ratio_parts]
+                    total_parts = sum(ratio_parts)
+                    known_part = ratio_parts[0]
+                    known_part_value = int(part)
+                    total_amount = (known_part_value * total_parts) / known_part
+                    # Calculate the total amount based on the ratio and known part
+                    # Print the result
+                    print(f"The total amount is: {total_amount}")
+                    print("The unknwown parts are:")
+                    unknown_parts_list = []
+                    for i in range(1, len(ratio_parts)):
+                        unknown_part = ratio_parts[i]
+                        unknown_part_value = (unknown_part * total_amount) / total_parts
+                        print(f"Part {i + 1}: {unknown_part_value}")
+                        unknown_parts_list.append(unknown_part_value)
+                    copy_to_keyboard(f"{unknown_parts_list},{total_amount}", copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Listing equinvant ratios!")
+                    ratio = input("Enter the ratio (e.g. 2:3): ")
+                    number = int(input("Enter the number of equivalent ratios to generate(from it's simplest form): "))
+                    ratio_parts = ratio.split(":")
+                    ratio_parts = [int(x) for x in ratio_parts]
+                    ratio_sum = sum(ratio_parts)
+                    equivalent_ratios = []
+                    for i in range(1, number + 1):
+                        equivalent_ratio = [part * i for part in ratio_parts]
+                        equivalent_ratios.append(":".join(map(str, equivalent_ratio)))
+                    print(f"The equivalent ratios are: {equivalent_ratios}")
+                    copy_to_keyboard(equivalent_ratios, copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+                    
+
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
             print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
@@ -1553,6 +1767,18 @@ if __name__ == "__main__":
             print(f"Version: {version}")
             print(f"File path: {file_path}")
             copy_to_keyboard(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.© 2025 M0bile132022. All rights reserved. This program is protected by the GNU General Public License v3.0. This program is provided as is with no warranty. For more information, visit https://www.ultimatecalc.com. Other statstics: Lines of code: {count_lines(file_path)} Size:{file_size} bytes Version: {version} File path: {file_path}", copy_to_keyboard_true)
+            print("""Credits:
+            1. M0bile132022 for code
+            2. OpenAI for aid
+            3. Python community for possiblity
+            4. SymPy for the real complicated stuff
+            5. Math community for purpose
+            6. Stack Overflow for help
+            7. GitHub community for storage
+            8. Wikipedia for knowledge
+            9. Yzfargo for 3rd party subroutines
+            10. You for using it!!!""")
+            
         elif category == 16:
             print("Welcome to settings!")
             print("Please select an operation:")
