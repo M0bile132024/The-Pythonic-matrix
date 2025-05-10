@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date: 2025-04-16
-#Version: 2.59
+#Version: 2.595(Beta)
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -73,12 +73,91 @@ def divide_list(values):
         result /= value
     return result
 def calc(name,options,operation_or_calc):
+    '''1.Operation,2.Calcuation,3.Method'''
     print(f"You have selected {name}!" if operation_or_calc == 1 else f"Welcome to the {name} category!")
+    
     print("Please select an operation:" if operation_or_calc == 1 else "Please select a calculation:" if operation_or_calc == 2 else "Please select a method:")
     for i, option in enumerate(options, start=1):
         print(f"{i}. {option}")
     operation = int(input("Enter the number of the operation you want to perform: "))
     return operation
+def multiplication_table():
+    print("Multiplication grid:")
+                # Define the size of the times table grid
+    size = int(input("Please input the size of multiplication grid: "))
+
+                # Print the header row
+    print("    ", end="")
+    for i in range(1, size + 1):
+        print(f"{i:4}", end="")
+    print()
+
+                # Print the separator line
+    print("    " + "-" * (size * 4))
+
+                # Print the times table grid
+    for i in range(1, size + 1):
+        print(f"{i:2} |", end="")
+        for j in range(1, size + 1):
+            print(f"{i * j:4}", end="")
+        print()
+def Sqaures_Cubes():
+    size = int(input("Please input the size of the sqaures and cubes grid: "))
+    print("Squares and cubes grid:")
+    # Print the header row
+    print("Number |",end="")
+    print("Squares |",end="")
+    print("Cubes |")
+    size += 1
+    # Print the separator line
+    print("    " + "-" * (size * 4))
+    # Print the times table grid
+    for i in range(1,size):
+        print(i,i**2,i**3,sep="   |")
+def find_factors(n):
+    factors = []
+    for i in range(1, n + 1):
+        if n % i == 0:
+            factors.append(i)
+    return factors
+def find_multiples(n, limit):
+    multiples = []
+    for i in range(1, limit + 1):
+        multiples.append(n * i)
+    return multiples
+
+def find_if_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+def find_primes(n):
+    prime_numbers = []
+    for i in range(2, n + 1):
+        if find_if_primes(i) == True:
+            prime_numbers.append(i)
+    return prime_numbers
+def find_prime_factors(n):
+    prime_factors = []
+    for i in range(2, n + 1):
+        while n % i == 0:
+            prime_factors.append(i)
+            n //= i
+    return prime_factors
+def find_gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+    return gcd, lcm
+def find_lcm_of_list(numbers):
+    lcm = numbers[0]
+    for number in numbers[1:]:
+        lcm = find_lcm(lcm, number)
+    return lcm
+
 #3rd party subroutines
 #yzfargo/yu https://github.com/yzfargo/yu
 def calculate_displacement(initial_velocity, acceleration, time):
@@ -109,6 +188,14 @@ def find_x_intercept(m, b):
         return None
     x_intercept = -b / m
     return x_intercept
+def find_lcm(a, b):
+    return abs(a * b) // find_gcd(a, b)
+def find_gcd_lcm(numbers):
+    gcd = numbers[0]
+    lcm = numbers[0]
+    for number in numbers[1:]:
+        gcd = find_gcd(gcd, number)
+        lcm = find_lcm(lcm, number)
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
 version = 2.59
@@ -119,6 +206,10 @@ area_units = "Area units"
 money_units = "Money units"
 time_units = "Time units"
 copy_to_keyboard_true = True
+
+
+
+
 if __name__ == "__main__": 
     while True:
         print(f"Welcome to the ULTIMATE calc Ver {version}!")
@@ -695,32 +786,50 @@ if __name__ == "__main__":
                 print(f"The {root} root of the number is {result}.")
                 copy_to_keyboard(result, copy_to_keyboard_true)
             elif operation == 7:
-                print("Multiplication grid:")
-                # Define the size of the times table grid
-                size = int(input("Please input the size of multiplication grid: "))
-
-                # Print the header row
-                print("    ", end="")
-                for i in range(1, size + 1):
-                    print(f"{i:4}", end="")
-                print()
-
-                # Print the separator line
-                print("    " + "-" * (size * 4))
-
-                # Print the times table grid
-                for i in range(1, size + 1):
-                    print(f"{i:2} |", end="")
-                    for j in range(1, size + 1):
-                        print(f"{i * j:4}", end="")
-                    print()
-                print("Standard list of sqaures and cubes:")
-                print("Number |",end="")
-                print("Squares |",end="")
-                print("Cubes |")
-
-                for i in range(1,21):
-                    print(i,i**2,i**3,sep="   |")
+                calcuation = calc("The Lists(aka Number Sequences/Rules)",
+                                  ["Multiplication Table",
+                                    "Squares and Cubes list",
+                                    "Factors of a number",
+                                    "Multiples of a number",
+                                    "Prime numbers list",
+                                    "Fibonacci series",
+                                    "Pythagorean triples",
+                                    "Check if prime",""
+                                    "Find GCD",
+                                    "Find LCM",
+                                    "Find HCF",],
+                                    2)
+                if calcuation == 1:
+                    print("You have selected Multiplication Table!")
+                    multiplication_table()
+                elif calcuation == 2:
+                    print("You have selected Squares and Cubes list!")
+                    Sqaures_Cubes()
+                elif calcuation == 3:
+                    print("You have selected Factors of a number!")
+                    number = int(input("Enter the number you want to find the factors of: "))
+                    factors = find_factors(number)
+                    print("The factors of the number are:")
+                    for factor in factors:
+                        print(f"{factors.index(factor)+1}.{factor}")
+                    copy_to_keyboard(factors, copy_to_keyboard_true)
+                elif calcuation == 4:
+                    print("You have selected Multiples of a number!")
+                    number = int(input("Enter the number you want to find the multiples of: "))
+                    num = int(input("Enter the number of multiples you want to find: "))
+                    multiples = find_multiples(number, num)
+                    print("The multiples of the number are:")
+                    for multiple in multiples:
+                        print(f"{multiples.index(multiple)+1}.{multiple}")
+                    copy_to_keyboard(multiples, copy_to_keyboard_true)
+                elif calcuation == 5:
+                    print("You have selected Prime numbers list!")
+                    num = int(input("Enter the number of prime numbers you want to find: "))
+                    primes = find_primes(num)
+                    print("The prime numbers are:")
+                    for prime in primes:
+                        print(f"{primes.index(prime)+1}.{prime}")
+                    copy_to_keyboard(primes, copy_to_keyboard_true)
             elif operation == 8:
                 print("You have selected Sin()!")
                 num = float(input("Enter the number you want to find the sin of: "))
@@ -1557,7 +1666,7 @@ if __name__ == "__main__":
         elif category == 14:
             operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Unit conversion calc","Miscellaneous calc"],2)
             if operation == 1:
-                operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc"],1)
+                operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc","Concertration calc"],1)
                 if operation == 1:
                     print("You have selected Relative mass calc!")
                     mass_list = []
@@ -1701,6 +1810,13 @@ if __name__ == "__main__":
                     else:
                         print("Invalid operation!Please try again.")
                         continue
+                elif operation == 7:
+                    print("You have selected Concertration calc!")
+                    moles = float(input("Enter the number of moles of the solute: "))
+                    volume = float(input("Enter the volume of the solution (L): "))
+                    concentration = moles / volume
+                    print(f"The concentration of the solution is {concentration} mol/L.")
+                    copy_to_keyboard(concentration, copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue
