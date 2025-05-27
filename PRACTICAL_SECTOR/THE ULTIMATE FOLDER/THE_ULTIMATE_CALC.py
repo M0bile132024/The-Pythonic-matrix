@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-04-16
-#Version: 2.595(Beta)
+#Date(of last test): 2025-05-12
+#Version: 2.59.71
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -136,7 +136,7 @@ def find_if_prime(n):
 def find_primes(n):
     prime_numbers = []
     for i in range(2, n + 1):
-        if find_if_primes(i) == True:
+        if find_if_prime(i) == True:
             prime_numbers.append(i)
     return prime_numbers
 def find_prime_factors(n):
@@ -157,6 +157,82 @@ def find_lcm_of_list(numbers):
     for number in numbers[1:]:
         lcm = find_lcm(lcm, number)
     return lcm
+def calculate_mean(numbers):
+    return sum(numbers) / len(numbers)
+
+def calculate_variance(numbers):
+    avg = calculate_mean(numbers)
+    squared_diff = [(x - avg) ** 2 for x in numbers]
+    return sum(squared_diff) / len(numbers)
+
+def calculate_standard_deviation(numbers):
+    return math.sqrt(calculate_variance(numbers))
+
+def calculate_median(numbers):
+    sorted_numbers = sorted(numbers)
+    n = len(numbers)
+    if n % 2 == 0:
+        mid = n // 2
+        return (sorted_numbers[mid - 1] + sorted_numbers[mid]) / 2
+    else:
+        return sorted_numbers[n // 2]
+def calculate_mode(numbers):
+    frequency = {}
+    for number in numbers:
+        frequency[number] = frequency.get(number, 0) + 1
+    max_freq = max(frequency.values())
+    modes = [num for num, freq in frequency.items() if freq == max_freq]
+    return modes if len(modes) > 1 else modes[0]
+def calculate_range(numbers):
+    return max(numbers) - min(numbers)
+def mean_freq(frequencies, values):
+    if len(frequencies) != len(values):
+        raise ValueError("The lengths of frequencies and values must match.")
+    for i in range(len(frequencies)):
+        if frequencies[i] < 0:
+            raise ValueError("Frequencies must be non-negative.")
+        if values[i] < 0:
+            raise ValueError("Values must be non-negative.")
+
+    total_freq_list = []
+    for i in range(len(frequencies)):
+        total_freq_list.append(frequencies[i] * values[i])
+    total_frequency = sum(total_freq_list)
+
+    total_value = sum(values)
+ 
+    mean = total_frequency / total_value
+    return mean
+def fibonacci(n):
+    """Returns the n terms in Fibonacci sequence."""
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+    elif n == 2:
+        return [0, 1]
+    
+    fib_sequence = [0, 1]
+    for i in range(2, n):
+        next_term = fib_sequence[i - 1] + fib_sequence[i - 2]
+        fib_sequence.append(next_term)
+    
+    return fib_sequence
+def is_prime(n):
+    """Checks if a number is prime."""
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+def find_hcf(a, b):
+    """Finds the highest common factor (HCF) of two numbers."""
+    while b:
+        a, b = b, a % b
+    return a
+    
+
 
 #3rd party subroutines
 #yzfargo/yu https://github.com/yzfargo/yu
@@ -174,6 +250,13 @@ def calculate_time(initial_velocity, final_velocity, acceleration):
     """Calculates the time using the SVT equation."""
     time = (final_velocity - initial_velocity) / acceleration
     return time
+def calculate_factorial(n):
+    """Calculates the factorial of a number."""
+    return math.factorial(n)
+
+def calculate_pi_digits(digits):
+    """Calculates the value of pi up to a specified number of digits."""
+    return round(math.pi, digits)
 
        
 
@@ -196,6 +279,22 @@ def find_gcd_lcm(numbers):
     for number in numbers[1:]:
         gcd = find_gcd(gcd, number)
         lcm = find_lcm(lcm, number)
+    return gcd, lcm
+def calculate_statistics(numbers):
+    statistics = {}
+    statistics["count"] = len(numbers)
+    statistics["sum"] = sum(numbers)
+    statistics["mean"] = calculate_mean(numbers)
+    statistics["variance"] = calculate_variance(numbers)
+    statistics["standard_deviation"] = calculate_standard_deviation(numbers)
+    statistics["median"] = calculate_median(numbers)
+    return statistics
+def calculate_iqr(numbers):
+    sorted_numbers = sorted(numbers)
+    n = len(sorted_numbers)
+    q1 = sorted_numbers[n // 4]
+    q3 = sorted_numbers[3 * n // 4]
+    return q3 - q1
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
 version = 2.59
@@ -219,7 +318,7 @@ if __name__ == "__main__":
         3. Perimiter and Area(P:A ratio)
         4. Standard form
         5. The Basics
-        6. Ordering/Mass operations(Beta)
+        6. Ordering/Mass operations
         7. Scale factors
         8. Decimal to fraction to percentage conversions
         9. Intrest
@@ -227,7 +326,7 @@ if __name__ == "__main__":
         11. Lines
         12. Equations(beta)
         13. Circles/Spheres
-        14. Others(coming soon)
+        14. Others(in working)
         15. Legal/Other Info on ULTIMATE CALC™
         16. Settings
         More functions are coming soon!!!!!""")
@@ -786,18 +885,19 @@ if __name__ == "__main__":
                 print(f"The {root} root of the number is {result}.")
                 copy_to_keyboard(result, copy_to_keyboard_true)
             elif operation == 7:
-                calcuation = calc("The Lists(aka Number Sequences/Rules)",
+                calcuation = calc("The Lists(aka Number Sequences/Rules)(beta)",
                                   ["Multiplication Table",
                                     "Squares and Cubes list",
                                     "Factors of a number",
                                     "Multiples of a number",
                                     "Prime numbers list",
                                     "Fibonacci series",
-                                    "Pythagorean triples",
-                                    "Check if prime",""
+                                    "Check if prime",
                                     "Find GCD",
                                     "Find LCM",
-                                    "Find HCF",],
+                                    "Find HCF",
+                                    "Find factorial",
+                                    "Calcuate Pi digits"],
                                     2)
                 if calcuation == 1:
                     print("You have selected Multiplication Table!")
@@ -830,6 +930,56 @@ if __name__ == "__main__":
                     for prime in primes:
                         print(f"{primes.index(prime)+1}.{prime}")
                     copy_to_keyboard(primes, copy_to_keyboard_true)
+                elif calcuation == 6:
+                    print("You have selected Fibonacci series!")
+                    num = int(input("Enter the number of terms you want in the Fibonacci series: "))
+                    fibonacci_series = fibonacci(num)
+                    print("The Fibonacci series is:")
+                    for term in fibonacci_series:
+                        print(f"{fibonacci_series.index(term)+1}.{term}")
+                    copy_to_keyboard(fibonacci_series, copy_to_keyboard_true)
+                elif calcuation == 7:
+                    print("You have selected Check if prime!")
+                    number = int(input("Enter the number you want to check if it is prime: "))
+                    if is_prime(number):
+                        print(f"{number} is a prime number.")
+                        copy_to_keyboard(f"{number} is a prime number.", copy_to_keyboard_true) 
+                    else:
+                        print(f"{number} is not a prime number.")
+                        copy_to_keyboard(f"{number} is not a prime number.", copy_to_keyboard_true)
+                elif calcuation == 8:
+                    print("You have selected Find GCD!")
+                    num1 = int(input("Enter the first number: "))
+                    num2 = int(input("Enter the second number: "))
+                    gcd = find_gcd(num1, num2)
+                    print(f"The GCD of {num1} and {num2} is {gcd}.")
+                    copy_to_keyboard(gcd, copy_to_keyboard_true)
+                elif calcuation == 9:
+                    print("You have selected Find LCM!")
+                    num1 = int(input("Enter the first number: "))
+                    num2 = int(input("Enter the second number: "))
+                    lcm = find_lcm(num1, num2)
+                    print(f"The LCM of {num1} and {num2} is {lcm}.")
+                    copy_to_keyboard(lcm, copy_to_keyboard_true)
+                elif calcuation == 10:
+                    print("You have selected Find HCF!")
+                    num1 = int(input("Enter the first number: "))
+                    num2 = int(input("Enter the second number: "))
+                    hcf = find_hcf(num1, num2)
+                    print(f"The HCF of {num1} and {num2} is {hcf}.")
+                    copy_to_keyboard(hcf, copy_to_keyboard_true)
+                elif calcuation == 11:
+                    print("You have selected Find factorial!")
+                    number = int(input("Enter the number you want to find the factorial of: "))
+                    factorial_result = calculate_factorial(number)
+                    print(f"The factorial of {number} is {factorial_result}.")
+                    copy_to_keyboard(factorial_result, copy_to_keyboard_true)
+                elif calcuation == 12:
+                    print("You have selected Calcuate Pi digits!")
+                    num = int(input())
+
+
+                    
             elif operation == 8:
                 print("You have selected Sin()!")
                 num = float(input("Enter the number you want to find the sin of: "))
@@ -1821,7 +1971,7 @@ if __name__ == "__main__":
                     print("Invalid operation!Please try again.")
                     continue
             elif operation == 2:
-                operation = calc("Ratio calc",["Finding all amounts in ratio","Finding total of ratio and unknwon amounts","Listing equinvant ratios"],2)
+                operation = calc("Ratio calc",["Finding all amounts in ratio","Finding total of ratio and unknwon amounts","Listing equinvant ratios"],1)
                 if operation == 1:
                     print("You have selected Finding all amounts in ratio!")
                     ratio = input("Enter the ratio (e.g. 2:3): ")
@@ -1868,6 +2018,105 @@ if __name__ == "__main__":
                 else:
                     print("Invalid operation!Please try again.")
                     continue
+            elif operation == 3:
+                operation = calc("Statistics calc",["Mean calc","Median calc","Mode calc","Range calc","Standard deviation calc","Variance",
+                                                    "Modal Score","Median Score(Decrapated until further notice)","Mean Score"],1)
+                if operation == 1:
+                    print("You have selected Mean calc!")
+                    numbers = input("Enter the numbers separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    mean = calculate_mean(numbers)
+                    print(f"The mean is {mean}.")
+                    copy_to_keyboard(mean, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Median calc!")
+                    numbers = input("Enter the numbers separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    median = calculate_median(numbers)
+                    print(f"The median is {median}.")
+                    copy_to_keyboard(median, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Mode calc!")
+                    numbers = input("Enter the numbers separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    mode = calculate_mode(numbers)
+                    print(f"The mode is {mode}.")
+                    copy_to_keyboard(mode, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Range calc!")
+                    numbers = input("Enter the numbers separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    range_value = calculate_range(numbers)
+                    print(f"The range is {range_value}.")
+                    copy_to_keyboard(range_value, copy_to_keyboard_true)
+                elif operation == 5:
+                    print("You have selected Standard deviation calc!")
+                    numbers = input("Enter the numbers separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    standard_deviation = calculate_standard_deviation(numbers)
+                    print(f"The standard deviation is {standard_deviation}.")
+                    copy_to_keyboard(standard_deviation, copy_to_keyboard_true)
+                elif operation == 6:
+                    print("You have selected Variance calc!")
+                    numbers = input("Enter the numbers separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    variance = calculate_variance(numbers)
+                    print(f"The variance is {variance}.")
+                    copy_to_keyboard(variance, copy_to_keyboard_true)
+                elif operation == 7:
+                    print("You have selected Modal Score calc!")
+                    scores = input("Enter the scores separated by commas: ")
+                    scores = [str(x) for x in scores.split(",")]
+                    numbers = []
+                    for i in range(len(scores)):
+                        number = float(input(f"Enter the number of times {scores[i]} appears: "))
+                        numbers.append(number)
+                    numbers_dict = dict(zip(scores, numbers))
+                    modal_score = max(numbers_dict, key=numbers_dict.get)
+                    print(f"The modal score is {modal_score}.")
+                    copy_to_keyboard(modal_score, copy_to_keyboard_true)
+                elif operation == 9:
+                    print("You have selected Mean Score calc!")
+                    # Example data: frequencies and corresponding values
+                    frequencies = input("Enter frequencies/scores separated by commas: ")
+                    frequencies = [int(x) for x in frequencies.split(",")]
+                    # Example values corresponding to frequencies
+                    values = input("Enter total values separated by commas: ")
+                    values = [float(x) for x in values.split(",")]
+                    mean_score = mean_freq(frequencies, values)
+                    print(f"The mean score is {mean_score}.")
+                    copy_to_keyboard(mean_score, copy_to_keyboard_true)
+                    
+
+
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+# The following code is commented out because it is not complete and may cause errors
+# Uncomment and complete the code if needed
+#elif operation == 8:
+# Calculate the median score
+#median= middle value of orderd list
+#position of median= (number of data points+1)/2
+#print("You have selected Median Score calc!")
+#scores = input("Enter the scores separated by commas: ")
+#scores = [str(x) for x in scores.split(",")]
+#numbers = []
+#for i in range(len(scores)):
+ #   number = float(input(f"Enter the number of times {scores[i]} appears: "))
+ #   numbers.append(number)
+#numbers_dict = dict(zip(scores, numbers))
+#sorted_scores = sorted(numbers_dict.items(), key=lambda x: x[1])
+#middle_index = len(sorted_scores) // 2
+#if len(sorted_scores) % 2 == 0:
+#    median_score = (sorted_scores[middle_index - 1][1] + sorted_scores[middle_index][1]) / 2
+#else:
+ #   median_score = sorted_scores[middle_index][1]
+#print(f"The median score is {median_score}.")
+#copy_to_keyboard(median_score, copy_to_keyboard_true) 
+                
+                
+
                     
 
         elif category == 15:

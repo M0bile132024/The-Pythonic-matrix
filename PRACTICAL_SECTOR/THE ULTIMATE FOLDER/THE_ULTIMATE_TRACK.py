@@ -1,10 +1,15 @@
 # THE ULTIMATE TRACK(er)
-#Date:31/03/2025
-#Version:V 1.35
+#Date(of last test):10/05/2025
+#Version:V 1.37
 #Author:M0bile132022
 ''' Description:This is an ULTIMATE tracker that can track ULTIMATE things
 such as:
-1. Sparxs bookwork'''
+1. Sparxs bookwork
+2. FTP(Fitness Tracker Program)
+3. Loot Tracker(coming 1.4.25)
+4. Cat Tracker(coming 1.4.25)
+5. More will be added soon
+'''
 import time
 import json
 import os
@@ -17,7 +22,21 @@ def copy_to_keyboard(text,true_or_false):
         pyperclip.copy(text)
         print("Text copied sucessfully")
 copy_to_keyboard_true = True
-version = 1.35
+version = 1.37
+#Check if the version is up to date
+if version != 1.37:
+    print("Version is not up to date")
+    print("Please update the version to 1.37")
+    exit()
+#Check if the user has the required modules
+try:
+    import pyperclip
+except ImportError:
+    print("Please install the pyperclip module")
+    print("You can install it by running 'pip install pyperclip'")
+    exit()
+
+
 bookwork_ID = []
 bookwork_list = []
 alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -30,8 +49,8 @@ while True:
     print("Please chose an category you wish to do:")
     print("""1. Track Sparxs bookwork
 2.FTP(Fitness Tracker Program)
-3.Loot Tracker(coming 1.4.25)
-4.Cat Tracker(coming 1.4.25)
+3.Loot Tracker(coming 1.425)
+4.Cat Tracker(coming 1.425)
     More will be added soon""")
     category = int(input("Please chose an operation:"))
     if category == 1:
@@ -47,7 +66,8 @@ while True:
             6. Exit the program(Note:Will not save if exited)
             7.Save current bookwork as
             8. Save current bookwork(to last save file)
-            9.Load new bookwork(will override current bookwork)""")
+            9.Load new bookwork(will override current bookwork)
+            10. Copy and paste settings""")
             operation = int(input("Please chose an operation:"))
             if operation == 1:
                 print("You have chosen to add bookwork")
@@ -152,7 +172,7 @@ while True:
                 file_path = os.path.join(directory, name)
                
                 with open(f"{file_path}.json","w") as f:
-                    json.dump({"bookwork_list": bookwork_list, "bookwork_ID": bookwork_ID}, f)
+                    json.dump({"bookwork_list": bookwork_list, "bookwork_ID": bookwork_ID,"Question":question,"Letter":i,"Iterations":j}, f)
             elif operation == 8:
                 print("You have chosen to save the current bookwork to the last save file")
               
@@ -168,9 +188,9 @@ while True:
                 print("You have chosen to load new bookwork")
                 file_path = input("Please input the file path of the file you wish to load the bookwork from:")
                 #check if the file exists
-                if file_path in os.listdir():
-                    with open(f"{file_path}.json","r") as f:
-                        data = json.load(open(f"{file_path}.json", "r"))
+                if os.path.exists(file_path):
+                    with open(file_path,"r") as f:
+                        data = json.load(open(file_path, "r"))
                         bookwork_list = data["bookwork_list"]
                         bookwork_ID = data["bookwork_ID"]
                         question = data["Question"]
@@ -179,8 +199,30 @@ while True:
                     print("Bookwork loaded")
                 else:
                     print("File not found")
+            elif operation == 10:
+                print("You have chosen to change the Copy and Paste settings!")
+                copy_to_keyboard_true = input("Please input 'True' to enable copy and paste, or 'False' to disable it:")
+                if copy_to_keyboard_true == "True":
+                    copy_to_keyboard_true = True
+                elif copy_to_keyboard_true == "False":
+                    copy_to_keyboard_true = False
+                else:
+                    print("Invalid input. Please try again")
+                    continue
+            else:
+                print("Invalid input. Please try again")
+                continue
     elif category == 2:
         FTP.FTP()
+    elif category == 3:
+        print("You have chosen to use the Loot Tracker")
+        #Loot Tracker code will go here
+    elif category == 4:
+        print("You have chosen to use the Cat Tracker")
+        #Cat Tracker code will go her
+
+                
+    
     else:
         print("Invalid input.Please try again.")
 
