@@ -23,6 +23,8 @@ Standard form and more!
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 import math
 import time
+import datetime
+import random
 import os
 import fractions
 import pyperclip
@@ -295,6 +297,30 @@ def calculate_iqr(numbers):
     q1 = sorted_numbers[n // 4]
     q3 = sorted_numbers[3 * n // 4]
     return q3 - q1
+
+#April fools
+def generate_wholesome_message():
+    messages = [
+        "You are capable of amazing things!",
+        "Your hard work is paying off. Keep going!",
+        "You're making a positive impact on the world!",
+        "Believe in yourself, you can achieve anything!",
+        "Your kindness inspires others. Thank you!",
+        "Take a moment to appreciate how far you've come.",
+        "You are loved and appreciated!",
+        "Your efforts make a difference. Keep pushing forward!",
+        "You have the power to make someone's day brighter.",
+        "Remember to be kind to yourself. You deserve it!"
+    ]
+    return random.choice(messages)
+def calculate_love_meter(name1, name2):
+    """Calculates the compatibility percentage between two names."""
+    combined_names = name1.lower() + name2.lower()
+    letters = list(set(combined_names))
+    love_meter_value = len(letters) * 10
+    return min(love_meter_value, 100)
+
+#Other variables
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
 version = 2.59
@@ -324,7 +350,7 @@ if __name__ == "__main__":
         9. Intrest
         10. Trigomentry
         11. Lines
-        12. Equations(beta)
+        12. Equations
         13. Circles/Spheres
         14. Others(in working)
         15. Legal/Other Info on ULTIMATE CALC™
@@ -976,7 +1002,10 @@ if __name__ == "__main__":
                     copy_to_keyboard(factorial_result, copy_to_keyboard_true)
                 elif calcuation == 12:
                     print("You have selected Calcuate Pi digits!")
-                    num = int(input())
+                    num = int(input("Enter the number of digits of Pi you want to calculate: "))
+                    pi_digits = calculate_pi_digits(num)
+                    print(f"The first {num} digits of Pi are: {pi_digits}.")
+                    copy_to_keyboard(pi_digits, copy_to_keyboard_true)
 
 
                     
@@ -2289,3 +2318,28 @@ if __name__ == "__main__":
                 else:
                     print("Invalid operation!Please try again.")
                     continue
+            else:
+                print("Invalid operation!Please try again.")
+                continue
+        elif category == 17:
+            print("You have selected Exit!")
+            print("Thank you for using ULTIMATE CALC™!")
+            print("Goodbye!")
+            break
+        elif category == "April Fools":
+            operation = calc("April Fools",["Wholesome message","Love compatibility meter"],1)
+            if operation == 1:
+                print(generate_wholesome_message())
+            elif operation == 2:
+                print("You have selected Love compatibility meter!")
+                name1 = input("Enter your name: ")
+                name2 = input("Enter your crush's name: ")
+                compatibility = calculate_love_meter(name1, name2)
+                print(f"Your love compatibility is {compatibility}%.")
+
+            else:
+                print("Invalid operation!Please try again.")
+                continue
+        else:
+            print("Invalid category!Please try again.")
+            continue

@@ -1,6 +1,13 @@
 #python code to solve simultanous equation test
 from sympy import symbols, Eq, solve, parse_expr
-from THE_ULTIMATE_CALC import copy_to_keyboard,copy_to_keyboard_true
+import pyperclip
+def copy_to_keyboard(text,true_or_false):
+    if true_or_false == True:    
+        pyperclip.copy(text)
+        print("Text copied sucessfully")
+    else:
+        return
+copy_to_keyboard_true = False
 '''
 This code is used to solve simultanous equations'''
 
@@ -18,7 +25,7 @@ def simultanous_calc():
     solution = solve((eq1, eq2), (x, y))
     print(solution)
     copy_to_keyboard(solution,copy_to_keyboard_true)
-    
+  
 
 #simultanous_calc()
 def equation_calc():
@@ -32,4 +39,16 @@ def equation_calc():
     print(solution)
     copy_to_keyboard(solution,copy_to_keyboard_true)
 #equation_calc()
+def quadratic_calc():
+    x = symbols('x')
+    print("Note:Type unknown values as 'number*variable' for example 2*x")
+# Take input from the user
+    equation = input("Enter the expression: ")
+    answer = input("Enter the answer of the expression: ")
+    eq = Eq(parse_expr(equation), int(answer))
+    solution = solve(eq, x)
+    print(solution)
+    copy_to_keyboard(solution,copy_to_keyboard_true)
+#quadratic_calc()
+
     

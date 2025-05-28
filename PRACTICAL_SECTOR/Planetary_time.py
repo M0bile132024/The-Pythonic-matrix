@@ -46,6 +46,7 @@ Monday, 7 April 2025
 01/01/8399 00:46:22 '''
 import time
 import datetime
+from datetime import date, datetime as dt, time as my_time
 import math
 import os
 def clear_console():
@@ -96,24 +97,72 @@ def planet_date(planet_day,planet_year):
     days_since_0AD = ((now - datetime.datetime(1, 1, 1)).days) + hour + minute + second #Get the current date in days since 0AD
 
     # Calculate the Mercury year, month, day, hour, minute, and second
-    mercury_year = days_since_0AD // planet_year
-    mercury_month = (days_since_0AD % planet_year) // planet_month # 88 days in a year / 12 months in a year
+    mercury_year = (days_since_0AD // planet_year) + 1 # Add 1 to account for the year starting at 1 AD
+    # Calculate the month, day, hour, minute, and second based on the planet's year and day
+    # Note: The planet_day is the number of Earth days in a day on the planet
+    # The planet_year is the number of Earth days in a year on the planet
+    mercury_month = ((days_since_0AD % planet_year) // planet_month)+2# Add 2 to account for the month starting at 1 AD
+    # Calculate the day, hour, minute, and second based on the planet's year and day
     mercury_day = (days_since_0AD % planet_year) % planet_month * planet_day // 1 # 1 day = 24 hours
-    mercury_hour = (days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 // 1
-    mercury_minute = (days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 % 1 * 60 // 1
-    mercury_second = (days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 % 1 * 60 % 1 * 60 // 1
+    mercury_hour = ((days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 // 1) # Add 1 to account for the hour starting at 0
+    mercury_minute = ((days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 % 1 * 60 // 1) # Add 1 to account for the minute starting at 0
+    mercury_second = ((days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 % 1 * 60 % 1 * 60 // 1) # Add 1 to account for the second starting at 0
+    # Ensure that the month is within the correct range
+    if mercury_month < 1:
+        mercury_month = 1
+    elif mercury_month > 12:
+        mercury_month = 12
+    
+    # Ensure that if day is greater than the planet's year, it is adjusted accordingly
+    while mercury_day > planet_year:
+        overlapping_days = mercury_day - planet_year
+        mercury_year += 1
+        mercury_day = overlapping_days
+    mercury_day = round(mercury_day)  # Round the day to the nearest whole number
+   
+    # Ensure that the hour is within the correct range
+    if mercury_hour < 0:
+        mercury_hour = 0
+    elif mercury_hour >= 24:
+        mercury_hour = 23
+    # Ensure that the minute is within the correct range
+    if mercury_minute < 0:
+        mercury_minute = 0
+    elif mercury_minute >= 60:
+        mercury_minute = 59
+    # Ensure that the second is within the correct range
+    if mercury_second < 0:
+        mercury_second = 0
+    elif mercury_second >= 60:
+        mercury_second = 59
 
     # Format the Mercury date and time as a string
-    mercury_date_str = f"{mercury_day:02}/{mercury_month:02}/{mercury_year} {mercury_hour:02}:{mercury_minute:02}:{mercury_second:02}"
+    mercury_date_str = f"{mercury_day:02}/{mercury_month:02}/{mercury_year}     Time:{mercury_hour:02}:{mercury_minute:02}:{mercury_second:02}"
 
     return mercury_date_str
+
 try:
     while True:
         clear_console()
-        
+                
+        x = datetime.datetime.now()
+        # Get the current date and time in BST
+        x = x.astimezone(datetime.timezone(datetime.timedelta(hours=1)))  # Assuming BST is UTC+1
+        # This will convert the current time to BST (British Summer Time)
+        # Note: The above line assumes that the system time is set to UTC. If your system is set to a different timezone, you may need to adjust accordingly.
+        #need to format it as well
+        x = x.strftime("%d/%m/%Y %H:%M:%S")  # Format the date and time as a string
+        # This will give you the current date and time in BST in the format "Day, DD Month YYYY HH:MM:SS"
         print("Mercury date:", planet_date(176,88))
         print("Venus date:", planet_date(243,224.7))
-        print("Earth(sidereal) date:", planet_date(1,365.25))
+        print("Earth(sidereal) date:", planet_date(1,365.25636))
+        print("Earth(solar) date:", planet_date(1,365.2425))
+        #erm
+        print(f"Actual earth date: {x}")
+        #For some reason the above line is saying it's 8 o'clock in the morning when it's 9 o'clock in the morning
+        #I'm not sure why this is happening, but I think it might be because of the way the datetime module works
+        #UPDATE: I think it's because the datetime module is using UTC time, and I'm in BST time
+        # #So I need to convert the time to BST time
         print("Mars date:", planet_date(1.027,687))
         print("Jupiter date:", planet_date(0.4125,4331.6))
         print("Saturn date:", planet_date(0.4375,10759.22))
@@ -129,6 +178,7 @@ finally:
     print("Cleaning up...")
     # Perform any necessary cleanup here
     # For example, closing files or releasing resources
+    # Clear the console
     print("Cleanup complete.")
     # Exit the program
     exit(0)
