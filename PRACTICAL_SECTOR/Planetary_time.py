@@ -1,7 +1,7 @@
-#Planetary time v.1.0
+#Planetary time v.2.0
 #Author:Mobile132022
 #Date:07/04/2025
-#Planetary time is a time system that is based on the position of the planets in the solar system.
+#Planetary time is a time system that is based on the position of the planets in the solar system(and 0AD)
 ''' HOW TO CALCULATE DATES ON OTHER PLANETS 
 
 EG:Mercury 
@@ -83,61 +83,35 @@ def clear_console():
 #Mercury date function
 #Fully inclusive func for any planet in the solar system
 def planet_date(planet_day,planet_year):
+    '''Planet days in earth days,planet year in earth days'''
     # Get the current date and time in UTC
     now = datetime.datetime.now()#This should be decimal(i.e days+hours that have passed on this current day+minitues+seconds)
     hour = (now.hour)/24 #Get the current hour(in days  i.e 0.5 is 12 hours)
     minute = (now.minute)/1440 #Get the current minute(in days  i.e 0.5 is 720 minites  )
     second = (now.second)/86400 #Get the current second(in days  i.e 0.5 is 43200 seconds)
     planet_month = planet_year/12 #Get the current month(in days  i.e 0.5 is 720 minites  )
+    planet_hour = planet_day/24
+    planet_minite = planet_hour/60
+    planet_second = planet_minite/60
     # Convert to UTC if not already in UTC
     if now.tzinfo is not None:
         now = now.astimezone(datetime.timezone.utc)
 
     # Calculate the number of days since 0 AD
     days_since_0AD = ((now - datetime.datetime(1, 1, 1)).days) + hour + minute + second #Get the current date in days since 0AD
+    current_year = days_since_0AD // planet_year #Get the current year in the planet's time system
+    current_month = (days_since_0AD % planet_year) // planet_month  # Get the current month in the planet's time system
+    current_day = (days_since_0AD % planet_year) % planet_month // planet_day  # Get the current day in the planet's time system
+    current_hour = (days_since_0AD % planet_year) % planet_month % planet_day // planet_hour   # Get the current hour in the planet's time system
+    current_minute = (days_since_0AD % planet_year) % planet_month % planet_day % planet_hour // planet_minite  # Get the current minute in the planet's time system
+    current_second = (days_since_0AD % planet_year) % planet_month % planet_day % planet_hour % planet_minite // planet_second  # Get the current second in the planet's time system
 
-    # Calculate the Mercury year, month, day, hour, minute, and second
-    mercury_year = (days_since_0AD // planet_year) + 1 # Add 1 to account for the year starting at 1 AD
-    # Calculate the month, day, hour, minute, and second based on the planet's year and day
-    # Note: The planet_day is the number of Earth days in a day on the planet
-    # The planet_year is the number of Earth days in a year on the planet
-    mercury_month = ((days_since_0AD % planet_year) // planet_month)+2# Add 2 to account for the month starting at 1 AD
-    # Calculate the day, hour, minute, and second based on the planet's year and day
-    mercury_day = (days_since_0AD % planet_year) % planet_month * planet_day // 1 # 1 day = 24 hours
-    mercury_hour = ((days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 // 1) # Add 1 to account for the hour starting at 0
-    mercury_minute = ((days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 % 1 * 60 // 1) # Add 1 to account for the minute starting at 0
-    mercury_second = ((days_since_0AD % planet_year) % planet_month * planet_day % 1 * 24 % 1 * 60 % 1 * 60 // 1) # Add 1 to account for the second starting at 0
-    # Ensure that the month is within the correct range
-    if mercury_month < 1:
-        mercury_month = 1
-    elif mercury_month > 12:
-        mercury_month = 12
     
-    # Ensure that if day is greater than the planet's year, it is adjusted accordingly
-    while mercury_day > planet_year:
-        overlapping_days = mercury_day - planet_year
-        mercury_year += 1
-        mercury_day = overlapping_days
-    mercury_day = round(mercury_day)  # Round the day to the nearest whole number
-   
-    # Ensure that the hour is within the correct range
-    if mercury_hour < 0:
-        mercury_hour = 0
-    elif mercury_hour >= 24:
-        mercury_hour = 23
-    # Ensure that the minute is within the correct range
-    if mercury_minute < 0:
-        mercury_minute = 0
-    elif mercury_minute >= 60:
-        mercury_minute = 59
-    # Ensure that the second is within the correct range
-    if mercury_second < 0:
-        mercury_second = 0
-    elif mercury_second >= 60:
-        mercury_second = 59
-
-    # Format the Mercury date and time as a string
-    mercury_date_str = f"{mercury_day:02}/{mercury_month:02}/{mercury_year}     Time:{mercury_hour:02}:{mercury_minute:02}:{mercury_second:02}"
+    # Format the planet date and time as a string
+    mercury_date_str = f"{int(current_day):02}/{int(current_month):02}/{int(current_year)} {int(current_hour):02}:{int(current_minute):02}:{int(current_second):02}"
+    # This will give you the current date and time in the planet's time system in the format "DD/MM/YYYY HH:MM:SS"
+    # Example output: "01/01/8399 00:46:22"
+    # Note: The above line assumes that the system time is set to UTC. If your system is set to a different timezone, you may need to adjust accordingly.
 
     return mercury_date_str
 
@@ -153,6 +127,7 @@ try:
         #need to format it as well
         x = x.strftime("%d/%m/%Y %H:%M:%S")  # Format the date and time as a string
         # This will give you the current date and time in BST in the format "Day, DD Month YYYY HH:MM:SS"
+        print("The solar system:\n")
         print("Mercury date:", planet_date(176,88))
         print("Venus date:", planet_date(243,224.7))
         print("Earth(sidereal) date:", planet_date(1,365.25636))
@@ -169,7 +144,38 @@ try:
         print("Uranus date:", planet_date(517/720,30769.5))
         print("Neptune date:", planet_date(16/24,60225))
         print("Pluto date:", planet_date(6.4,90560))
-        time.sleep(1) # Sleep for 1 second to avoid busy waiting
+        #Commented out for checks later
+        '''
+        print("\nMoons:\n")
+        print("Earth:\n")
+
+
+        print("The moon:", planet_date(27.3,27.3))
+        print("\nMars:\n")
+        print("Phobos:", planet_date(0.3189,0.3189))  # Phobos orbits Mars
+        print("Deimos:", planet_date(1.262,1.262))
+        print("\nJupiter(main moons):\n")
+        print("Io:", planet_date(1.769,1.769))
+        print("Europa:", planet_date(3.551,3.551))
+        print("Ganymede:", planet_date(7.155,7.155))
+        print("Callisto:", planet_date(16.689,16.689))
+        print("\nSaturn(main moons):\n")
+        print("Titan:", planet_date(15.945,15.945))
+        print("Encleadus:", planet_date(1.370,1.370))
+        print("Mimas:", planet_date(0.942,0.942))
+        print("Tethys:", planet_date(1.887,1.887))
+        print("\nUranus(main moons):\n")
+        print("Titania:", planet_date(8.706,8.706))
+        print("Oberon:", planet_date(13.463,13.463))
+        print("Ariel:", planet_date(2.520,2.520))
+        print("Umbriel:", planet_date(4.144,4.144))
+        print("\nNeptune(main moons):\n")
+        print("Triton:", planet_date(5.877,5.877))
+        print("Nereid:", planet_date(360/365.25,360/365.25))
+        print("\nPluto(main moons):\n")
+        print("Charon:", planet_date(6.387,6.387))
+        print("Styx:", planet_date(20.2,20.2))
+        time.sleep(1) # Sleep for 1 second to avoid busy waiting'''
 except KeyboardInterrupt:
     print("Exiting the program.")
 except Exception as e:
