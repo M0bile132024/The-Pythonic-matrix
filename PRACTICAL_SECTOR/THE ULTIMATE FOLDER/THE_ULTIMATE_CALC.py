@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date(of last test): 2025-05-12
-#Version: 2.59.71
+#Version: 2.59.89
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -29,6 +29,7 @@ import os
 import fractions
 import pyperclip
 import equations as eq
+
 
 def operation_dialogue():
     print("Please select an operation:")
@@ -1527,15 +1528,19 @@ if __name__ == "__main__":
         elif category == 12:
             print("Welcome to the Equation category!")
             print("Please select an operation:")
-            print("""1. Solve a equation
-2.Solve two simultaoenous equations""")
-            operation = int(input("Enter the number of the operation you want to perform(note:only supports x/y as vars): "))
+            print("""1. Solve linear equations
+2.Solve simultaoenous equations
+3.Changing the subject of an equation""")
+            operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
-                print("You have selected Solve a equation!")
+                print("You have selected Solve equations!")
                 eq.equation_calc()
             elif operation == 2:
-                print("You have selected Solve two simultaoenous equations!")
+                print("You have selected Solve simultaoenous equations!")
                 eq.simultanous_calc()
+            elif operation == 3:
+                print("You have selected Changing the subject of an equation!")
+                eq.changing_the_subject()
                 
             else:
                 print("Invalid operation!Please try again.")
@@ -1821,29 +1826,8 @@ if __name__ == "__main__":
             else:
                 print("Invalid shape!Please try again.")
                 continue
- 
-
-                
-                
-
-            
-            
-
-
-                
-    
-                  
-
-        
-
-                
-                
-
-            
-
-                
         elif category == 14:
-            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Unit conversion calc","Miscellaneous calc"],2)
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Advanced Geomentry calc(requires turtle)","Miscellaneous calc"],2)
             if operation == 1:
                 operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc","Concertration calc"],1)
                 if operation == 1:
@@ -2049,7 +2033,9 @@ if __name__ == "__main__":
                     continue
             elif operation == 3:
                 operation = calc("Statistics calc",["Mean calc","Median calc","Mode calc","Range calc","Standard deviation calc","Variance",
-                                                    "Modal Score","Median Score(Decrapated until further notice)","Mean Score"],1)
+                                                    "Modal Score","Median Score(Decrapated until further notice)","Mean Score",
+                                                    "Make pie chart(requires mathplotlib and a good PC)",
+                                                    "Make frequency polygon","Sampling"],1)
                 if operation == 1:
                     print("You have selected Mean calc!")
                     numbers = input("Enter the numbers separated by commas: ")
@@ -2115,6 +2101,199 @@ if __name__ == "__main__":
                     mean_score = mean_freq(frequencies, values)
                     print(f"The mean score is {mean_score}.")
                     copy_to_keyboard(mean_score, copy_to_keyboard_true)
+                elif operation == 10:
+                    print("You have selected Make pie chart!")
+                    import matplotlib.pyplot as plt
+                    import random
+                    numbers = input("Enter the data values/percentages separated by commas: ")
+                    numbers = [float(x) for x in numbers.split(",")]
+                    labels = input("Enter the labels for the data values separated by commas: ")
+                    labels = [str(x) for x in labels.split(",")]
+                    if len(numbers) != len(labels):
+                        print("Error: The number of labels must match the number of data values.")
+                        continue
+                    #Check if data values or percentages,convert to percentages if nessescary
+                    if sum(numbers) != 100:
+                        for i in range(len(numbers)):
+                            numbers[i] = (numbers[i] / sum(numbers)) * 100
+                    # Generate random colors for the pie chart
+                    colors = [f'#{random.randint(0, 0xFFFFFF):06x}' for _ in range(len(numbers))]
+                    plt.pie(numbers, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+                    plt.axis('equal')  # Equal aspect ratio ensures that pie chart is a circle.
+                    plt.title("Pie Chart")  
+                    plt.show()
+                    copy_to_keyboard("Pie chart created successfully.", copy_to_keyboard_true)
+                elif operation == 11:
+                    print("You have selected Make frequency polygon!")
+                    import matplotlib.pyplot as plt
+                    import numpy as np
+                    calcuation = calc("Make frequency polygon",["Make frequency polygon using frequencies","Make frequency polygon using intervals"],2)
+                    if calcuation == 1:
+                        print("You have selected Make frequency polygon using frequencies!")
+                        frequencies = input("Enter the frequencies separated by commas: ")
+                        frequencies = [int(x) for x in frequencies.split(",")]
+                        labels = input("Enter the labels for the frequencies separated by commas: ")
+                        labels = [str(x) for x in labels.split(",")]
+                        if len(frequencies) != len(labels):
+                            print("Error: The number of labels must match the number of frequencies.")
+                            continue
+                        # Generate x values for the polygon
+                        x_values = np.arange(len(frequencies))
+                        # Create the frequency polygon
+                        plt.plot(x_values, frequencies, marker='o')
+                        plt.xticks(x_values, labels)
+                        plt.xlabel("Categories")
+                        plt.ylabel("Frequencies")
+                        plt.title("Frequency Polygon")
+                        plt.grid()
+                        plt.show()
+                        copy_to_keyboard("Frequency polygon created successfully.", copy_to_keyboard_true)
+                    elif calcuation == 2:
+                        print("You have selected Make frequency polygon using intervals!")
+                        intervals = input("Enter the intervals separated by commas: ")
+                        intervals = [str(x) for x in intervals.split(",")]
+                        frequencies = input("Enter the frequencies for the intervals separated by commas: ")
+                        frequencies = [int(x) for x in frequencies.split(",")]
+                        if len(frequencies) != len(intervals):
+                            print("Error: The number of intervals must match the number of frequencies.")
+                            continue
+                        # Generate x values for the polygon(via finding the midpoints of intervals)
+                        midpoints = [(float(interval.split('-')[0]) + float(interval.split('-')[1])) / 2 for interval in intervals]
+                        frequencies = [frequencies[i] for i in range(len(frequencies))]
+                        # Generate x values for the polygon
+                        intervals = [f"{interval.split('-')[0]}-{interval.split('-')[1]}" for interval in intervals]
+                        # Generate x values for the polygon
+                        x_values = np.arange(len(midpoints))
+                        # Create the frequency polygon
+                        plt.plot(x_values, frequencies, marker='o')
+                        plt.xticks(x_values, intervals)
+                        plt.xlabel("Intervals")
+                        plt.ylabel("Frequencies")
+                        plt.title("Frequency Polygon")
+                        plt.grid()
+                        plt.show()
+                        copy_to_keyboard("Frequency polygon created successfully.", copy_to_keyboard_true)
+                    else:
+                        print("Invalid calculation type!Please try again.")
+                        continue
+                elif operation == 12:
+                    method = calc("Sampling",["Simple random sampling","Systematic sampling","Stratified sampling","Cluster sampling","Quota sampling"],3)
+                    if method == 1:
+                        print("You habve selected Simple Random Sampling")
+                        data = input("Enter the data separated by commas: ")
+                        data = [str(x) for x in data.split(",")]
+                        sample_size = int(input("Enter the sample size: "))
+                        if sample_size > len(data):
+                            print("Sample size cannot be greater than the data size.")
+                            continue
+                        sample = random.sample(data, sample_size)
+                        print(f"The sample is: {sample}")
+                        copy_to_keyboard(sample, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Systematic Sampling")
+                        data = input("Enter the data separated by commas: ")
+                        data = [str(x) for x in data.split(",")]
+                        sample_size = int(input("Enter the sample size: "))
+                        if sample_size > len(data):
+                            print("Sample size cannot be greater than the data size.")
+                            continue
+                        interval = len(data) // sample_size
+                        sample = [data[i] for i in range(0, len(data), interval)][:sample_size]
+                        print(f"The sample is: {sample}")
+                        copy_to_keyboard(sample, copy_to_keyboard_true)
+                    elif method == 3:
+                        #FORMULA=(TIER/POP)*sample size = stratum
+                        print("You have selected Stratified Sampling")
+                        tier = int(input("Enter the number of categories: "))
+                        tier_list = []
+                        for i in range(tier):
+                            data = input(f"Enter the data for category {i+1} separated by commas: ")
+                            data = [str(x) for x in data.split(",")]
+                            tier_list.append(data)
+                        total_pop = 0
+                        for i in range(len(tier_list)):
+                            total_pop += len(tier_list[i])
+                        sample_size = int(input("Enter the sample size: "))
+                        sample_list = []
+                        for i in range(tier):
+                            stratum = (len(tier_list[i]) / total_pop) * sample_size
+                            stratum = int(stratum)
+                            if stratum > len(tier_list[i]):
+                                print(f"Stratum size cannot be greater than the data size for category {i+1}.")
+                                continue
+                            sample = random.sample(tier_list[i], stratum)
+                            print(f"The sample for category {i+1} is: {sample}")
+                            sample_list.extend(sample)
+                        print(f"The total sample is: {sample_list}")
+                        copy_to_keyboard(sample_list, copy_to_keyboard_true)
+                    elif method == 4:
+                        #FORMULA=(TIER/POP)*sample size = stratum
+                        print("You have selected Cluster Sampling")
+                        tier = int(input("Enter the number of categories: "))
+                        tier_list = []
+                        for i in range(tier):
+                            data = input(f"Enter the data for category {i+1} separated by commas: ")
+                            data = [str(x) for x in data.split(",")]
+                            tier_list.append(data)
+                        total_pop = 0
+                        for i in range(len(tier_list)):
+                            total_pop += len(tier_list[i])
+                        sample_size = int(input("Enter the sample size: "))
+                        sample_list = []
+                        if sample_size > total_pop:
+                            print("Sample size cannot be greater than the total population.")
+                            continue
+                        while len(sample_list) != sample_size:
+                            stratum = random.choice(tier_list)
+                            tier_list.remove(stratum)
+                            if len(stratum) == 0:
+                                continue
+                            else:
+                                for item in stratum:
+                                    if len(sample_list) < sample_size:
+                                        sample_list.append(item)
+                                    else:
+                                        break
+                        print(f"The total sample is: {sample_list}")
+                        copy_to_keyboard(sample_list, copy_to_keyboard_true)
+                    elif method == 5:
+                        #FORMULA=(TIER/POP)*sample size = stratum
+                        print("You have selected Quota Sampling")
+                        tier = int(input("Enter the number of categories: "))
+                        sample_list = []
+                        for i in range(tier):
+                            data = input(f"Enter the data for category {i+1} separated by commas: ")
+                            data = [str(x) for x in data.split(",")]
+                            
+                            quota = int(input(f"Enter the quota for category {i+1}: "))
+                            
+                            if quota > len(data):
+                                print(f"Quota cannot be greater than the data size for category {i+1}.")
+                                continue
+                            else:
+                                sample = random.sample(data, quota)
+                                sample_list.extend(sample)
+                        if len(sample_list) == 0:
+                            print("No sample was selected. Please try again.")
+                            continue
+                        print(f"The total sample is: {sample_list}")
+                        copy_to_keyboard(sample_list, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif operation == 4:
+                operation = calc("Advanced Geomentry calc",["Consturct scale drawings","Consturct bearings","Consturct triangles","Consturct loci"],1)
+                        
+                         
+                        
+                        
+
+                            
+                            
+
                     
 
 
@@ -2150,7 +2329,7 @@ if __name__ == "__main__":
 
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
-            print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
+            print(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.")
             print("© 2025 M0bile132022. All rights reserved.")
             print("This program is protected by the GNU General Public License v3.0.")
             print("This program is provided as is with no warranty.")
@@ -2160,13 +2339,23 @@ if __name__ == "__main__":
             print(f"Size:{file_size} bytes")
             print(f"Version: {version}")
             print(f"File path: {file_path}")
-            copy_to_keyboard(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.© 2025 M0bile132022. All rights reserved. This program is protected by the GNU General Public License v3.0. This program is provided as is with no warranty. For more information, visit https://www.ultimatecalc.com. Other statstics: Lines of code: {count_lines(file_path)} Size:{file_size} bytes Version: {version} File path: {file_path}", copy_to_keyboard_true)
+            copy_to_keyboard(f"""ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.
+                             © 2025 M0bile132022. All rights reserved.
+                             This program is protected by the GNU General Public License v3.0. 
+                             This program is provided as is with no warranty. 
+                             For more information, visit https://www.ultimatecalc.com. 
+                             Other statstics: 
+                             Lines of code: {count_lines(file_path)} 
+                             Size:{file_size} bytes 
+                             Version: {version} 
+                             File path: {file_path}""", 
+                             copy_to_keyboard_true)
             print("""Credits:
             1. M0bile132022 for code
             2. OpenAI for aid
             3. Python community for possiblity
             4. SymPy for the real complicated stuff
-            5. Math community for purpose
+            5. Math community/school for purpose
             6. Stack Overflow for help
             7. GitHub community for storage
             8. Wikipedia for knowledge
@@ -2326,7 +2515,7 @@ if __name__ == "__main__":
             print("Thank you for using ULTIMATE CALC™!")
             print("Goodbye!")
             break
-        elif category == "April Fools":
+        elif category == "April Fools" and date.today().month == 4 and date.today().day == 1:
             operation = calc("April Fools",["Wholesome message","Love compatibility meter"],1)
             if operation == 1:
                 print(generate_wholesome_message())
