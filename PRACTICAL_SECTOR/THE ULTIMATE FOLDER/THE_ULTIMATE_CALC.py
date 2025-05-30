@@ -2285,7 +2285,143 @@ if __name__ == "__main__":
                     print("Invalid operation!Please try again.")
                     continue
             elif operation == 4:
-                operation = calc("Advanced Geomentry calc",["Consturct scale drawings","Consturct bearings","Consturct triangles","Consturct loci"],1)
+                operation = calc("Advanced Geomentry calc",["Scale","Consturct bearings","Consturct triangles","Consturct loci"],1)
+                if operation == 1:
+                    calcuation = calc("Scale",["Scale from IRL","Scale from image","Find scale factor"],2)
+                    if calcuation == 1:
+                        print("You have selected Scale from IRL!")
+                        real_length = float(input("Enter the real length : "))
+                        scale_factor = float(input("Enter the scale factor (e.g. 1:100): ").split(":")[1])
+                        scaled_length = real_length / scale_factor
+                        print(f"The scaled length is {scaled_length} {lenght_units}.")
+                        copy_to_keyboard(scaled_length, copy_to_keyboard_true)
+                    elif calcuation == 2:
+                        print("You have selected Scale from image!")
+                        image_length = float(input("Enter the length in the image: "))
+                        scale_factor = float(input("Enter the scale factor (e.g. 1:100): ").split(":")[1])
+                        real_length = image_length * scale_factor
+                        print(f"The real length is {real_length} {lenght_units}.")
+                        copy_to_keyboard(real_length, copy_to_keyboard_true)
+                    elif calcuation == 3:
+                        print("You have selected Find scale factor!")
+                        real_length = float(input("Enter the real length: "))
+                        image_length = float(input("Enter the length of the image(in same unit): "))
+                        scale_factor = real_length / image_length
+                        scale_factor = f"1:{scale_factor}"
+                        print(f"The scale factor is {scale_factor}.")
+                        copy_to_keyboard(scale_factor, copy_to_keyboard_true)
+                    else:
+                        print("Invalid calculation type!Please try again.")
+                        continue
+                elif operation == 2:
+                    print("You have selected Consturct bearings!")
+
+                    bearing = input("Enter the bearing (e.g. 45°): ")
+                    distance = float(input("Enter the distance: "))
+                    origin = input("Enter the origin point (x,y): ")
+                    # Parse the origin point
+                    origin = origin.split(",")
+                    origin_x = float(origin[0])
+                    origin_y = float(origin[1])
+                    bearing = bearing.replace("°", "")
+                    bearing = float(bearing)
+                    # Calculate the new point based on the bearing and distance
+                    new_x = origin_x + distance * math.cos(math.radians(bearing))
+                    new_y = origin_y + distance * math.sin(math.radians(bearing))
+                    print(f"The new point is ({new_x}, {new_y}) {lenght_units}.")
+                    copy_to_keyboard(f"({new_x}, {new_y}) {lenght_units}", copy_to_keyboard_true)
+                elif operation == 3:
+                    triangle_type = calc("Consturct triangles",["Equilateral triangle","Isosceles triangle",],1)
+                    if triangle_type == 1:
+                        calculate_type = calc("Equilateral triangle",["Calculate side length","Calculate height"],1)
+                        if calculate_type == 1:
+                            print("You have selected Calculate side length of Equilateral triangle!")
+                            height = float(input("Enter the height of the triangle: "))
+                            side_length = height / (math.sqrt(3) / 2)
+                            print(f"The side length of the equilateral triangle is {side_length} {lenght_units}.")
+                            copy_to_keyboard(side_length, copy_to_keyboard_true)
+                        elif calculate_type == 2:
+                            print("You have selected Calculate height of Equilateral triangle!")
+                            side_length = float(input("Enter the side length of the triangle: "))
+                            height = side_length * (math.sqrt(3) / 2)
+                            print(f"The height of the equilateral triangle is {height} {lenght_units}.")
+                            copy_to_keyboard(height, copy_to_keyboard_true)
+                    elif triangle_type == 2:
+                        print("You have selected Isoceles triangle!")
+                        calculate_type = calc("Isosceles triangle",["Calculate base length","Calculate height","Calcuate equal lenghts"],1)
+                        if calculate_type == 1:
+                            print("You have selected Calculate base length of Isosceles triangle!")
+                            height = float(input("Enter the height of the triangle: "))
+                            base_length = 2 * height / math.sqrt(3)
+                            print(f"The base length of the isosceles triangle is {base_length} {lenght_units}.")
+                            copy_to_keyboard(base_length, copy_to_keyboard_true)
+                        elif calculate_type == 2:
+                            print("You have selected Calculate height of Isosceles triangle!")
+                            base_length = float(input("Enter the base length of the triangle: "))
+                            height = base_length * (math.sqrt(3) / 2)
+                            print(f"The height of the isosceles triangle is {height} {lenght_units}.")
+                            copy_to_keyboard(height, copy_to_keyboard_true)
+                        elif calculate_type == 3:
+                            print("You have selected Calculate equal lengths of Isosceles triangle!")
+                            base_length = float(input("Enter the base length of the triangle: "))
+                            height = float(input("Enter the height of the triangle: "))
+                            equal_length = math.sqrt((base_length / 2) ** 2 + height ** 2)
+                            print(f"The equal lengths of the isosceles triangle are {equal_length} {lenght_units}.")
+                            copy_to_keyboard(equal_length, copy_to_keyboard_true)
+                        else:
+                            print("Invalid calculation type!Please try again.")
+                            continue
+                    else:
+                        print("Invalid triangle type!Please try again.")
+                        continue
+                elif operation == 4:
+                    print("You have selected Consturct loci!")
+                    loci_type = calc("Consturct loci",["Perpendicular bisector","Angle bisector",3)
+                    if loci_type == 1:
+                        print("You have selected Perpendicular bisector!")
+                        point1 = input("Enter the first point (x1,y1): ")
+                        point2 = input("Enter the second point (x2,y2): ")
+                        # Parse the points
+                        point1 = point1.split(",")
+                        point2 = point2.split(",")
+                        x1, y1 = float(point1[0]), float(point1[1])
+                        x2, y2 = float(point2[0]), float(point2[1])
+                        # Calculate the midpoint
+                        midpoint_x = (x1 + x2) / 2
+                        midpoint_y = (y1 + y2) / 2
+                        # Calculate the slope of the line segment
+                        slope = (y2 - y1) / (x2 - x1)
+                        # Calculate the slope of the perpendicular bisector
+                        perpendicular_slope = -1 / slope if slope != 0 else float('inf')
+                        print(f"The perpendicular bisector passes through ({midpoint_x}, {midpoint_y}) with slope {perpendicular_slope}.")
+                        copy_to_keyboard(f"Perpendicular bisector: Midpoint ({midpoint_x}, {midpoint_y}), Slope {perpendicular_slope}", copy_to_keyboard_true)
+                    elif loci_type == 2:
+                        print("You have selected Angle bisector!")
+                        point1 = input("Enter the first point (x1,y1): ")
+                        point2 = input("Enter the second point (x2,y2): ")
+                        point3 = input("Enter the third point (x3,y3): ")
+                        # Parse the points
+                        point1 = point1.split(",")
+                        point2 = point2.split(",")
+                        point3 = point3.split(",")
+                        x1, y1 = float(point1[0]), float(point1[1])
+                        x2, y2 = float(point2[0]), float(point2[1])
+                        x3, y3 = float(point3[0]), float(point3[1])
+                        # Calculate the slopes of the lines
+                        slope1 = (y2 - y1) / (x2 - x1) if (x2 - x1) != 0 else float('inf')
+                        slope2 = (y3 - y2) / (x3 - x2) if (x3 - x2) != 0 else float('inf')
+                        # Calculate the angle bisector slope
+                        bisector_slope = (slope1 + slope2) / 2 if slope1 != float('inf') and slope2 != float('inf') else float('inf')
+                        print(f"The angle bisector passes through ({x2}, {y2}) with slope {bisector_slope}.")
+                        copy_to_keyboard(f"Angle bisector: Point ({x2}, {y2}), Slope {bisector_slope}", copy_to_keyboard_true)
+                    
+                    
+
+
+                        
+
+
+
                         
                          
                         
