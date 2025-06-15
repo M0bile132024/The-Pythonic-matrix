@@ -1,0 +1,8 @@
+Bookwork 2a:not,not,are
+Bookwork 2b:are,49
+Bookwork 2c:7/18
+Bookwork 2d:0.9,have
+Bookwork 3a:43
+Bookwork 3b:1.74
+Bookwork 3c:82
+Bookwork 3d:9,6,3,1,1

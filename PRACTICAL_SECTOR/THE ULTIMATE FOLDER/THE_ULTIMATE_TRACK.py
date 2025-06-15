@@ -21,7 +21,7 @@ def copy_to_keyboard(text,true_or_false):
     if true_or_false == True:    
         pyperclip.copy(text)
         print("Text copied sucessfully")
-copy_to_keyboard_true = True
+copy_to_keyboard_true = False
 version = 1.37
 #Check if the version is up to date
 if version != 1.37:
@@ -47,7 +47,7 @@ name = ""
 while True:
     print(f"Welcome to the Ultimate Tracker Ver:Beta {version}!")
     print("Please chose an category you wish to do:")
-    print("""1. Track Sparxs bookwork
+    print("""1.Track Sparxs bookwork
 2.FTP(Fitness Tracker Program)
 3.Loot Tracker(coming 1.425)
 4.Cat Tracker(coming 1.425)
