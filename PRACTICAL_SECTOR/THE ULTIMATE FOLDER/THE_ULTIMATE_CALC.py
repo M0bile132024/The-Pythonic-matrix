@@ -234,7 +234,24 @@ def find_hcf(a, b):
     while b:
         a, b = b, a % b
     return a
+def recurring_decimal_to_fraction(repeating_part, non_repeating_part=""):
+    if non_repeating_part:
+        # Combine non-repeating and repeating parts
+        decimal = f"0.{non_repeating_part}({repeating_part})"
+        print(f"Recurring Decimal: {decimal}")
+        
+        # Calculate the fraction
+        len_non_repeating = len(non_repeating_part)
+        len_repeating = len(repeating_part)
+        
+        numerator = int(non_repeating_part + repeating_part) - int(non_repeating_part or "0")
+        denominator = (10**(len_non_repeating + len_repeating) - 10**len_non_repeating)
+    else:
+        # Only repeating part
+        numerator = int(repeating_part)
+        denominator = int("9" * len(repeating_part))
     
+    return fractions.Fraction(numerator, denominator)    
 
 
 #3rd party subroutines
@@ -1182,15 +1199,14 @@ if __name__ == "__main__":
                 print("Invalid operation!Please try again.")
                 continue
         elif category == 8:
-            print("Welcome to the Decimal to fraction to percentage conversions category!")
-            print("""Please select an operation:
-            1. Decimal to fraction
-            2. Fraction to decimal
-            3. Decimal to percentage
-            4. Percentage to decimal
-            5. Fraction to percentage
-            6. Percentage to fraction""")
-            operation = int(input("Enter the number of the operation you want to perform: "))
+            operation = calc("Decimal/Fraction/Percentage conversion",
+                             ["Decimal to fraction",
+                            "Fraction to decimal",
+                            "Decimal to percentage",
+                            "Percentage to decimal",
+                            "Fraction to percentage",
+                            "Percentage to fraction",
+                            "Reoccurring decimal to fraction"],2)
             if operation == 1:
                 print("You have selected Decimal to fraction!")
                 decimal = float(input("Enter the decimal you want to convert to a fraction: "))
@@ -1229,9 +1245,19 @@ if __name__ == "__main__":
                 fraction = fractions.Fraction(percentage / 100).limit_denominator()
                 print(f"The fraction is {fraction}.")
                 copy_to_keyboard(fraction, copy_to_keyboard_true)
-            else:
-                print("Invalid operation!Please try again.")
-                continue
+            elif operation == 7:
+                print("You have selected Reoccurring decimal to fraction!")
+                decimal1 = int(input("Enter the non-reoccurring part of the decimal(e.g:48 or leave blank if no non reoccuring): "))
+                decimal2 = int(input("Enter the reoccurring part of the decimal(e.g:The numbers underneath the •): "))
+                if decimal1 == "":
+                    fraction = recurring_decimal_to_fraction(decimal2)
+                else:
+                    fraction = recurring_decimal_to_fraction(decimal1, decimal2)
+                
+                
+                
+                
+                
         elif category == 9:
     #       FORMULAS TO REMEMBER(in case it breaks again):
     #       Simple intrest: I = PRT/100(with intrest rate as %)
@@ -2376,7 +2402,7 @@ if __name__ == "__main__":
                         continue
                 elif operation == 4:
                     print("You have selected Consturct loci!")
-                    loci_type = calc("Consturct loci",["Perpendicular bisector","Angle bisector",3)
+                    loci_type = calc("Consturct loci","Perpendicular bisector","Angle bisector",3)
                     if loci_type == 1:
                         print("You have selected Perpendicular bisector!")
                         point1 = input("Enter the first point (x1,y1): ")
@@ -2651,7 +2677,7 @@ if __name__ == "__main__":
             print("Thank you for using ULTIMATE CALC™!")
             print("Goodbye!")
             break
-        elif category == "April Fools" and date.today().month == 4 and date.today().day == 1:
+        elif category == "April Fools" and datetime.today().month == 4 and datetime.today().day == 1:
             operation = calc("April Fools",["Wholesome message","Love compatibility meter"],1)
             if operation == 1:
                 print(generate_wholesome_message())

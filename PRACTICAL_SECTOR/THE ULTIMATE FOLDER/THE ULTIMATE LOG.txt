@@ -1,8 +1,119 @@
-ULTIMATE LOG STUFF(2.5 UPDATE;MASSIVE SPHERES):
-.SPHERES
-.PI IN COPY AND PASTE WE COVERED THISFVJKYGIOIHU!!!!!!!!!!!!!!!!
-    resource sector,19:33 31/03/2025.....
-.MASS OPERATIONS
-FUTURE THOUGHTS:
-.DETAILING OF METHODS?????
-.TURTLE/NUMPY GRAPHS?????
+EOY UPDATE(2.6):
+
+Finding and recognising factors, multiples and primes ✅
+
+Finding HCF and LCM ✅
+
+ 
+
+Forming and solving linear equations ✅
+
+ 
+
+Changing the subject ✅
+
+Fractions, decimals and percentages including converting recurring decimals to fractions  
+
+Percentage increase and decrease 
+
+Compound Interest 
+
+Reverse Percentages 
+
+Expand double and triple brackets  
+
+Removing brackets and factorising linear & quadratic equations 
+
+Volume of a prism 
+
+Surface Area of a prism 
+
+Finding the length of an arc 
+
+Finding the area of a sector 
+
+Converting between different metric units of length, area and volume 
+
+Compound Measure – speed, density and pressure 
+
+Using a calculator for complex calculations 
+
+Round to a given number of decimal places 
+
+Round to a given number of significant figures 
+
+Pythagoras’ theorem, solving problems applying the theorem 
+
+
+Using similarity to find lengths of missing sides 
+
+Using trigonometry to find missing sides of right-angled triangles 
+
+Using trigonometry to find missing angles  
+
+Calculating equations of straight line graphs 
+
+Finding the equation between 2 points 
+
+Understanding parallel & perpendicular lines 
+
+Solving Simultaneous equations by elimination / substitution 
+
+Solving Simultaneous equations graphically 
+
+Forming then Solving Simultaneous equations  
+
+Multiplying, dividing using indices 
+
+Understanding and  using negative indices 
+
+Understanding and  using fractional indices 
+
+Writing very large and small numbers in standard form, and vice-versa 
+
+Performing calculations in standard form 
+
+Simplifying ratio 
+
+Sharing quantities in a given ratio 
+
+Solving problems using unitary method 
+
+Constructing and interpreting pie charts 
+
+Constructing and interpreting frequency polygons 
+
+Understanding data handling cycle, and different data types 
+
+Understanding sampling methods including stratified random sampling 
+
+Calculating probabilities 
+
+Estimating relative frequencies 
+
+
+Understanding and using two-way tables and frequency trees 
+
+Understanding mutually exclusive, independent and dependent events 
+
+Representing probabilities using tree diagrams 
+
+Representing probabilities using Venn diagrams 
+
+Use and Construct scale drawings 
+
+Understanding and using bearings 
+
+Recognise and use rules for sequences and number patterns 
+
+Identify arithmetic and geometric sequences 
+
+Finding the nth term for linear and quadratic sequences 
+
+Constructing triangles using protractor, compass, ruler 
+
+Performing compass constructions 
+
+Solving loci problems 
+
+
