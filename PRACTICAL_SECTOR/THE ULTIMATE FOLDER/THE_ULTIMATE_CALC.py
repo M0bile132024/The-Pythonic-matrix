@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date(of last test): 2025-05-12
-#Version: 2.59.89
+#Version: 2.59.89.11
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -29,6 +29,7 @@ import os
 import fractions
 import pyperclip
 import equations as eq
+import sympy as sp
 
 
 def operation_dialogue():
@@ -234,24 +235,7 @@ def find_hcf(a, b):
     while b:
         a, b = b, a % b
     return a
-def recurring_decimal_to_fraction(repeating_part, non_repeating_part=""):
-    if non_repeating_part:
-        # Combine non-repeating and repeating parts
-        decimal = f"0.{non_repeating_part}({repeating_part})"
-        print(f"Recurring Decimal: {decimal}")
-        
-        # Calculate the fraction
-        len_non_repeating = len(non_repeating_part)
-        len_repeating = len(repeating_part)
-        
-        numerator = int(non_repeating_part + repeating_part) - int(non_repeating_part or "0")
-        denominator = (10**(len_non_repeating + len_repeating) - 10**len_non_repeating)
-    else:
-        # Only repeating part
-        numerator = int(repeating_part)
-        denominator = int("9" * len(repeating_part))
-    
-    return fractions.Fraction(numerator, denominator)    
+   
 
 
 #3rd party subroutines
@@ -315,7 +299,24 @@ def calculate_iqr(numbers):
     q1 = sorted_numbers[n // 4]
     q3 = sorted_numbers[3 * n // 4]
     return q3 - q1
-
+def recurring_decimal_to_fraction(repeating_part, non_repeating_part=""):
+    if non_repeating_part:
+        # Combine non-repeating and repeating parts
+        decimal = f"0.{non_repeating_part}({repeating_part})"
+        print(f"Recurring Decimal: {decimal}")
+        
+        # Calculate the fraction
+        len_non_repeating = len(non_repeating_part)
+        len_repeating = len(repeating_part)
+        
+        numerator = int(non_repeating_part + repeating_part) - int(non_repeating_part or "0")
+        denominator = (10**(len_non_repeating + len_repeating) - 10**len_non_repeating)
+    else:
+        # Only repeating part
+        numerator = int(repeating_part)
+        denominator = int("9" * len(repeating_part))
+    
+    return fractions.Fraction(numerator, denominator) 
 #April fools
 def generate_wholesome_message():
     messages = [
@@ -364,7 +365,7 @@ if __name__ == "__main__":
         5. The Basics
         6. Ordering/Mass operations
         7. Scale factors
-        8. Decimal to fraction to percentage conversions
+        8. Decimals/fraction/percentage
         9. Intrest
         10. Trigomentry
         11. Lines
@@ -1199,14 +1200,15 @@ if __name__ == "__main__":
                 print("Invalid operation!Please try again.")
                 continue
         elif category == 8:
-            operation = calc("Decimal/Fraction/Percentage conversion",
+            operation = calc("Decimal/Fraction/Percentages category",
                              ["Decimal to fraction",
                             "Fraction to decimal",
                             "Decimal to percentage",
                             "Percentage to decimal",
                             "Fraction to percentage",
                             "Percentage to fraction",
-                            "Reoccurring decimal to fraction"],2)
+                            "Reoccurring decimal to fraction",
+                            "Percentage increase/decrease"],2)
             if operation == 1:
                 print("You have selected Decimal to fraction!")
                 decimal = float(input("Enter the decimal you want to convert to a fraction: "))
@@ -1247,12 +1249,56 @@ if __name__ == "__main__":
                 copy_to_keyboard(fraction, copy_to_keyboard_true)
             elif operation == 7:
                 print("You have selected Reoccurring decimal to fraction!")
-                decimal1 = int(input("Enter the non-reoccurring part of the decimal(e.g:48 or leave blank if no non reoccuring): "))
-                decimal2 = int(input("Enter the reoccurring part of the decimal(e.g:The numbers underneath the •): "))
-                if decimal1 == "":
-                    fraction = recurring_decimal_to_fraction(decimal2)
-                else:
-                    fraction = recurring_decimal_to_fraction(decimal1, decimal2)
+                decimal = input("Enter the reoccurring decimal you want to convert to a fraction (e.g. 0.333... with at least 3 digits repeating followed by ...): ")
+                fraction = sp.nsimplify(decimal)
+                print(f"The fraction is {fraction}.")
+                copy_to_keyboard(fraction, copy_to_keyboard_true)
+            elif operation == 8:
+                calcuation = calc("Percentage change",["Calculate percentage increase/decrease",
+                                                    "Calcuate original number",
+                                                    "Calcuate increase/decrease"],2)
+                if calcuation == 1:
+                    print("You have selected Calculate percentage increase/decrease!")
+                    original_number = float(input("Enter the original number: "))
+                    new_number = float(input("Enter the new number: "))
+                    percentage_change = ((new_number - original_number) / original_number) * 100
+                    if percentage_change > 0:
+                        print(f"The percentage increase is {percentage_change}%.")
+                        copy_to_keyboard(f"{percentage_change}%", copy_to_keyboard_true)
+                    elif percentage_change < 0:
+                        print(f"The percentage decrease is {abs(percentage_change)}%.")
+                        copy_to_keyboard(f"{abs(percentage_change)}%", copy_to_keyboard_true)
+                    else:
+                        print("There is no percentage change.")
+                        copy_to_keyboard("0%", copy_to_keyboard_true)
+                elif calcuation == 2:
+                    print("You have selected Calcuate original number!")
+                    new_number = float(input("Enter the new number: "))
+                    percentage_change = float(input("Enter the percentage change: "))
+                    original_number = new_number / (1 + (percentage_change / 100))
+                    print(f"The original number is {original_number}.")
+                    copy_to_keyboard(original_number, copy_to_keyboard_true)
+                elif calcuation == 3:
+                    print("You have selected Calcuate increase/decrease!")
+                    original_number = int(input("Enter the original number:"))
+                    percentage_change = float(input("Enter the percentage change: "))
+                    increase_decrease = (original_number * percentage_change) / 100
+                    if increase_decrease > 0:
+                        print(f"The increase is {increase_decrease}.")
+                        copy_to_keyboard(increase_decrease, copy_to_keyboard_true)
+                    elif increase_decrease < 0:
+                        print(f"The decrease is {abs(increase_decrease)}.")
+                        copy_to_keyboard(abs(increase_decrease), copy_to_keyboard_true)
+                    else:
+                        print("There is no increase/decrease.")
+                        copy_to_keyboard("0", copy_to_keyboard_true)
+                    
+
+                    
+            else:
+                print("Invalid operation!Please try again.")
+                continue
+
                 
                 
                 
@@ -1529,7 +1575,6 @@ if __name__ == "__main__":
             elif operation == 9:
                 print("You have selected Calculate the equation of a perpendicular line!")
                 gradient = float(input("Enter the gradient of the other line: "))
-                y_intercept = float(input("Enter the y-intercept of the other line: "))
                 x2 = float(input("Enter the x-coordinate of a point the perpendicular line passes through: "))
                 y2 = float(input("Enter the y-coordinate of a point the perpendicular line passes through: "))
                 perpendicular_gradient = -1 / gradient
@@ -1543,7 +1588,7 @@ if __name__ == "__main__":
                 y2 = float(input("Enter the y-coordinate of a point the parallel line passes through: "))
                 parallel_gradient = gradient
                 y_intercept = y2 - (parallel_gradient * x2)
-                print("The equation of the parallel line is y = {parallel_gradient}x{y_intercept:+}.")
+                print(f"The equation of the parallel line is y = {parallel_gradient}x{y_intercept:+}.")
                 copy_to_keyboard(f"The equation of the parallel line is y = {parallel_gradient}x{y_intercept:+}.", copy_to_keyboard_true)
 
 

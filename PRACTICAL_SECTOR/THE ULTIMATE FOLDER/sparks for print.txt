@@ -6,3 +6,8 @@ Bookwork 3a:43
 Bookwork 3b:1.74
 Bookwork 3c:82
 Bookwork 3d:9,6,3,1,1
+Bookwork 4a:1/3x+4
+Bookwork 4b:f/3
+Bookwork 4c:2x+7
+Bookwork 4d:mid,ran,mod,mean
+Bookwork 4e:-2/3x+14

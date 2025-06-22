@@ -144,6 +144,7 @@ try:
         print("Uranus date:", planet_date(517/720,30769.5))
         print("Neptune date:", planet_date(16/24,60225))
         print("Pluto date:", planet_date(6.4,90560))
+        time.sleep(1)  # Sleep for 1 second to avoid busy waiting
         #Commented out for checks later
         '''
         print("\nMoons:\n")
