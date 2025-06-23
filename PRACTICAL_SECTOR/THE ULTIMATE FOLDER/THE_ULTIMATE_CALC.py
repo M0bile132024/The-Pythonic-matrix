@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date(of last test): 2025-05-12
-#Version: 2.59.89.11
+#Date(of last test): 23/06/2025
+#Version: 2.59.89.30
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -78,11 +78,18 @@ def divide_list(values):
     return result
 def calc(name,options,operation_or_calc):
     '''1.Operation,2.Calcuation,3.Method'''
-    print(f"You have selected {name}!" if operation_or_calc == 1 else f"Welcome to the {name} category!")
+    if operation_or_calc == 0:
+        print(f"Welcome to the ULTIMATE calc Ver {version}!")
+        print("Please select a category:")
+    else:
+
+        print(f"You have selected {name}!" if operation_or_calc == 1 else f"Welcome to the {name} category!")
     
-    print("Please select an operation:" if operation_or_calc == 1 else "Please select a calculation:" if operation_or_calc == 2 else "Please select a method:")
+        print("Please select an operation:" if operation_or_calc == 1 else "Please select a calculation:" if operation_or_calc == 2 else "Please select a method:")
     for i, option in enumerate(options, start=1):
         print(f"{i}. {option}")
+    if operation_or_calc == 0:
+        print("More functions are coming soon!!!!!")
     operation = int(input("Enter the number of the operation you want to perform: "))
     return operation
 def multiplication_table():
@@ -235,7 +242,15 @@ def find_hcf(a, b):
     while b:
         a, b = b, a % b
     return a
-   
+
+#Special
+def convert_size(size_bytes):
+    if size_bytes == 0:
+        return "0B"
+    size_units = ["B", "KB", "MB", "GB", "TB", "PB"]
+    i = int((size_bytes).bit_length() / 10)  # Determine unit index
+    size = size_bytes / (1024 ** i)
+    return f"{size:.2f} {size_units[i]}"   
 
 
 #3rd party subroutines
@@ -342,42 +357,48 @@ def calculate_love_meter(name1, name2):
 #Other variables
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
+file_size_in_a_reasonable_unit = convert_size(file_size)
 version = 2.59
+current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+current_year = datetime.datetime.now().year
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
 area_units = "Area units"
 money_units = "Money units"
 time_units = "Time units"
+
 copy_to_keyboard_true = True
+try:
+    copy_to_keyboard("Placeholder text",copy_to_keyboard_true)
+except pyperclip.PyperclipException:
+    print("NOTICE:Pyperclip is not installed or not working properly. Copy to keyboard functionality will be disabled.\n\n\n")
+    copy_to_keyboard_true = False
+
+
 
 
 
 
 if __name__ == "__main__": 
     while True:
-        print(f"Welcome to the ULTIMATE calc Ver {version}!")
-        print("""Please select a category:
-        1. Surface Area and Volume(SA:VOL ratio)
-        2. Pythagoras therom
-        3. Perimiter and Area(P:A ratio)
-        4. Standard form
-        5. The Basics
-        6. Ordering/Mass operations
-        7. Scale factors
-        8. Decimals/fraction/percentage
-        9. Intrest
-        10. Trigomentry
-        11. Lines
-        12. Equations
-        13. Circles/Spheres
-        14. Others(in working)
-        15. Legal/Other Info on ULTIMATE CALC™
-        16. Settings
-        More functions are coming soon!!!!!""")
-        category = int(input("Enter the number of the category you want to use: "))
-        
-
+        category = calc("Please select a category:",[
+        "Surface Area and Volume(SA:VOL ratio)",
+        "Pythagoras therom",
+        "Perimiter and Area(P:A ratio)",
+        "Standard form",
+        "The Basics",
+        "Ordering/Mass operations",
+        "Scale factors",
+        "Decimals/fraction/percentage",
+        "Intrest",
+        "Trigomentry",
+        "Lines",
+        "Equations",
+        "Circles/Spheres",
+        "Others(in working)",
+        "Legal/Other Info on ULTIMATE CALC™",
+        "Settings"],0)
         if category == 1:
             print("Welcome to the Surface Area and Volume category!")
             print("""Please select a shape:
@@ -2104,7 +2125,7 @@ if __name__ == "__main__":
                     continue
             elif operation == 3:
                 operation = calc("Statistics calc",["Mean calc","Median calc","Mode calc","Range calc","Standard deviation calc","Variance",
-                                                    "Modal Score","Median Score(Decrapated until further notice)","Mean Score",
+                                                    "Modal Score","Median Score","Mean Score",
                                                     "Make pie chart(requires mathplotlib and a good PC)",
                                                     "Make frequency polygon","Sampling"],1)
                 if operation == 1:
@@ -2161,11 +2182,30 @@ if __name__ == "__main__":
                     modal_score = max(numbers_dict, key=numbers_dict.get)
                     print(f"The modal score is {modal_score}.")
                     copy_to_keyboard(modal_score, copy_to_keyboard_true)
+                elif operation == 8:
+                    print("You have selected Median Score calc!")
+                    scores = input("Enter the scores separated by commas(in order of appearance): ")
+                    scores = [str(x) for x in scores.split(",")]
+                    numbers = []
+                    for i in range(len(scores)):
+                        number = float(input(f"Enter the number of times {scores[i]} appears: "))
+                        numbers.append(number)
+                    numbers_dict = dict(zip(scores, numbers))
+                    mediant_number = sum(numbers_dict.values()) / 2
+                    cumulative_sum = 0
+                    while cumulative_sum < mediant_number:
+                        for score, count in numbers_dict.items():
+                            cumulative_sum += count
+                            if cumulative_sum >= mediant_number:
+                                median_score = score
+                                break
+                    print(f"The median score is {median_score}.")
+                    copy_to_keyboard(median_score, copy_to_keyboard_true)
                 elif operation == 9:
                     print("You have selected Mean Score calc!")
                     # Example data: frequencies and corresponding values
                     frequencies = input("Enter frequencies/scores separated by commas: ")
-                    frequencies = [int(x) for x in frequencies.split(",")]
+                    frequencies = [float(x) for x in frequencies.split(",")]
                     # Example values corresponding to frequencies
                     values = input("Enter total values separated by commas: ")
                     values = [float(x) for x in values.split(",")]
@@ -2385,22 +2425,34 @@ if __name__ == "__main__":
                         print("Invalid calculation type!Please try again.")
                         continue
                 elif operation == 2:
-                    print("You have selected Consturct bearings!")
-
-                    bearing = input("Enter the bearing (e.g. 45°): ")
-                    distance = float(input("Enter the distance: "))
-                    origin = input("Enter the origin point (x,y): ")
-                    # Parse the origin point
-                    origin = origin.split(",")
-                    origin_x = float(origin[0])
-                    origin_y = float(origin[1])
-                    bearing = bearing.replace("°", "")
-                    bearing = float(bearing)
-                    # Calculate the new point based on the bearing and distance
-                    new_x = origin_x + distance * math.cos(math.radians(bearing))
-                    new_y = origin_y + distance * math.sin(math.radians(bearing))
-                    print(f"The new point is ({new_x}, {new_y}) {lenght_units}.")
-                    copy_to_keyboard(f"({new_x}, {new_y}) {lenght_units}", copy_to_keyboard_true)
+                    calcuation = calc("Consturct bearings",["Calculate new point using bearing and distance","Calcuate opposing bearing"],2)
+                    if calcuation == 1:
+                        bearing = input("Enter the bearing (e.g. 45°): ")
+                        distance = float(input("Enter the distance: "))
+                        origin = input("Enter the origin point (x,y): ")
+                        # Parse the origin point
+                        origin = origin.split(",")
+                        origin_x = float(origin[0])
+                        origin_y = float(origin[1])
+                        bearing = bearing.replace("°", "")
+                        bearing = float(bearing)
+                        # Calculate the new point based on the bearing and distance
+                        new_x = origin_x + distance * math.cos(math.radians(bearing))
+                        new_y = origin_y + distance * math.sin(math.radians(bearing))
+                        print(f"The new point is ({new_x}, {new_y}) {lenght_units}.")
+                        copy_to_keyboard(f"({new_x}, {new_y}) {lenght_units}", copy_to_keyboard_true)
+                    elif calcuation == 2:
+                        #FORMULA: Opposing bearing = (Bearing + 180) % 360
+                        print("You have selected Calcuate opposing bearing!")
+                        bearing = input("Enter the bearing (e.g. 45°): ")
+                        bearing = bearing.replace("°", "")
+                        bearing = float(bearing)
+                        opposing_bearing = (bearing + 180) % 360
+                        print(f"The opposing bearing is {opposing_bearing}°.")
+                        copy_to_keyboard(f"{opposing_bearing}°", copy_to_keyboard_true)
+                    else:
+                        print("Invalid calculation type!Please try again.")
+                        continue
                 elif operation == 3:
                     triangle_type = calc("Consturct triangles",["Equilateral triangle","Isosceles triangle",],1)
                     if triangle_type == 1:
@@ -2485,65 +2537,23 @@ if __name__ == "__main__":
                         bisector_slope = (slope1 + slope2) / 2 if slope1 != float('inf') and slope2 != float('inf') else float('inf')
                         print(f"The angle bisector passes through ({x2}, {y2}) with slope {bisector_slope}.")
                         copy_to_keyboard(f"Angle bisector: Point ({x2}, {y2}), Slope {bisector_slope}", copy_to_keyboard_true)
-                    
-                    
-
-
-                        
-
-
-
-                        
-                         
-                        
-                        
-
-                            
-                            
-
-                    
-
-
                 else:
                     print("Invalid operation!Please try again.")
                     continue
-# The following code is commented out because it is not complete and may cause errors
-# Uncomment and complete the code if needed
-#elif operation == 8:
-# Calculate the median score
-#median= middle value of orderd list
-#position of median= (number of data points+1)/2
-#print("You have selected Median Score calc!")
-#scores = input("Enter the scores separated by commas: ")
-#scores = [str(x) for x in scores.split(",")]
-#numbers = []
-#for i in range(len(scores)):
- #   number = float(input(f"Enter the number of times {scores[i]} appears: "))
- #   numbers.append(number)
-#numbers_dict = dict(zip(scores, numbers))
-#sorted_scores = sorted(numbers_dict.items(), key=lambda x: x[1])
-#middle_index = len(sorted_scores) // 2
-#if len(sorted_scores) % 2 == 0:
-#    median_score = (sorted_scores[middle_index - 1][1] + sorted_scores[middle_index][1]) / 2
-#else:
- #   median_score = sorted_scores[middle_index][1]
-#print(f"The median score is {median_score}.")
-#copy_to_keyboard(median_score, copy_to_keyboard_true) 
-                
+
                 
 
                     
-
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
             print(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.")
-            print("© 2025 M0bile132022. All rights reserved.")
+            print(f"© {current_year} M0bile132022. All rights reserved.")
             print("This program is protected by the GNU General Public License v3.0.")
             print("This program is provided as is with no warranty.")
             print("For more information, visit https://www.ultimatecalc.com.")
             print("Other statstics:")
             print(f"Lines of code: {count_lines(file_path)}")
-            print(f"Size:{file_size} bytes")
+            print(f"Size:{file_size_in_a_reasonable_unit}")
             print(f"Version: {version}")
             print(f"File path: {file_path}")
             copy_to_keyboard(f"""ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.

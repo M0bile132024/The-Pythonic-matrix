@@ -1,13 +1,30 @@
-Bookwork 2a:not,not,are
-Bookwork 2b:are,49
-Bookwork 2c:7/18
-Bookwork 2d:0.9,have
-Bookwork 3a:43
-Bookwork 3b:1.74
-Bookwork 3c:82
-Bookwork 3d:9,6,3,1,1
-Bookwork 4a:1/3x+4
-Bookwork 4b:f/3
-Bookwork 4c:2x+7
-Bookwork 4d:mid,ran,mod,mean
-Bookwork 4e:-2/3x+14
+Bookwork 1a:0.36,0.26
+Bookwork 1b:yes,impossible to tell
+Bookwork 1c:11/50.largest numbers of trails
+Bookwork 1d:polly,0.34,better
+Bookwork 1e:2,black,increase total nums
+Bookwork 1f:6
+Bookwork 3a: Caving, high ropes course
+Bookwork 3b:3
+Bookwork 3c:14
+Bookwork 4a:16
+Bookwork 4b:21.2
+Bookwork 4d:168.9,have
+
+XP Boost:
+Bookwork 1a:055
+Bookwork 1b:255
+Bookwork 2a:7
+Bookwork 2b:0.15
+Bookwork 3a:40-50,30-40
+Bookwork 4a:1.9
+Bookwork 4b:5
+Bookwork 4c:7
+
+Target:
+Bookwork 1a:0.003,47
+Bookwork 1b:13
+Bookwork 1c:305
+Bookwork 1d:-12
+Bookwork 1e:BB
+

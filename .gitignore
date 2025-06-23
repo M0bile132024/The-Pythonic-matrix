@@ -158,5 +158,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-PRACTICAL_SECTOR/THE ULTIMATE FOLDER/XP Boost for Tuesday 15th April 10pm.json
-sparks for print.txt
+#Ingore sparks for print.txt file
+# This file is used to store temporary sparks for print, which are not needed in the repository.
+# It is recommended to keep this file in the repository for reference, but it can be ignored if not needed.
+PRACTICAL_SECTOR/THE ULTIMATE FOLDER/sparks for print.txt
