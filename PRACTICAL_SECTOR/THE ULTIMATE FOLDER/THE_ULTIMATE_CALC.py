@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date(of last test): 23/06/2025
-#Version: 2.59.89.30
+#Date(of last test): 28/06/2025
+#Version: 2.59.89.60
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -1277,7 +1277,8 @@ if __name__ == "__main__":
             elif operation == 8:
                 calcuation = calc("Percentage change",["Calculate percentage increase/decrease",
                                                     "Calcuate original number",
-                                                    "Calcuate increase/decrease"],2)
+                                                    "Calcuate increase/decrease",
+                                                    "Reverse Percentages"],2)
                 if calcuation == 1:
                     print("You have selected Calculate percentage increase/decrease!")
                     original_number = float(input("Enter the original number: "))
@@ -1313,6 +1314,13 @@ if __name__ == "__main__":
                     else:
                         print("There is no increase/decrease.")
                         copy_to_keyboard("0", copy_to_keyboard_true)
+                elif calcuation == 4:
+                    print("You have selected Reverse Percentages!")
+                    percentile_number = float(input("Enter the percentile number: "))
+                    percentage = float(input("Enter the % of the number it is part of: "))
+                    original_number = percentile_number / (percentage / 100)
+                    print(f"The original number is {original_number}.")
+                    copy_to_keyboard(original_number, copy_to_keyboard_true)
                     
 
                     
@@ -1622,8 +1630,12 @@ if __name__ == "__main__":
             print("Please select an operation:")
             print("""1. Solve linear equations
 2.Solve simultaoenous equations
-3.Changing the subject of an equation""")
-            operation = int(input("Enter the number of the operation you want to perform: "))
+3.Changing the subject of an equation
+                  4.Expanding double/triple brackets""")
+            operation = calc("Equation",["Solve linear equations",
+                                         "Solve simultaoenous equations",
+                                         "Changing the subject of an equation",
+                                         "Expanding double/triple brackets","Factorising"],2)
             if operation == 1:
                 print("You have selected Solve equations!")
                 eq.equation_calc()
@@ -1633,6 +1645,20 @@ if __name__ == "__main__":
             elif operation == 3:
                 print("You have selected Changing the subject of an equation!")
                 eq.changing_the_subject()
+            elif operation == 4:
+                print("You have selected Expanding double/triple brackets!")
+                print("Note:Type unknown values as 'number*variable' for example 2*x")
+                equation = input("Enter the equation you want to expand, (e.g. (x+2)*(x+3) or (x+2)*(x+3)*(x+4)): ")
+                expanded = eq.expanding_brackets(equation)
+                print(f"The expanded equation is {expanded}.")
+                copy_to_keyboard(expanded, copy_to_keyboard_true)
+            elif operation == 5:
+                print("You have selected Factorising!")
+                print("Note:Type unknown values as 'number*variable' for example 2*x")
+                equation = input("Enter the equation you want to factorise, (e.g. x**2 + 5*x + 6 or x**3 + 9*x**2 + 26*x + 24): ")
+                expanded = eq.factorising(equation)
+                print(f"The factorised equation is {expanded}.")
+                copy_to_keyboard(expanded, copy_to_keyboard_true)
                 
             else:
                 print("Invalid operation!Please try again.")

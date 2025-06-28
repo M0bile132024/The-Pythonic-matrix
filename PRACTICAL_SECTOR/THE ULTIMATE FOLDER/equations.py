@@ -1,7 +1,7 @@
 #equations.py
 #By: M0bile132022
-#Date: 30-05-2025
-#Version: 0.8 (Beta)
+#Date: 28-06-2025
+#Version: 1.2
 # This libary is used to solve equations, simultanous equations, quadratic factoriser and changing the subject of an equation.
 from sympy import symbols, Eq, solve, parse_expr
 import pyperclip
@@ -118,6 +118,18 @@ def changing_the_subject():
 
     
 #changing_the_subject()
+def expanding_brackets(equation):
+    a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z = symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
+    # This function expands the brackets in the given equation
+    expanded_equation = parse_expr(equation).expand()
+    return str(expanded_equation) 
+#expanding_brackets("2*(x+3) + 4*(y-5)")  # Example usage of expanding brackets function
+def factorising(equation):
+    a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z = symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
+    # This function factorises the given equation
+    factorised_equation = parse_expr(equation).factor()
+    return str(factorised_equation)
+#factorising("x**2 + 5*x + 6")  # Example usage of factorising function  
 
 
 #Class formatting
@@ -141,6 +153,10 @@ class EquationSolver:
 
     def changing_the_subject(self):
         changing_the_subject()
+    def expanding_brackets(self, equation):
+        return expanding_brackets(equation)
+    def factorising(self, equation):
+        return factorising(equation)
     def solve(self, equation_type):
         if equation_type == "simultanous":
             self.simultanous_calc()
@@ -150,8 +166,18 @@ class EquationSolver:
             self.quadratic_factoriser_calc()
         elif equation_type == "changing_the_subject":
             self.changing_the_subject()
+        elif equation_type == "expanding_brackets":
+            equation = input("Enter the equation to expand: ")
+            result = self.expanding_brackets(equation)
+            print(f"Expanded equation: {result}")
+            self.copy_to_keyboard(result)
+        elif equation_type == "factorising":
+            equation = input("Enter the equation to factorise: ")
+            result = self.factorising(equation)
+            print(f"Factorised equation: {result}")
+            self.copy_to_keyboard(result)
         else:
-            print("Invalid equation type. Please choose from 'simultanous', 'equation', 'quadratic_factoriser', or 'changing_the_subject'.")
+            print("Invalid equation type. Please choose from 'simultanous', 'equation', 'quadratic_factoriser', 'changing_the_subject', 'expanding_brackets', or 'factorising'.")
 # Example usage:
 # solver = EquationSolver(copy_to_keyboard=True)
 # solver.solve("simultanous")

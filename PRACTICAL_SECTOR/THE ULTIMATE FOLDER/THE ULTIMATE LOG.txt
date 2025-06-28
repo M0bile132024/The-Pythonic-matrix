@@ -18,21 +18,21 @@ Percentage increase and decrease ✅
 
 Compound Interest ✅
 
-Reverse Percentages 
+Reverse Percentages ✅
 
-Expand double and triple brackets  
+Expand double and triple brackets✅  
 
-Removing brackets and factorising linear & quadratic equations 
+Removing brackets and factorising linear & quadratic equations ✅
 
-Volume of a prism 
+Volume of a prism ✅
 
-Surface Area of a prism 
+Surface Area of a prism ✅
 
-Finding the length of an arc 
+Finding the length of an arc ✅
 
-Finding the area of a sector 
+Finding the area of a sector ✅ 
 
-Converting between different metric units of length, area and volume 
+Converting between different metric units of length, area and volume ✅
 
 Compound Measure – speed, density and pressure 
 
