@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date(of last test): 28/06/2025
-#Version: 2.59.89.60
+#Version: 2.59.89.62
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -396,7 +396,7 @@ if __name__ == "__main__":
         "Lines",
         "Equations",
         "Circles/Spheres",
-        "Others(in working)",
+        "Others(WIP)",
         "Legal/Other Info on ULTIMATE CALC™",
         "Settings"],0)
         if category == 1:
@@ -1945,7 +1945,7 @@ if __name__ == "__main__":
                 print("Invalid shape!Please try again.")
                 continue
         elif category == 14:
-            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Advanced Geomentry calc(requires turtle)","Miscellaneous calc"],2)
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Advanced Geomentry calc(requires turtle)","Probability calc"],2)
             if operation == 1:
                 operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc","Concertration calc"],1)
                 if operation == 1:
@@ -2566,7 +2566,90 @@ if __name__ == "__main__":
                 else:
                     print("Invalid operation!Please try again.")
                     continue
-
+            elif operation == 5:
+                operation = calc("Probability calc(WIP)",["Probabilty tree calc(WIP)"],1)
+                if operation == 1:
+                    print("You have selected Probabilty tree calc!")
+                    events = int(input("Enter the number of events: "))
+                    event_names = []
+                    temp_probabilities = []
+                    probabilites = []
+                    choice_names = []
+                    for i in range(events):
+                        event_name = input(f"Enter the name of event {i + 1}: ")
+                        choices = int(input(f"Enter the number of choices for event {event_name}: "))
+                        event_names.append(event_name)
+                        for j in range(choices):
+                            choice_name = input(f"Enter the name of choice {j + 1} for event {i + 1}: ")
+                            choice_names.append(choice_name)
+                            probability = float(input(f"Enter the probability for choice {choice_name} of event {event_name}: (decimal between 0 and 1)"))
+                            temp_probabilities.append(probability)
+                        if sum(temp_probabilities) != 1:
+                            print("Error: The sum of probabilites must be equal to 1.")
+                            continue
+                        else:
+                            for k in range(choices):
+                                probabilites.append(temp_probabilities[k])
+                            temp_probabilities = []
+                        print(f"Event {i + 1} probabilites: {probabilites}")
+                    print("Probability tree created successfully.")
+                    print("Please select a sub-operation:")
+                    print("""1. Calculate the probability of a specific outcome
+2. Display the probability tree
+3. Exit""")
+                    sub_operation = int(input("Enter the number of the sub-operation you want to perform: "))
+                    if sub_operation == 1:
+                        outcome = input("Enter the outcome you want to calculate the probability for in order (e.g. A n B u C)(n=AND,u=OR):")
+                        # Parse the outcome
+                        outcome_parts = outcome.split(" ")
+                        outcome_parts = [part.strip() for part in outcome_parts]
+                        outcome_probabilities = []
+                        for part in outcome_parts:
+                            if part in choice_names:
+                                index = choice_names.index(part)
+                                event_index = index // len(temp_probabilities[0])
+                                choice_index = index % len(temp_probabilities[0])
+                                outcome_probabilities.append(temp_probabilities[event_index][choice_index])
+                            elif part == "n":
+                                continue
+                            elif part == "u":
+                                continue
+                            else:
+                                print(f"Error: {part} is not a valid choice.")
+                                continue
+                        if "n" in outcome_parts:
+                            #Convert the n/AND and u/OR to multiplication and addition
+                            probability = 1
+                            for prob in outcome_probabilities:
+                                probability *= prob
+                        elif "u" in outcome_parts:
+                            #Convert the n/AND and u/OR to multiplication and addition
+                            probability = 0
+                            for prob in outcome_probabilities:
+                                probability += prob
+                        else:
+                            print("Error: The outcome must contain either 'n' or 'u'.")
+                            continue
+                        print(f"The probability of the outcome {outcome} is {probability}.")
+                        copy_to_keyboard(probability, copy_to_keyboard_true)
+                    elif sub_operation == 2:
+                        print("Displaying the probability tree:")
+                        for i in range(events):
+                            print(f"Event {event_names[i]}:")
+                            for j in range(len(temp_probabilities[i])):
+                                print(f"  Choice {choice_names[j]}: {temp_probabilities[i][j]}")
+                        copy_to_keyboard("Probability tree displayed successfully.", copy_to_keyboard_true)
+                    elif sub_operation == 3:
+                        print("Exiting the probability tree calc.")
+                        continue
+                    else:
+                        print("Invalid sub-operation!Please try again.")
+                        continue
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+                    
+                    
                 
 
                     
