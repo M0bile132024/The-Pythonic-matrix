@@ -1,7 +1,7 @@
 #equations.py
 #By: M0bile132022
-#Date: 28-06-2025
-#Version: 1.2
+#Date: 07-07-2025
+#Version: 1.3
 # This libary is used to solve equations, simultanous equations, quadratic factoriser and changing the subject of an equation.
 from sympy import symbols, Eq, solve, parse_expr
 import pyperclip
@@ -33,7 +33,8 @@ def simultanous_calc():
     #create a list of equations
     eq_list = []
     for i in range(number_of_equations):
-        eq1 = Eq(parse_expr(equation_list[i]), int(answer_list[i]))
+        eq1 = Eq(parse_expr(equation_list[i]), parse_expr(answer_list[i]))
+        
         eq_list.append(eq1)
     solution = solve((eq_list), (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z))
     print(solution)
@@ -130,8 +131,23 @@ def factorising(equation):
     factorised_equation = parse_expr(equation).factor()
     return str(factorised_equation)
 #factorising("x**2 + 5*x + 6")  # Example usage of factorising function  
+def solve_by_subsitition(equation, variable_to_substitute, substitution_value):
+    a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z = symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
+    # This function solves the equation by substituting the value of the variable
+    equation = parse_expr(equation)
+    substituted_equation = equation.subs(variable_to_substitute, substitution_value)
+    return str(substituted_equation)
+# solve_by_subsitition("x**2 + 5*x + 6", "x", 2)  # Example usage of solve_by_subsitition function
+def solve_by_elimination(equation1, equation2):
+    a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z = symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
+    # This function solves the equations by elimination method
+    eq1 = Eq(parse_expr(equation1), 0)
+    eq2 = Eq(parse_expr(equation2), 0)
+    solution = solve((eq1, eq2), (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z))
+    return str(solution)
+#solve_by_elimination("4/(7*x-4)", "(5*x)/(3*y+2)")  # Example usage of solve_by_elimination function
 
-
+    
 #Class formatting
 class EquationSolver:
     def __init__(self, copy_to_keyboard=False):

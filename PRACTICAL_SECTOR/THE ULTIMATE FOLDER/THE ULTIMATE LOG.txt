@@ -34,9 +34,9 @@ Finding the area of a sector ✅
 
 Converting between different metric units of length, area and volume ✅
 
-Compound Measure – speed, density and pressure 
+Compound Measure – speed, density and pressure ✅
 
-Using a calculator for complex calculations 
+Using a calculator for complex calculations 💀
 
 Round to a given number of decimal places 
 

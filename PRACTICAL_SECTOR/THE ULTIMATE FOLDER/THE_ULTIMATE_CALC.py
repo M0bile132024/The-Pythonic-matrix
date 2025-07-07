@@ -2,7 +2,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
 #Date(of last test): 28/06/2025
-#Version: 2.59.89.62
+#Version: 2.59.89.82
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -867,12 +867,10 @@ if __name__ == "__main__":
                 print("Invalid shape!Please try again.")
                 continue 
         elif category == 4:
-            print("Welcome to the Standard form category!")
-            print("Please select an operation:")
-            print("""1. Convert to standard form
-    2. Convert from standard form
-    Please note this calc only supports ENG notation""")
-            operation = int(input("Enter the number of the operation you want to perform: "))
+            operation = calc("Standard Form category",["Convert to standard form",
+            "Convert from standard form",
+            "Round to a given number of decimal places",
+            "Round to a given number of significant figures"],2)
             if operation == 1:
                 print("You have selected Convert to standard form!")
                 number = float(input("Enter the number you want to convert to standard form: "))
@@ -888,7 +886,24 @@ if __name__ == "__main__":
                     copy_to_keyboard(number,copy_to_keyboard_true)
                 except:
                     print("Invalid notation!Please try again,using ENG Noation.")
-                    continue 
+                    continue
+            elif operation == 3:
+                print("You have selected Round to a given number of decimal places!")
+                number = float(input("Enter the number you want to round: "))
+                decimal_places = int(input("Enter the number of decimal places you want to round to: "))
+                rounded_number = round(number, decimal_places)
+                print(f"The rounded number is {rounded_number}.")
+                copy_to_keyboard(rounded_number,copy_to_keyboard_true)
+            elif operation == 4:
+                print("You have selected Round to a given number of significant figures!")
+                number = float(input("Enter the number you want to round: "))
+                significant_figures = int(input("Enter the number of significant figures you want to round to: "))
+                if number == 0:
+                    rounded_number = 0
+                else:
+                    rounded_number = round(number, significant_figures - int(math.floor(math.log10(abs(number)))) - 1)
+                print(f"The rounded number is {rounded_number}.")
+                copy_to_keyboard(rounded_number,copy_to_keyboard_true) 
             else:
                 print("Invalid operation!Please try again.")
                 continue 
@@ -1945,7 +1960,7 @@ if __name__ == "__main__":
                 print("Invalid shape!Please try again.")
                 continue
         elif category == 14:
-            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Advanced Geomentry calc(requires turtle)","Probability calc"],2)
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Advanced Geomentry calc(requires turtle)","Probability calc","Compund Meausures calc"],2)
             if operation == 1:
                 operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc","Concertration calc"],1)
                 if operation == 1:
@@ -2141,6 +2156,9 @@ if __name__ == "__main__":
                     ratio_parts = [int(x) for x in ratio_parts]
                     ratio_sum = sum(ratio_parts)
                     equivalent_ratios = []
+                    #simplify ratio
+                    gcd = math.gcd(*ratio_parts)
+                    ratio_parts = [part // gcd for part in ratio_parts]
                     for i in range(1, number + 1):
                         equivalent_ratio = [part * i for part in ratio_parts]
                         equivalent_ratios.append(":".join(map(str, equivalent_ratio)))
@@ -2644,6 +2662,90 @@ if __name__ == "__main__":
                         continue
                     else:
                         print("Invalid sub-operation!Please try again.")
+                        continue
+
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif operation == 6:
+                operation = calc("Compound Meausures calc",["Speed meausures","Pressure meausures","Densisty meausures"],2)
+                if operation == 1:
+                    speed_type = calc("Speed meausures",["Calculate speed","Calculate time","Calculate distance"],1)
+                    if speed_type == 1:
+                        print("You have selected Calculate speed!")
+                        distance = float(input(f"Enter the distance in {lenght_units}: "))
+                        time = float(input("Enter the time in {time_units}: "))
+                        speed = distance / time
+                        print(f"The speed is {speed} {lenght_units}/{time_units}.")
+                        copy_to_keyboard(speed, copy_to_keyboard_true)
+                    elif speed_type == 2:
+                        print("You have selected Calculate time!")
+                        distance = float(input(f"Enter the distance in {lenght_units}: "))
+                        speed = float(input(f"Enter the speed in {lenght_units}/{time_units}: "))
+                        time = distance / speed
+                        print(f"The time is {time} {time_units}.")
+                        copy_to_keyboard(time, copy_to_keyboard_true)
+                    elif speed_type == 3:
+                        print("You have selected Calculate distance!")
+                        speed = float(input(f"Enter the speed in {lenght_units}/{time_units}: "))
+                        time = float(input("Enter the time in {time_units}: "))
+                        distance = speed * time
+                        print(f"The distance is {distance} {lenght_units}.")
+                        copy_to_keyboard(distance, copy_to_keyboard_true)
+                    else:
+                        print("Invalid speed type!Please try again.")
+                        continue
+                elif operation == 2:
+                    pressure_type = calc("Pressure meausures",["Calculate pressure","Calculate force","Calculate area"],1)
+                    if pressure_type == 1:
+                        print("You have selected Calculate pressure!")
+                        force = float(input(f"Enter the force in force units: "))
+                        area = float(input(f"Enter the area in {area_units}: "))
+                        pressure = force / area
+                        print(f"The pressure is {pressure} force_units/{area_units}.")
+                        copy_to_keyboard(pressure, copy_to_keyboard_true)
+                    elif pressure_type == 2:
+                        print("You have selected Calculate force!")
+                        pressure = float(input(f"Enter the pressure in force units/{area_units}: "))
+                        area = float(input(f"Enter the area in {area_units}: "))
+                        force = pressure * area
+                        print(f"The force is {force} force units.")
+                        copy_to_keyboard(force, copy_to_keyboard_true)
+                    elif pressure_type == 3:
+                        print("You have selected Calculate area!")
+                        pressure = float(input(f"Enter the pressure in force units/{area_units}: "))
+                        force = float(input(f"Enter the force in force units: "))
+                        area = force / pressure
+                        print(f"The area is {area} {area_units}.")
+                        copy_to_keyboard(area, copy_to_keyboard_true)
+                    else:
+                        print("Invalid pressure type!Please try again.")
+                        continue
+                elif operation == 3:
+                    density_type = calc("Density meausures",["Calculate density","Calculate mass","Calculate volume"],1)
+                    if density_type == 1:
+                        print("You have selected Calculate density!")
+                        mass = float(input(f"Enter the mass in weight units: "))
+                        volume = float(input(f"Enter the volume in {volume_units}: "))
+                        density = mass / volume
+                        print(f"The density is {density} weight units/{volume_units}.")
+                        copy_to_keyboard(density, copy_to_keyboard_true)
+                    elif density_type == 2:
+                        print("You have selected Calculate mass!")
+                        density = float(input(f"Enter the density in weight units/{volume_units}: "))
+                        volume = float(input(f"Enter the volume in {volume_units}: "))
+                        mass = density * volume
+                        print(f"The mass is {mass} weight units.")
+                        copy_to_keyboard(mass, copy_to_keyboard_true)
+                    elif density_type == 3:
+                        print("You have selected Calculate volume!")
+                        density = float(input(f"Enter the density in weight units/{volume_units}: "))
+                        mass = float(input(f"Enter the mass in weight units: "))
+                        volume = mass / density
+                        print(f"The volume is {volume} {volume_units}.")
+                        copy_to_keyboard(volume, copy_to_keyboard_true)
+                    else:
+                        print("Invalid density type!Please try again.")
                         continue
                 else:
                     print("Invalid operation!Please try again.")
