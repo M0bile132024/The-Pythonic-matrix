@@ -1,10 +1,10 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-03-24
-#Version: 2.44
+#Date: 2025-04-16
+#Version: 2.59
 #Milestones:
-#UPDATE 2.0:11/03/2025
+#UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
 PHYSIC EQUATIONS, 
 pythagoras therom,
@@ -63,7 +63,7 @@ def subtract_list(values):
         result -= value
     return result
 def multiply_list(values):
-    result = 0
+    result = 1
     for value in values[1:]:
         result *= value
     return result
@@ -72,6 +72,31 @@ def divide_list(values):
     for value in values[1:]:
         result /= value
     return result
+def calc(name,options,operation_or_calc):
+    print(f"You have selected {name}!" if operation_or_calc == 1 else f"Welcome to the {name} category!")
+    print("Please select an operation:" if operation_or_calc == 1 else "Please select a calculation:" if operation_or_calc == 2 else "Please select a method:")
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    operation = int(input("Enter the number of the operation you want to perform: "))
+    return operation
+#3rd party subroutines
+#yzfargo/yu https://github.com/yzfargo/yu
+def calculate_displacement(initial_velocity, acceleration, time):
+    """Calculates the displacement using the SVT equation."""
+    displacement = initial_velocity * time + 0.5 * acceleration * time**2
+    return displacement
+
+def calculate_final_velocity(initial_velocity, acceleration, time):
+    """Calculates the final velocity using the SVT equation."""
+    final_velocity = initial_velocity + acceleration * time
+    return final_velocity
+
+def calculate_time(initial_velocity, final_velocity, acceleration):
+    """Calculates the time using the SVT equation."""
+    time = (final_velocity - initial_velocity) / acceleration
+    return time
+
+       
 
 
 # Example usage
@@ -86,7 +111,7 @@ def find_x_intercept(m, b):
     return x_intercept
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.45
+version = 2.59
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -98,21 +123,22 @@ if __name__ == "__main__":
     while True:
         print(f"Welcome to the ULTIMATE calc Ver {version}!")
         print("""Please select a category:
-        1. Surface Area and Volume
+        1. Surface Area and Volume(SA:VOL ratio)
         2. Pythagoras therom
         3. Perimiter and Area(P:A ratio)
         4. Standard form
         5. The Basics
-        6. Ordering/Mass operations
+        6. Ordering/Mass operations(Beta)
         7. Scale factors
         8. Decimal to fraction to percentage conversions
         9. Intrest
         10. Trigomentry
         11. Lines
         12. Equations(beta)
-        13. Circles(is out)/Spheres(coming 2.5)
-        14. Legal/Other Info on ULTIMATE CALC™
-        15. Settings
+        13. Circles/Spheres
+        14. Others(coming soon)
+        15. Legal/Other Info on ULTIMATE CALC™
+        16. Settings
         More functions are coming soon!!!!!""")
         category = int(input("Enter the number of the category you want to use: "))
         
@@ -734,12 +760,11 @@ if __name__ == "__main__":
             print("Welcome to the Ordering/Mass operations category!")
             print("Please select an operation:")
             print("""1. Ascending order
-    2. Descending order
-    3. Mass addition
-                  (coming 2.5)
-    4. Mass subtraction
-    5. Mass multiplication
-    6. Mass division""")
+2. Descending order
+3. Mass addition
+4. Mass subtraction
+5. Mass multiplication
+6. Mass division""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Ascending order!")
@@ -777,9 +802,61 @@ if __name__ == "__main__":
                     else:
                         number = float(number)
                         ordering_list.append(number)
-                sum_of_numbers = sum(ordering_list) 
-                print(f"The sum of the numbers are {sum_of_numbers}.")
-                copy_to_keyboard(sum_of_numbers, copy_to_keyboard_true)
+                try:    
+                    sum_of_numbers = sum(ordering_list) 
+                    print(f"The sum of the numbers are {sum_of_numbers}.")
+                    copy_to_keyboard(sum_of_numbers, copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
+            elif operation == 4:
+                print("You have selected Mass subtraction!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                try:
+                    print(f"The difference of the numbers is {subtract_list(ordering_list)}.")
+                    copy_to_keyboard(subtract_list(ordering_list), copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
+            elif operation == 5:
+                print("You have selected Mass multiplication!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                try:    
+                    print(f"The product of the numbers is {multiply_list(ordering_list)}.")
+                    copy_to_keyboard(multiply_list(ordering_list), copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
+            elif operation == 6:
+                print("You have selected Mass division!")
+                ordering_list = []
+                while True:
+                    number = input("Enter a number to add to the list or type 'done' to finish: ")
+                    if number == "done":
+                        break
+                    else:
+                        number = float(number)
+                        ordering_list.append(number)
+                try:    
+                    print(f"The quotient of the numbers is {divide_list(ordering_list)}.")
+                    copy_to_keyboard(divide_list(ordering_list), copy_to_keyboard_true)
+                except:
+                    print("Invalid values!Please try again.")
+                    continue
 
             else:
                 print("Invalid operation!Please try again.")
@@ -1217,6 +1294,7 @@ if __name__ == "__main__":
                     elif method == 3:
                         circumference = float(input("Enter the circumference of the circle: "))
                         diameter = circumference / pi
+                        radius = diameter / 2
                         print(f"The diameter of the circle is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
                         copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
                     elif method == 4:
@@ -1365,7 +1443,93 @@ if __name__ == "__main__":
                     print("Invalid operation!Please try again.")
                     continue
             elif shape == 2:
-                print("The sphere category will come in 2.5.0!")
+                #V=2/3piR^2h
+                print("You have selected Sphere!")
+                print("Please select an operation:")
+                print("""
+1. Calculate the diameter/radius
+2.Calcuate volume of spherical cone
+3.Calcuate lenght of Great circle
+4.Calcuate volume of spherical cap
+5.Calcuate volume of spherical segment
+6.Calcuate volume of spherical wedge""")
+                operation = int(input("Enter the number of the operation you want to perform: "))
+                if operation == 1:
+                    print("You have selected Calculate the diameter/radius!")
+                    print("Please select a method:")
+                    print("""1. Using the radius
+2. Using diameter
+3. Using the great circle circumference""")
+                    method = int(input("Enter the number of the method you want to use: "))
+                    if method == 1:
+                        radius = float(input("Enter the radius of the sphere: "))
+                        diameter = radius * 2
+                        print(f"The diameter of the sphere is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
+                        copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
+                    elif method == 2:
+                        diameter = float(input("Enter the diameter of the sphere: "))
+                        radius = diameter / 2
+                        print("The radius of the sphere is {radius} {lenght_units} and the diameter is {diameter} {lenght_units}.")
+                        copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
+                    elif method == 3:
+                        circumference = float(input("Enter the circumference of the great circle: "))
+                        diameter = circumference / pi
+                        radius = diameter / 2
+                        print(f"The diameter of the sphere is {diameter} {lenght_units} and the raduis is {radius} {lenght_units}.")
+                        copy_to_keyboard(f"{diameter},{radius}", copy_to_keyboard_true)
+                    
+                        
+                            
+
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                
+                elif operation == 2:
+                    print("You have selected Calcuate volume of spherical cone!")
+                    radius = float(input("Enter the radius of the cone: "))
+                    height = float(input("Enter the height of the cone: "))
+                    area = (2/3) * pi * (radius ** 2) * height
+                    print(f"The volume of the spherical cone is {area} {volume_units}.")
+                    copy_to_keyboard(area, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Calcuate lenght of Great Circle!")
+                    radius = float(input("Enter the radius of the sphere: "))
+                    x = float(input("Enter the frist angle of latitude of the sphere(degrees): "))
+                    y = float(input("Enter the second angle of latitude of the sphere(degrees): "))
+                    a = float(input("Enter the first angle of longitude of the sphere(degrees): "))
+                    b = float(input("Enter the second angle of longitude of the sphere(degrees): "))
+                    arc_length = radius * math.acos(math.sin(math.radians(x)) * math.sin(math.radians(y)) + math.cos(math.radians(x)) * math.cos(math.radians(y)) * math.cos(math.radians(a - b)))
+                    print(f"The lenght of the Great Circle is {arc_length} {lenght_units}.")
+                    copy_to_keyboard(arc_length, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Calcuate volume of a spherical cap!")
+                    radius = float(input("Enter the radius of the cap: "))
+                    height = float(input("Enter the height of the cap: "))
+                    area = (1/3) * pi * (height ** 2) * ((3 * radius) - height)
+                    print(f"The volume of the cap is {area} {volume_units}.")
+                    copy_to_keyboard(area, copy_to_keyboard_true)
+                elif operation == 5:
+                    # (1/6)πh((3r1)^2 + (3r2)^2 + h^2)
+                    print("You have selected Calcuate volume of spherical segment!")
+                    r1 = float(input("Enter the radius of the base circle of segment: "))
+                    r2 = float(input("Enter the radius of the top circle of segment: "))
+                    h = float(input("Enter the height of the segment: "))
+                    volume = (1/6) * pi * h * ((3 * (r1 ** 2)) + (3 * (r2 ** 2)) + (h ** 2))
+                    print(f"The volume of the segment is {volume} {volume_units}.")
+                    copy_to_keyboard(volume, copy_to_keyboard_true)
+                elif operation == 6:
+                    #(θ/360°)(4/3)π(R^3)
+                    print("You have selected Calcuate the volume of spherical wedge!")
+                    radius = float(input("Enter the radius of the wedge: "))
+                    angle = float(input("Enter the angle of the wedge(degrees): "))
+                    volume = (angle / 360) * ((4/3) * pi * (radius ** 3))
+                    print("The volume of the wedge is {volume} {volume_units}.")
+                    copy_to_keyboard(volume, copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+                
             else:
                 print("Invalid shape!Please try again.")
                 continue
@@ -1390,8 +1554,207 @@ if __name__ == "__main__":
             
 
                 
-
         elif category == 14:
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Unit conversion calc","Miscellaneous calc"],2)
+            if operation == 1:
+                operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc"],1)
+                if operation == 1:
+                    print("You have selected Relative mass calc!")
+                    mass_list = []
+                    abundance_list = []
+                    while True:
+                        mass = input("Enter the mass of a isotope:(type done to stop recording) ")
+                        abundance = input("Enter the abundance of the isotope(%): ")
+                        if mass == "done":
+                            break
+                        mass_list.append(float(mass))
+                        abundance_list.append(float(abundance))
+                    product_list = []
+                    for i in range(len(mass_list)):
+                        product = mass_list[i] * abundance_list[i]
+                        product_list.append(product)
+
+                    relative_mass = sum(product_list) / 100
+                    print(f"The relative mass of the element is {relative_mass}.")
+                    copy_to_keyboard(relative_mass, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Atomic weight using relative mass calc!")
+                    mass_list = []
+                    abundance_list = []
+                    product_list = []
+                    while True:
+                    
+                    
+                        mass = input("Enter the mass of a known isotope (or type 'done' to finish): ")
+                        if mass == 'done':
+                            break
+                        else:
+                            abundance = input("Enter the abundance of the known isotope: ")
+                            mass_list.append(float(mass))
+                            abundance_list.append(float(abundance))
+                            product = float(mass) * float(abundance)
+                            product_list.append(product)
+                    relative_mass = float(input("Enter the relative mass of the isotope: "))
+                    abunance = 100 - sum(abundance_list)
+                    atomic_weight = relative_mass * 100
+                    for i in range(len(mass_list)):
+                        atomic_weight -= product_list[i]
+                    atomic_weight /= abunance
+                    print("The atomic weight of the unknown isotope is: ", atomic_weight)
+                    copy_to_keyboard(atomic_weight, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Moles calc!")
+                    concentration = float(input("Enter the concentration of the solution (mol/L): "))
+                    volume = float(input("Enter the volume of the solution (L): "))
+                    moles = concentration * volume
+                    print(f"The number of moles is {moles}.")
+                    copy_to_keyboard(moles, copy_to_keyboard_true)
+                elif operation == 4:
+                    method = calc("Thermodynamics calc",["Enthalpy calc","Entropy calc","Gibbs free energy calc","Heat capacity calc"],3)
+                    if method == 1:
+                        print("You have selected Enthalpy calc!")
+                        enthalpy = float(input("Enter the enthalpy (kJ/mol): "))
+                        temperature = float(input("Enter the temperature (K): "))
+                        enthalpy_change = enthalpy / temperature
+                        print(f"The enthalpy change is {enthalpy_change} kJ/mol/K.")
+                        copy_to_keyboard(enthalpy_change, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Entropy calc!")
+                        entropy = float(input("Enter the entropy (J/mol/K): "))
+                        temperature = float(input("Enter the temperature (K): "))
+                        entropy_change = entropy / temperature
+                        print(f"The entropy change is {entropy_change} J/mol/K.")
+                        copy_to_keyboard(entropy_change, copy_to_keyboard_true)
+                    elif method == 3:
+                        print("You have selected Gibbs free energy calc!")
+                        enthalpy = float(input("Enter the enthalpy (kJ/mol): "))
+                        entropy = float(input("Enter the entropy (J/mol/K): "))
+                        temperature = float(input("Enter the temperature (K): "))
+                        gibbs_free_energy = enthalpy - (temperature * entropy)
+                        print(f"The Gibbs free energy is {gibbs_free_energy} kJ/mol.")
+                        copy_to_keyboard(gibbs_free_energy, copy_to_keyboard_true)
+                    elif method == 4:
+                        print("You have selected Heat capacity calc!")
+                        heat_capacity = float(input("Enter the heat capacity (J/mol/K): "))
+                        temperature_change = float(input("Enter the temperature change (K): "))
+                        heat_capacity_change = heat_capacity * temperature_change
+                        print(f"The heat capacity change is {heat_capacity_change} J/mol.")
+                        copy_to_keyboard(heat_capacity_change, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 5:
+                    method = calc("Electrochemistry calc",["Electrochemical cell calc","Electrolysis calc","Faraday's law calc"],3)
+                    if method == 1:
+                        print("You have selected Electrochemical cell calc!")
+                        cell_potential = float(input("Enter the cell potential (V): "))
+                        current = float(input("Enter the current (A): "))
+                        time = float(input("Enter the time (s): "))
+                        charge = cell_potential * current * time
+                        print(f"The charge is {charge} C.")
+                        copy_to_keyboard(charge, copy_to_keyboard_true)
+                    elif method == 2:
+                        print("You have selected Electrolysis calc!")
+                        current = float(input("Enter the current (A): "))
+                        time = float(input("Enter the time (s): "))
+                        charge = current * time
+                        print(f"The charge is {charge} C.")
+                        copy_to_keyboard(charge, copy_to_keyboard_true)
+                    elif method == 3:
+                        print("You have selected Faraday's law calc!")
+                        current = float(input("Enter the current (A): "))
+                        time = float(input("Enter the time (s): "))
+                        charge = current * time
+                        faraday_constant = 96485.3329
+                        moles = charge / faraday_constant
+                        print(f"The number of moles is {moles}.")
+                        copy_to_keyboard(moles, copy_to_keyboard_true)
+                    else:
+                        print("Invalid method!Please try again.")
+                        continue
+                elif operation == 6:
+                    operation = calc("SVT calc",["Calcuate displacement","Calcuate final velocity","Calcuate time"],1)
+                    if operation == 1:
+                        print("You have selected Calcuate displacement!")
+                        initial_velocity = float(input("Enter the initial velocity (m/s): "))
+                        final_velocity = float(input("Enter the final velocity (m/s): "))
+                        time = float(input("Enter the time (s): "))
+                        displacement = calculate_displacement(initial_velocity, final_velocity, time)
+                        print(f"The displacement is {displacement} {lenght_units}.")
+                        copy_to_keyboard(displacement, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calcuate final velocity!")
+                        initial_velocity = float(input("Enter the initial velocity (m/s): "))
+                        acceleration = float(input("Enter the acceleration (m/s²): "))
+                        time = float(input("Enter the time (s): "))
+                        final_velocity = calculate_final_velocity(initial_velocity, acceleration, time)
+                        print(f"The final velocity is {final_velocity} {lenght_units}.")
+                        copy_to_keyboard(final_velocity, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calcuate time!")
+                        initial_velocity = float(input("Enter the initial velocity (m/s): "))
+                        final_velocity = float(input("Enter the final velocity (m/s): "))
+                        acceleration = float(input("Enter the acceleration (m/s²): "))
+                        time = calculate_time(initial_velocity, final_velocity, acceleration)
+                        print(f"The time is {time} seconds.")
+                        copy_to_keyboard(time, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif operation == 2:
+                operation = calc("Ratio calc",["Finding all amounts in ratio","Finding total of ratio and unknwon amounts","Listing equinvant ratios"],2)
+                if operation == 1:
+                    print("You have selected Finding all amounts in ratio!")
+                    ratio = input("Enter the ratio (e.g. 2:3): ")
+                    total_amount = float(input("Enter the total amount: "))
+                    ratio_parts = ratio.split(":")
+                    ratio_sum = sum(int(part) for part in ratio_parts)
+                    amounts = [int(part) / ratio_sum * total_amount for part in ratio_parts]
+                    print(f"The amounts are: {amounts}")
+                    copy_to_keyboard(amounts, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Finding total of ratio and unknwon amounts!")
+                    ratio = input("Enter the ratio with known value at forefront(eg.2:3,2 being known): ")
+                    part = input("Enter value of known part: ")
+                    ratio_parts = ratio.split(":")
+                    ratio_parts = [int(x) for x in ratio_parts]
+                    total_parts = sum(ratio_parts)
+                    known_part = ratio_parts[0]
+                    known_part_value = int(part)
+                    total_amount = (known_part_value * total_parts) / known_part
+                    # Calculate the total amount based on the ratio and known part
+                    # Print the result
+                    print(f"The total amount is: {total_amount}")
+                    print("The unknwown parts are:")
+                    unknown_parts_list = []
+                    for i in range(1, len(ratio_parts)):
+                        unknown_part = ratio_parts[i]
+                        unknown_part_value = (unknown_part * total_amount) / total_parts
+                        print(f"Part {i + 1}: {unknown_part_value}")
+                        unknown_parts_list.append(unknown_part_value)
+                    copy_to_keyboard(f"{unknown_parts_list},{total_amount}", copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Listing equinvant ratios!")
+                    ratio = input("Enter the ratio (e.g. 2:3): ")
+                    number = int(input("Enter the number of equivalent ratios to generate(from it's simplest form): "))
+                    ratio_parts = ratio.split(":")
+                    ratio_parts = [int(x) for x in ratio_parts]
+                    ratio_sum = sum(ratio_parts)
+                    equivalent_ratios = []
+                    for i in range(1, number + 1):
+                        equivalent_ratio = [part * i for part in ratio_parts]
+                        equivalent_ratios.append(":".join(map(str, equivalent_ratio)))
+                    print(f"The equivalent ratios are: {equivalent_ratios}")
+                    copy_to_keyboard(equivalent_ratios, copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+                    
+
+        elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
             print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
             print("© 2025 M0bile132022. All rights reserved.")
@@ -1404,7 +1767,19 @@ if __name__ == "__main__":
             print(f"Version: {version}")
             print(f"File path: {file_path}")
             copy_to_keyboard(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.© 2025 M0bile132022. All rights reserved. This program is protected by the GNU General Public License v3.0. This program is provided as is with no warranty. For more information, visit https://www.ultimatecalc.com. Other statstics: Lines of code: {count_lines(file_path)} Size:{file_size} bytes Version: {version} File path: {file_path}", copy_to_keyboard_true)
-        elif category == 15:
+            print("""Credits:
+            1. M0bile132022 for code
+            2. OpenAI for aid
+            3. Python community for possiblity
+            4. SymPy for the real complicated stuff
+            5. Math community for purpose
+            6. Stack Overflow for help
+            7. GitHub community for storage
+            8. Wikipedia for knowledge
+            9. Yzfargo for 3rd party subroutines
+            10. You for using it!!!""")
+            
+        elif category == 16:
             print("Welcome to settings!")
             print("Please select an operation:")
             print("""1. Change the lenght units
