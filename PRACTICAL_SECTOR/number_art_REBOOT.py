@@ -34,7 +34,7 @@ if a == 2:
         left(90)
         forward(1)
         left(1)
-        
+
 if a == 3:
     print(" Number 3:l e m o n")
     while infintyvarbilbe != 100:
@@ -169,6 +169,7 @@ if a == 7:
         purple.left(1)
         pink.left(1)
 if a == 8:
+    print("Number 8:Octogon force be with you")
     while infintyvarbilbe != 11111111:
         color("magenta")
         forward(10)
@@ -204,7 +205,7 @@ if a == 10:
         white.write("1",font=("Verdana", 200, "normal"))
         white.left(1)
 if a == 11:
-    rb = ["red" , "blue"] 
+    rb = ["red" , "blue"]
     while infintyvarbilbe != 11:
         color(rb[randrange(0 , 2)])
         circle(50)
@@ -235,7 +236,7 @@ if a == 14:
         goto(randrange(-200 ,200 ) , randrange(-200 , 200))
         sleep(0.1)
 if a == 15:
-    
+
     Russia = Turtle()
     Ukraine = Turtle()
     Russia.penup()
@@ -326,9 +327,9 @@ if a == 18:
     speed(800000)
     j = 0
     color("red")
-    while infintyvarbilbe != 6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000:      
+    while infintyvarbilbe != 6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000:
         j = 0
-        while j != 6:   
+        while j != 6:
             penup()
             goto(-200, 0)
             pendown()
@@ -382,7 +383,7 @@ if a == 19:
     Mario.speed(5)
     bgybyr = ["black" , "green" , "green" , "white"]
     dnfskj = ["brown" , "yellow" , "red" , "red" ]
-    def mariospeech(mariosentence):   
+    def mariospeech(mariosentence):
         Mario.write(mariosentence)
         sleep(3)
         Mario.clear()
@@ -1943,13 +1944,12 @@ if a == 23 :
     done()
     exitonclick()
 
-            
-                
-
-            
 
 
 
 
-            
+
+
+
+
 
