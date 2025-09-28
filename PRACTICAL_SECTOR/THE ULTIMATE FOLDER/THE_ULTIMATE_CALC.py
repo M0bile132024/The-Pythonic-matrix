@@ -27,6 +27,7 @@ import os
 import fractions
 import pyperclip
 import equations as eq
+import sympy as sp
 
 def operation_dialogue():
     print("Please select an operation:")
@@ -95,7 +96,10 @@ def calculate_time(initial_velocity, final_velocity, acceleration):
     """Calculates the time using the SVT equation."""
     time = (final_velocity - initial_velocity) / acceleration
     return time
-
+def simplify_surd(expression):
+    """Simplifies a surd expression."""
+    simplified = sp.simplify(sp.sqrt(sp.sympify(expression)))
+    return simplified
        
 
 
@@ -109,6 +113,7 @@ def find_x_intercept(m, b):
         return None
     x_intercept = -b / m
     return x_intercept
+
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
 version = 2.59
@@ -118,7 +123,15 @@ volume_units = "Cubic units"
 area_units = "Area units"
 money_units = "Money units"
 time_units = "Time units"
-copy_to_keyboard_true = True
+try:
+    copy_to_keyboard_true = True
+    copy_to_keyboard("Test",copy_to_keyboard_true)
+except:
+    print("Pyperclip not installed or not working,copy to clipboard function has been disabled.\n\n\n")
+    copy_to_keyboard_true = False
+
+
+
 if __name__ == "__main__": 
     while True:
         print(f"Welcome to the ULTIMATE calc Ver {version}!")
@@ -1533,29 +1546,8 @@ if __name__ == "__main__":
             else:
                 print("Invalid shape!Please try again.")
                 continue
- 
-
-                
-                
-
-            
-            
-
-
-                
-    
-                  
-
-        
-
-                
-                
-
-            
-
-                
         elif category == 14:
-            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Unit conversion calc","Miscellaneous calc"],2)
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc(indev)","Probability calc","Surds calc","Unit conversion calc","Miscellaneous calc"],2)
             if operation == 1:
                 operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc"],1)
                 if operation == 1:
@@ -1564,9 +1556,10 @@ if __name__ == "__main__":
                     abundance_list = []
                     while True:
                         mass = input("Enter the mass of a isotope:(type done to stop recording) ")
-                        abundance = input("Enter the abundance of the isotope(%): ")
                         if mass == "done":
                             break
+                        abundance = input("Enter the abundance of the isotope(%): ")
+                        
                         mass_list.append(float(mass))
                         abundance_list.append(float(abundance))
                     product_list = []
@@ -1752,8 +1745,121 @@ if __name__ == "__main__":
                 else:
                     print("Invalid operation!Please try again.")
                     continue
-                    
-
+            elif operation == 4:
+                operation = calc("Probability calc",["Probability of a outcome","Finding the probability of an event not happening","Relative frequency","Systematic listing of digit probabilities","Finding the total number of outcome using Product Rule","Sample space diagram generator"],2)
+                if operation == 1:
+                    print("You have selected Probability of a outcome!")
+                    favorable_outcomes = int(input("Enter the number of favorable outcomes: "))
+                    total_outcomes = int(input("Enter the total number of outcomes: "))
+                    probability = favorable_outcomes / total_outcomes
+                    print(f"The probability of the outcome is: {probability}")
+                    copy_to_keyboard(probability, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Finding the probability of an event not happening!")
+                    favorable_outcomes = int(input("Enter the number of favorable outcomes: "))
+                    total_outcomes = int(input("Enter the total number of outcomes: "))
+                    probability = 1 - (favorable_outcomes / total_outcomes)
+                    print(f"The probability of the event not happening is: {probability}")
+                    copy_to_keyboard(probability, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Relative frequency!")
+                    successful_outcomes = int(input("Enter the number of successful outcomes: "))
+                    total_trials = int(input("Enter the total number of trials: "))
+                    relative_frequency = successful_outcomes / total_trials
+                    print(f"The relative frequency is: {relative_frequency}")
+                    copy_to_keyboard(relative_frequency, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Systematic listing of digit probabilities!")
+                    digits = input("Enter the digits (e.g. 1,2,3): ")
+                    digits_list = digits.split(",")
+                    total_digits = len(digits_list)
+                    probabilities = {digit: 1 / total_digits for digit in digits_list}
+                    print(f"The probabilities are: {probabilities}")
+                    copy_to_keyboard(probabilities, copy_to_keyboard_true)
+                elif operation == 5:
+                    print("You have selected Finding the total number of outcome using Product Rule!")
+                    events = int(input("Enter the number of events: "))
+                    outcomes_per_event = []
+                    for i in range(events):
+                        outcomes = int(input(f"Enter the number of outcomes for event {i + 1}: "))
+                        outcomes_per_event.append(outcomes)
+                    total_outcomes = 1
+                    for outcomes in outcomes_per_event:
+                        total_outcomes *= outcomes
+                    print(f"The total number of outcomes is: {total_outcomes}")
+                    copy_to_keyboard(total_outcomes, copy_to_keyboard_true)
+                elif operation == 6:
+                    print("You have selected Sample space diagram generator!")
+                    events = int(input("Enter the number of events: "))
+                    outcomes_per_event = []
+                    for i in range(events):
+                        outcomes = input(f"Enter the outcomes for event {i + 1} (e.g. H,T): ")
+                        outcomes_list = outcomes.split(",")
+                        outcomes_per_event.append(outcomes_list)
+                    sample_space = [[]]
+                    for outcomes in outcomes_per_event:
+                        sample_space = [x + [y] for x in sample_space for y in outcomes]
+                    sample_space_strings = [",".join(outcome) for outcome in sample_space]
+                    print(f"The sample space is: {sample_space_strings}")
+                    copy_to_keyboard(sample_space_strings, copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif operation == 5:
+                calculation = calc("Surds calc",["Simplifying surds","Adding and subtracting surds","Multiplying and dividing surds","Multiplying out brackets including surds","Rationalising the denominator"],2)
+                if calculation == 1:
+                    print("You have selected Simplifying surds!")
+                    expression = input("Enter the surd expression (e.g. sqrt(50)): ")
+                    try:
+                        simplified_expression = simplify_surd(expression)
+                        print(f"The simplified surd is: {simplified_expression}")
+                        copy_to_keyboard(simplified_expression, copy_to_keyboard_true)
+                    except Exception as e:
+                        print(f"Error simplifying surd: {e}")
+                        continue
+                elif calculation == 2:
+                    print("You have selected Adding and subtracting surds!")
+                    expression = input("Enter the surd expression (e.g. sqrt(2) + sqrt(8) - sqrt(18)): ")
+                    try:
+                        result = sp.simplify(expression)
+                        print(f"The result of adding/subtracting the surds is: {result}")
+                        copy_to_keyboard(result, copy_to_keyboard_true)
+                    except Exception as e:
+                        print(f"Error in calculation: {e}")
+                        continue
+                elif calculation == 3:
+                    print("You have selected Multiplying and dividing surds!")
+                    expression = input("Enter the surd expression (e.g. sqrt(2) * sqrt(8) / sqrt(18)): ")
+                    try:
+                        result = sp.simplify(expression)
+                        print(f"The result of multiplying/dividing the surds is: {result}")
+                        copy_to_keyboard(result, copy_to_keyboard_true)
+                    except Exception as e:
+                        print(f"Error in calculation: {e}")
+                        continue
+                elif calculation == 4:
+                    print("You have selected Multiplying out brackets including surds!")
+                    expression = input("Enter the surd expression (e.g. (sqrt(2) + sqrt(3))(sqrt(5) - sqrt(7))): ")
+                    try:
+                        result = sp.expand(expression)
+                        print(f"The result of multiplying out the brackets is: {result}")
+                        copy_to_keyboard(result, copy_to_keyboard_true)
+                    except Exception as e:
+                        print(f"Error in calculation: {e}")
+                        continue
+                elif calculation == 5:
+                    print("You have selected Rationalising the denominator!")
+                    expression = input("Enter the surd expression (e.g. 1/sqrt(2) + 1/(sqrt(3) + sqrt(5))): ")
+                    try:
+                        result = sp.simplify(expression)
+                        print(f"The result of rationalising the denominator is: {result}")
+                        copy_to_keyboard(result, copy_to_keyboard_true)
+                    except Exception as e:
+                        print(f"Error in calculation: {e}")
+                        continue
+                else:
+                    print("Invalid calculation!Please try again.")
+                    continue
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
             print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
