@@ -1,1 +1,14 @@
+ULTIMATE CALC UPDATE 2.6:Geometry Dash Rationale in the Realm of Precision UPDATE
+Pythagoras:✅
+Similar Triangles:N/A
+Trigonometry:✅
+Be able to use Pythagoras and Trigonometry to solve 3D problems:✅
+Convert fractions, decimals & percentages:✅
+Converting recurring decimals to fractions:✅
+Understanding and calculating with ratios:✅
+Using the Unitary method to solve ratio problems:✅
+Writing and using equations for proportionality:✅
+Writing and using equations for inverse proportionality:✅
+Finding the lower and upper bounds of numbers:✅
+Calculating with lower and upper bounds:✅
 

@@ -1,8 +1,8 @@
    
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 2025-04-16
-#Version: 2.59
+#Date: 19/10/25
+#Version: 2.60
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -18,8 +18,6 @@ intrest
 trigomentry
 Standard form and more!
 '''
-#Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
-#Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 #Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 import math
 import time
@@ -116,7 +114,8 @@ def find_x_intercept(m, b):
 
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.59
+version = 2.60
+line_count = count_lines(file_path)
 lenght_units = "Line units"
 angle_units = "Angle units"
 volume_units = "Cubic units"
@@ -141,7 +140,7 @@ if __name__ == "__main__":
         3. Perimiter and Area(P:A ratio)
         4. Standard form
         5. The Basics
-        6. Ordering/Mass operations(Beta)
+        6. Ordering/Mass operations
         7. Scale factors
         8. Decimal to fraction to percentage conversions
         9. Intrest
@@ -777,7 +776,11 @@ if __name__ == "__main__":
 3. Mass addition
 4. Mass subtraction
 5. Mass multiplication
-6. Mass division""")
+6. Mass division
+7. Finding the upper and lower bounds of a rounded number
+8. Finding the upper and lower bounds of a number rounded to significant figures
+9. Finding the upper and lower bounds of a truncated number
+        """)
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Ascending order!")
@@ -870,6 +873,44 @@ if __name__ == "__main__":
                 except:
                     print("Invalid values!Please try again.")
                     continue
+            elif operation == 7:
+                print("You have selected Finding the upper and lower bounds of a rounded number!")
+                number = float(input("Enter the rounded number: "))
+                decimal_places = int(input("Enter the number of decimal places the number is rounded to(0 for whole numbers): "))
+                if decimal_places == 0:
+                    lower_bound = number - 0.5
+                    upper_bound = number + 0.5
+                else:
+                    lower_bound = number - (0.5 * (10 ** -decimal_places))
+                    upper_bound = number + (0.5 * (10 ** -decimal_places))
+                print(f"The lower bound of the number is {lower_bound} and the upper bound is {upper_bound}.")
+                copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+            elif operation == 8:
+                print("You have selected Finding the upper and lower bounds of a number rounded to significant figures!")
+                number = float(input("Enter the rounded number: "))
+                significant_figures = int(input("Enter the number of significant figures the number is rounded to: "))
+                order_of_magnitude = math.floor(math.log10(abs(number)))
+                decimal_places = significant_figures - order_of_magnitude - 1
+                if decimal_places <= 0:
+                    lower_bound = number - (5 * (10 ** (order_of_magnitude - significant_figures + 1)))
+                    upper_bound = number + (5 * (10 ** (order_of_magnitude - significant_figures + 1)))
+                else:
+                    lower_bound = number - (0.5 * (10 ** -decimal_places))
+                    upper_bound = number + (0.5 * (10 ** -decimal_places))
+                print(f"The lower bound of the number is {lower_bound} and the upper bound is {upper_bound}.")
+                copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+            elif operation == 9:
+                print("You have selected Finding the upper and lower bounds of a truncated number!")
+                number = float(input("Enter the truncated number: "))
+                decimal_places = int(input("Enter the number of decimal places the number is truncated to(0 for whole numbers): "))
+                if decimal_places == 0:
+                    lower_bound = number
+                    upper_bound = number + 1
+                else:
+                    lower_bound = number
+                    upper_bound = number + (10 ** -decimal_places)
+                print(f"The lower bound of the number is {lower_bound} and the upper bound is {upper_bound}.")
+                copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
 
             else:
                 print("Invalid operation!Please try again.")
@@ -1698,7 +1739,7 @@ if __name__ == "__main__":
                     print("Invalid operation!Please try again.")
                     continue
             elif operation == 2:
-                operation = calc("Ratio calc",["Finding all amounts in ratio","Finding total of ratio and unknwon amounts","Listing equinvant ratios"],2)
+                operation = calc("Ratio calc",["Finding all amounts in ratio","Finding total of ratio and unknwon amounts","Listing equinvant ratios","Expressing ratios in the form 1:n"],2)
                 if operation == 1:
                     print("You have selected Finding all amounts in ratio!")
                     ratio = input("Enter the ratio (e.g. 2:3): ")
@@ -1742,6 +1783,98 @@ if __name__ == "__main__":
                         equivalent_ratios.append(":".join(map(str, equivalent_ratio)))
                     print(f"The equivalent ratios are: {equivalent_ratios}")
                     copy_to_keyboard(equivalent_ratios, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Expressing ratios in the form 1:n!")
+                    ratio = input("Enter the ratio (e.g. 2:3): ")
+                    ratio_parts = ratio.split(":")
+                    ratio_parts = [int(x) for x in ratio_parts]
+                    first_part = ratio_parts[0]
+                    expressed_ratio = [part / first_part for part in ratio_parts]
+                    print(f"The ratio in the form 1:n is: {expressed_ratio}")
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
+            elif operation == 3:
+                print("You have selected Statistics calc(indev)!")
+                operation = calc("Statistics calc",["Proprtionality calc","Mean","Median","Mode","Range","Standard Deviation","Variance"],2)
+                if operation == 1:
+                    print("You have selected Proprtionality calc!")
+                    sub_operation = calc("Proportionality calc",["Direct Proportionality","Inverse Proportionality"],1)
+                    if sub_operation == 1:
+                        print("You have selected Direct Proportionality!")
+                        x1 = float(input("Enter the first value of x: "))
+                        y1 = float(input("Enter the first value of y: "))
+                        x2 = float(input("Enter the second value of x: "))
+                        y2 = (y1 * x2) / x1
+                        print(f"The second value of y is: {y2}")
+                        copy_to_keyboard(y2, copy_to_keyboard_true)
+                    elif sub_operation == 2:
+                        print("You have selected Inverse Proportionality!")
+                        x1 = float(input("Enter the first value of x: "))
+                        y1 = float(input("Enter the first value of y: "))
+                        x2 = float(input("Enter the second value of x: "))
+                        y2 = (x1 * y1) / x2
+                        print(f"The second value of y is: {y2}")
+                        copy_to_keyboard(y2, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                elif operation == 2:
+                    print("You have selected Mean!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    mean = sum(data_list) / len(data_list)
+                    print(f"The mean is: {mean}")
+                    copy_to_keyboard(mean, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Median!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    data_list.sort()
+                    n = len(data_list)
+                    if n % 2 == 0:
+                        median = (data_list[n // 2 - 1] + data_list[n // 2]) / 2
+                    else:
+                        median = data_list[n // 2]
+                    print(f"The median is: {median}")
+                    copy_to_keyboard(median, copy_to_keyboard_true)
+                elif operation == 4:
+                    print("You have selected Mode!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    frequency = {}
+                    for item in data_list:
+                        if item in frequency:
+                            frequency[item] += 1
+                        else:
+                            frequency[item] = 1
+                    mode = max(frequency, key=frequency.get)
+                    print(f"The mode is: {mode}")
+                    copy_to_keyboard(mode, copy_to_keyboard_true)
+                elif operation == 5:
+                    print("You have selected Range!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    data_range = max(data_list) - min(data_list)
+                    print(f"The range is: {data_range}")
+                    copy_to_keyboard(data_range, copy_to_keyboard_true)
+                elif operation == 6:
+                    print("You have selected Standard Deviation!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    mean = sum(data_list) / len(data_list)
+                    variance = sum((x - mean) ** 2 for x in data_list) / len(data_list)
+                    standard_deviation = math.sqrt(variance)
+                    print(f"The standard deviation is: {standard_deviation}")
+                    copy_to_keyboard(standard_deviation, copy_to_keyboard_true)
+                elif operation == 7:
+                    print("You have selected Variance!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    mean = sum(data_list) / len(data_list)
+                    variance = sum((x - mean) ** 2 for x in data_list) / len(data_list)
+                    print(f"The variance is: {variance}")
+                    copy_to_keyboard(variance, copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue
@@ -1862,13 +1995,13 @@ if __name__ == "__main__":
                     continue
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
-            print("ULTIMATE CALC™(Version 1.53) is a trademark of M0bile132022.")
+            print(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.")
             print("© 2025 M0bile132022. All rights reserved.")
             print("This program is protected by the GNU General Public License v3.0.")
             print("This program is provided as is with no warranty.")
             print("For more information, visit https://www.ultimatecalc.com.")
             print("Other statstics:")
-            print(f"Lines of code: {count_lines(file_path)}")
+            print(f"Lines of code: {line_count}")
             print(f"Size:{file_size} bytes")
             print(f"Version: {version}")
             print(f"File path: {file_path}")
