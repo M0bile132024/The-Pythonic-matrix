@@ -1,8 +1,7 @@
-   
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 19/10/25
-#Version: 2.60
+#Date: 07/12/25
+#Version: 2.65
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -78,6 +77,33 @@ def calc(name,options,operation_or_calc):
         print(f"{i}. {option}")
     operation = int(input("Enter the number of the operation you want to perform: "))
     return operation
+def convert_units(value, from_unit, to_unit):
+    """Converts a value from one unit to another."""
+    units = {
+        'm': 1,
+        'cm': 0.01,
+        'mm': 0.001,
+        'km': 1000,
+        'in': 0.0254,
+        'ft': 0.3048,
+        'yd': 0.9144,
+        'mi': 1609.34
+    }
+    if from_unit not in units or to_unit not in units:
+        raise ValueError("Unsupported unit")
+    value_in_meters = value * units[from_unit]
+    converted_value = value_in_meters / units[to_unit]
+    return converted_value
+def rotate_point_2d(x, y, angle, clockwise, center_x, center_y):
+    angle_rad = math.radians(angle)
+    if clockwise:
+        angle_rad = -angle_rad
+    translated_x = x - center_x
+    translated_y = y - center_y
+    rotated_x = translated_x * math.cos(angle_rad) - translated_y * math.sin(angle_rad)
+    rotated_y = translated_x * math.sin(angle_rad) + translated_y * math.cos(angle_rad)
+    return rotated_x + center_x, rotated_y + center_y    
+
 #3rd party subroutines
 #yzfargo/yu https://github.com/yzfargo/yu
 def calculate_displacement(initial_velocity, acceleration, time):
@@ -98,7 +124,7 @@ def simplify_surd(expression):
     """Simplifies a surd expression."""
     simplified = sp.simplify(sp.sqrt(sp.sympify(expression)))
     return simplified
-       
+
 
 
 # Example usage
@@ -114,7 +140,7 @@ def find_x_intercept(m, b):
 
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.60
+version = 2.65
 line_count = count_lines(file_path)
 lenght_units = "Line units"
 angle_units = "Angle units"
@@ -780,6 +806,7 @@ if __name__ == "__main__":
 7. Finding the upper and lower bounds of a rounded number
 8. Finding the upper and lower bounds of a number rounded to significant figures
 9. Finding the upper and lower bounds of a truncated number
+10. Lower and upper bounds calcuator
         """)
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
@@ -911,6 +938,78 @@ if __name__ == "__main__":
                     upper_bound = number + (10 ** -decimal_places)
                 print(f"The lower bound of the number is {lower_bound} and the upper bound is {upper_bound}.")
                 copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+            elif operation == 10:
+                calcuation = calc("Lower and upper bounds calcuator",["Addition","Subtraction","Multiplication","Division","Exponents","Rooting"],2)
+                if calcuation == 1:
+                    print("You have selected Addition!")
+                    lower1 = float(input("Enter the lower bound of the first number: "))
+                    upper1 = float(input("Enter the upper bound of the first number: "))
+                    lower2 = float(input("Enter the lower bound of the second number: "))
+                    upper2 = float(input("Enter the upper bound of the second number: "))
+                    lower_bound = lower1 + lower2
+                    upper_bound = upper1 + upper2
+                    print(f"The lower bound of the result is {lower_bound} and the upper bound is {upper_bound}.")
+                    copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+                elif calcuation == 2:
+                    print("You have selected Subtraction!")
+                    lower1 = float(input("Enter the lower bound of the first number: "))
+                    upper1 = float(input("Enter the upper bound of the first number: "))
+                    lower2 = float(input("Enter the lower bound of the second number: "))
+                    upper2 = float(input("Enter the upper bound of the second number: "))
+                    lower_bound = lower1 - upper2
+                    upper_bound = upper1 - lower2
+                    print(f"The lower bound of the result is {lower_bound} and the upper bound is {upper_bound}.")
+                    copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+                elif calcuation == 3:
+                    print("You have selected Multiplication!")
+                    lower1 = float(input("Enter the lower bound of the first number: "))
+                    upper1 = float(input("Enter the upper bound of the first number: "))
+                    lower2 = float(input("Enter the lower bound of the second number: "))
+                    upper2 = float(input("Enter the upper bound of the second number: "))
+                    products = [lower1 * lower2, lower1 * upper2, upper1 * lower2, upper1 * upper2]
+                    lower_bound = min(products)
+                    upper_bound = max(products)
+                    print(f"The lower bound of the result is {lower_bound} and the upper bound is {upper_bound}.")
+                    copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+                elif calcuation == 4:
+                    print("You have selected Division!")
+                    lower1 = float(input("Enter the lower bound of the first number: "))
+                    upper1 = float(input("Enter the upper bound of the first number: "))
+                    lower2 = float(input("Enter the lower bound of the second number: "))
+                    upper2 = float(input("Enter the upper bound of the second number: "))
+                    if lower2 <= 0 and upper2 >= 0:
+                        print("Error: Division by zero is not allowed.")
+                        continue
+                    quotients = [lower1 / lower2, lower1 / upper2, upper1 / lower2, upper1 / upper2]
+                    lower_bound = min(quotients)
+                    upper_bound = max(quotients)
+                    print(f"The lower bound of the result is {lower_bound} and the upper bound is {upper_bound}.")
+                    copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+                elif calcuation == 5:
+                    print("You have selected Exponents!")
+                    lower = float(input("Enter the lower bound of the base number: "))
+                    upper = float(input("Enter the upper bound of the base number: "))
+                    lower_exponent = float(input("Enter the lower bound of the exponent: "))
+                    upper_exponent = float(input("Enter the upper bound of the exponent: "))
+                    powers = [lower ** lower_exponent, upper ** lower_exponent, lower ** upper_exponent, upper ** upper_exponent]
+                    lower_bound = min(powers)
+                    upper_bound = max(powers)
+                    print(f"The lower bound of the result is {lower_bound} and the upper bound is {upper_bound}.")
+                    copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+                elif calcuation == 6:
+                    print("You have selected Rooting!")
+                    lower = float(input("Enter the lower bound of the number: "))
+                    upper = float(input("Enter the upper bound of the number: "))
+                    lower_root = float(input("Enter the lower bound of the root: "))
+                    upper_root = float(input("Enter the upper bound of the root: "))
+                    roots = [lower ** (1 / lower_root), upper ** (1 / lower_root), lower ** (1 / upper_root), upper ** (1 / upper_root)]
+                    lower_bound = min(roots)
+                    upper_bound = max(roots)
+                    print(f"The lower bound of the result is {lower_bound} and the upper bound is {upper_bound}.")
+                    copy_to_keyboard(f"{lower_bound},{upper_bound}", copy_to_keyboard_true)
+                else:
+                    print("Invalid operation!Please try again.")
+                    continue
 
             else:
                 print("Invalid operation!Please try again.")
@@ -1588,7 +1687,7 @@ if __name__ == "__main__":
                 print("Invalid shape!Please try again.")
                 continue
         elif category == 14:
-            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc(indev)","Probability calc","Surds calc","Unit conversion calc","Miscellaneous calc"],2)
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc(indev)","Probability calc","Surds calc","Unit conversion calc","Coordinates/Transformation calc","Miscellaneous calc"],2)
             if operation == 1:
                 operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc"],1)
                 if operation == 1:
@@ -1796,7 +1895,7 @@ if __name__ == "__main__":
                     continue
             elif operation == 3:
                 print("You have selected Statistics calc(indev)!")
-                operation = calc("Statistics calc",["Proprtionality calc","Mean","Median","Mode","Range","Standard Deviation","Variance"],2)
+                operation = calc("Statistics calc",["Proprtionality calc","Mean","Median","Mode","Range","Standard Deviation","Variance","Calcuating averages from grouped data","Calcuating moving averages","Calcuating averages from cumulative data"],2)
                 if operation == 1:
                     print("You have selected Proprtionality calc!")
                     sub_operation = calc("Proportionality calc",["Direct Proportionality","Inverse Proportionality"],1)
@@ -1875,6 +1974,111 @@ if __name__ == "__main__":
                     variance = sum((x - mean) ** 2 for x in data_list) / len(data_list)
                     print(f"The variance is: {variance}")
                     copy_to_keyboard(variance, copy_to_keyboard_true)
+                elif operation == 8:
+                    calculation = calc("Calcuating averages from grouped data",["Mean from grouped data","Median from grouped data","Mode from grouped data"],2)
+                    if calculation == 1:
+                        print("You have selected Mean from grouped data!")
+                        class_intervals = input("Enter the class intervals separated by commas (e.g. 0-10,10-20): ")
+                        frequencies = input("Enter the frequencies separated by commas (e.g. 5,10): ")
+                        class_intervals_list = class_intervals.split(",")
+                        frequencies_list = [int(x) for x in frequencies.split(",")]
+                        midpoints = []
+                        for interval in class_intervals_list:
+                            lower, upper = map(int, interval.split("-"))
+                            midpoint = (lower + upper) / 2
+                            midpoints.append(midpoint)
+                        total_frequency = sum(frequencies_list)
+                        mean = sum(midpoints[i] * frequencies_list[i] for i in range(len(midpoints))) / total_frequency
+                        print(f"The mean from grouped data is: {mean}")
+                        copy_to_keyboard(mean, copy_to_keyboard_true)
+                    elif calculation == 2:
+                        print("You have selected Median from grouped data!")
+                        class_intervals = input("Enter the class intervals separated by commas (e.g. 0-10,10-20): ")
+                        frequencies = input("Enter the frequencies separated by commas (e.g. 5,10): ")
+                        class_intervals_list = class_intervals.split(",")
+                        frequencies_list = [int(x) for x in frequencies.split(",")]
+                        total_frequency = sum(frequencies_list)
+                        cumulative_frequencies = []
+                        cumulative_sum = 0
+                        for freq in frequencies_list:
+                            cumulative_sum += freq
+                            cumulative_frequencies.append(cumulative_sum)
+                        median_class_index = next(i for i, cum_freq in enumerate(cumulative_frequencies) if cum_freq >= total_frequency / 2)
+                        lower, upper = map(int, class_intervals_list[median_class_index].split("-"))
+                        median_class_frequency = frequencies_list[median_class_index]
+                        cumulative_frequency_before_median_class = cumulative_frequencies[median_class_index - 1] if median_class_index > 0 else 0
+                        median = lower + ((total_frequency / 2 - cumulative_frequency_before_median_class) / median_class_frequency) * (upper - lower)
+                        print(f"The median from grouped data is: {median}")
+                        copy_to_keyboard(median, copy_to_keyboard_true)
+                    elif calculation == 3:
+                        print("You have selected Mode from grouped data!")
+                        class_intervals = input("Enter the class intervals separated by commas (e.g. 0-10,10-20): ")
+                        frequencies = input("Enter the frequencies separated by commas (e.g. 5,10): ")
+                        class_intervals_list = class_intervals.split(",")
+                        frequencies_list = [int(x) for x in frequencies.split(",")]
+                        modal_class_index = frequencies_list.index(max(frequencies_list))
+                        lower, upper = map(int, class_intervals_list[modal_class_index].split("-"))
+                        modal_class_frequency = frequencies_list[modal_class_index]
+                        frequency_before_modal_class = frequencies_list[modal_class_index - 1] if modal_class_index > 0 else 0
+                        frequency_after_modal_class = frequencies_list[modal_class_index + 1] if modal_class_index < len(frequencies_list) - 1 else 0
+                        mode = lower + ((modal_class_frequency - frequency_before_modal_class) / ((modal_class_frequency - frequency_before_modal_class) + (modal_class_frequency - frequency_after_modal_class))) * (upper - lower)
+                        print(f"The mode from grouped data is: {mode}")
+                        copy_to_keyboard(mode, copy_to_keyboard_true)
+                    else:
+                        print("Invalid calculation!Please try again.")
+                        continue
+                elif operation == 9:
+                    print("You have selected Calcuating moving averages!")
+                    data = input("Enter the data set separated by commas: ")
+                    data_list = [float(x) for x in data.split(",")]
+                    n = int(input("Enter the number of periods for moving average: "))
+                    moving_averages = []
+                    for i in range(len(data_list) - n + 1):
+                        moving_average = sum(data_list[i:i + n]) / n
+                        moving_averages.append(moving_average)
+                    print(f"The moving averages are: {moving_averages}")
+                    copy_to_keyboard(moving_averages, copy_to_keyboard_true)
+                elif operation == 10:
+                    calculation = calc("Calcuating averages from cumulative data",["Lower quartile from cumulative data","Median quartile from cumulative data","Upper quartile from cumulative data","Interquartile range"],2)
+                    if calculation == 1:
+                        print("You have selected Lower quartile from cumulative data!")
+                        data = input("Enter the cumulative data set separated by commas: ")
+                        data_list = [float(x) for x in data.split(",")]
+                        n = len(data_list)
+                        lower_quartile_position = (n + 1) / 4
+                        lower_quartile = data_list[int(lower_quartile_position) - 1]
+                        print(f"The lower quartile is: {lower_quartile}")
+                        copy_to_keyboard(lower_quartile, copy_to_keyboard_true)
+                    elif calculation == 2:
+                        print("You have selected Median quartile from cumulative data!")
+                        data = input("Enter the cumulative data set separated by commas: ")
+                        data_list = [float(x) for x in data.split(",")]
+                        n = len(data_list)
+                        median_quartile_position = (n + 1) / 2
+                        median_quartile = data_list[int(median_quartile_position) - 1]
+                        print(f"The median quartile is: {median_quartile}")
+                        copy_to_keyboard(median_quartile, copy_to_keyboard_true)
+                    elif calculation == 3:
+                        print("You have selected Upper quartile from cumulative data!")
+                        data = input("Enter the cumulative data set separated by commas: ")
+                        data_list = [float(x) for x in data.split(",")]
+                        n = len(data_list)
+                        upper_quartile_position = 3 * (n + 1) / 4
+                        upper_quartile = data_list[int(upper_quartile_position) - 1]
+                        print(f"The upper quartile is: {upper_quartile}")
+                        copy_to_keyboard(upper_quartile, copy_to_keyboard_true)
+                    elif calculation == 4:
+                        print("You have selected Interquartile range!")
+                        data = input("Enter the cumulative data set separated by commas: ")
+                        data_list = [float(x) for x in data.split(",")]
+                        n = len(data_list)
+                        lower_quartile_position = (n + 1) / 4
+                        upper_quartile_position = 3 * (n + 1) / 4
+                        lower_quartile = data_list[int(lower_quartile_position) - 1]
+                        upper_quartile = data_list[int(upper_quartile_position) - 1]
+                        interquartile_range = upper_quartile - lower_quartile
+                        print(f"The interquartile range is: {interquartile_range}")
+                        copy_to_keyboard(interquartile_range, copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue
@@ -1993,6 +2197,123 @@ if __name__ == "__main__":
                 else:
                     print("Invalid calculation!Please try again.")
                     continue
+            elif operation == 6:
+                print("You have selected Unit conversion calc!")
+                value = float(input("Enter the value to convert: "))
+                from_unit = input("Enter the unit to convert from (e.g. m, cm, km): ")
+                to_unit = input("Enter the unit to convert to (e.g. m, cm, km): ")
+                try:
+                    converted_value = convert_units(value, from_unit, to_unit)
+                    print(f"The converted value is: {converted_value} {to_unit}")
+                    copy_to_keyboard(converted_value, copy_to_keyboard_true)
+                except Exception as e:
+                    print(f"Error in unit conversion: {e}")
+                    continue
+            elif operation == 7:
+                calculation = calc("Coordinates/Transformation calc",["2D Coordinate transformation","3D Coordinate transformation","Distance between two points in 3D","Midpoint between two points in 3D"],2)
+                if calculation == 1:
+                    calculation = calc("2D Coordinate transformation",["Translation","Rotation","Reflection","Enlargement"],1)
+                    if calculation == 1:
+                        print("You have selected Translation!")
+                        x = float(input("Enter the x-coordinate of the point: "))
+                        y = float(input("Enter the y-coordinate of the point: "))
+                        tx = float(input("Enter the translation in x-direction: "))
+                        ty = float(input("Enter the translation in y-direction: "))
+                        new_x = x + tx
+                        new_y = y + ty
+                        print(f"The new coordinates after translation are: ({new_x}, {new_y})")
+                        copy_to_keyboard((new_x, new_y), copy_to_keyboard_true)
+                    elif calculation == 2:
+                        print("You have selected Rotation!")
+                        x = float(input("Enter the x-coordinate of the point: "))
+                        y = float(input("Enter the y-coordinate of the point: "))
+                        angle = float(input("Enter the angle of rotation (degrees): "))
+                        clockwise = input("Is the rotation clockwise? (yes/no): ").lower() == "yes"
+                        center_x = float(input("Enter the x-coordinate of the center of rotation: "))
+                        center_y = float(input("Enter the y-coordinate of the center of rotation: "))
+                        new_x, new_y = rotate_point_2d(x, y, angle, clockwise, center_x, center_y)
+                        print(f"The new coordinates after rotation are: ({new_x}, {new_y})")
+                        copy_to_keyboard((new_x, new_y), copy_to_keyboard_true)
+                    elif calculation == 3:
+                        print("You have selected Reflection!")
+                        x = float(input("Enter the x-coordinate of the point: "))
+                        y = float(input("Enter the y-coordinate of the point: "))
+                        axis = input("Enter the line of reflection (x=0, y=0, y=x, y=-x): ")
+                        def reflect_point_2d(x, y, axis):
+                            if axis[0] == "x":
+                                return (x, 2 * axis[1] - y)
+                            elif axis[0] == "y":
+                                return (2 * axis[1] - x, y)
+                            elif axis[0] == "y=x":
+                                return (y, x)
+                            elif axis[0] == "y=-x":
+                                return (-y, -x)
+                            else:
+                                raise ValueError("Invalid line of reflection")
+                        new_x, new_y = reflect_point_2d(x, y, axis)
+                        print(f"The new coordinates after reflection are: ({new_x}, {new_y})")
+                        copy_to_keyboard((new_x, new_y), copy_to_keyboard_true)
+                    elif calculation == 4:
+                        print("You have selected Enlargement!")
+                        x = float(input("Enter the x-coordinate of the point: "))
+                        y = float(input("Enter the y-coordinate of the point: "))
+                        scale_factor = float(input("Enter the scale factor: "))
+                        center_x = float(input("Enter the x-coordinate of the center of enlargement: "))
+                        center_y = float(input("Enter the y-coordinate of the center of enlargement: "))
+                        new_x = center_x + scale_factor * (x - center_x)
+                        new_y = center_y + scale_factor * (y - center_y)
+                        print(f"The new coordinates after enlargement are: ({new_x}, {new_y})")
+                        copy_to_keyboard((new_x, new_y), copy_to_keyboard_true)
+                    else:
+                        print("Invalid calculation!Please try again.")
+                        continue
+                elif calculation == 2:
+                    calculation = calc("3D Coordinate transformation",["Translation"],1)
+                    if calculation == 1:
+                        print("You have selected Translation!")
+                        x = float(input("Enter the x-coordinate of the point: "))
+                        y = float(input("Enter the y-coordinate of the point: "))
+                        z = float(input("Enter the z-coordinate of the point: "))
+                        tx = float(input("Enter the translation in x-direction: "))
+                        ty = float(input("Enter the translation in y-direction: "))
+                        tz = float(input("Enter the translation in z-direction: "))
+                        new_x = x + tx
+                        new_y = y + ty
+                        new_z = z + tz
+                        print(f"The new coordinates after translation are: ({new_x}, {new_y}, {new_z})")
+                        copy_to_keyboard((new_x, new_y, new_z), copy_to_keyboard_true)
+                    else:
+                        print("Invalid calculation!Please try again.")
+                        continue
+                elif calculation == 3:
+                    print("You have selected Distance between two points in 3D!")
+                    x1 = float(input("Enter the x-coordinate of the first point: "))
+                    y1 = float(input("Enter the y-coordinate of the first point: "))
+                    z1 = float(input("Enter the z-coordinate of the first point: "))
+                    x2 = float(input("Enter the x-coordinate of the second point: "))
+                    y2 = float(input("Enter the y-coordinate of the second point: "))
+                    z2 = float(input("Enter the z-coordinate of the second point: "))
+                    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
+                    print(f"The distance between the two points is: {distance} {lenght_units}")
+                    copy_to_keyboard(distance, copy_to_keyboard_true)
+                elif calculation == 4:
+                    print("You have selected Midpoint between two points in 3D!")
+                    x1 = float(input("Enter the x-coordinate of the first point: "))
+                    y1 = float(input("Enter the y-coordinate of the first point: "))
+                    z1 = float(input("Enter the z-coordinate of the first point: "))
+                    x2 = float(input("Enter the x-coordinate of the second point: "))
+                    y2 = float(input("Enter the y-coordinate of the second point: "))
+                    z2 = float(input("Enter the z-coordinate of the second point: "))
+                    midpoint_x = (x1 + x2) / 2
+                    midpoint_y = (y1 + y2) / 2
+                    midpoint_z = (z1 + z2) / 2
+                    print(f"The midpoint between the two points is: ({midpoint_x}, {midpoint_y}, {midpoint_z})")
+                    copy_to_keyboard((midpoint_x, midpoint_y, midpoint_z), copy_to_keyboard_true)
+
+                   
+            elif operation == 8:
+                print("You have selected Miscellaneous calc!")
+                print("This section is under development. Please check back later for more features.")
         elif category == 15:
             print("Legal Info on ULTIMATE CALC™")
             print(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.")

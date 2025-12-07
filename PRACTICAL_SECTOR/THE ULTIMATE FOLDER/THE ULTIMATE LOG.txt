@@ -1,14 +1,22 @@
-ULTIMATE CALC UPDATE 2.6:Geometry Dash Rationale in the Realm of Precision UPDATE
-Pythagoras:✅
-Similar Triangles:N/A
-Trigonometry:✅
-Be able to use Pythagoras and Trigonometry to solve 3D problems:✅
-Convert fractions, decimals & percentages:✅
-Converting recurring decimals to fractions:✅
-Understanding and calculating with ratios:✅
-Using the Unitary method to solve ratio problems:✅
-Writing and using equations for proportionality:✅
-Writing and using equations for inverse proportionality:✅
-Finding the lower and upper bounds of numbers:✅
-Calculating with lower and upper bounds:✅
+UPDATE 2.65
+Topics:
+Writing and using equations for proportionality and indirect proportionality✅
+Finding and calculating with lower and upper bounds✅
+Transformations; reflection, rotation, translation✅
+Transformations; enlargement✅
+Calculating averages from a (grouped) frequency table✅
+Calculating moving averages✅
+Constructing cumulative frequency tables and graphs✅
+Calculating the median and interquartile range (6)
+Video 50 - 52
+Constructing box and whisker plots (6)
+Video 149 - 150
+Drawing scatter graphs and identifying types of correlation (4)
+Video 165 - 166
+Drawing and interpreting distance time & velocity time (6/7)
+Video 171
+Calculate lengths of arcs & areas of sectors (6)
+Video 58, 63
+Calculate volume & surface area of prisms (4/5)
+Video 355 - 358
 
