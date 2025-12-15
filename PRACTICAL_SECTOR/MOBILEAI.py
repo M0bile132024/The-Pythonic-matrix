@@ -1,5 +1,5 @@
 #MOBILE.AI
-#Ver 1
+#Ver 1.5
 #Author:M0bile132022
 #A test project using machine learning(kind of)
 import matplotlib.pyplot as plt
@@ -133,11 +133,48 @@ def line_plotting_perceptron(nump,lr=0.01,gradient=2, intercept=3,bias=2,iterati
     print("The perceptron is trained to classify the points above and below the line.")
     print("The perceptron is trained using the backpropagation algorithm.")
     print("The perceptron is trained using a simple weight update rule.")
+    print(f"The perceptron made {errors} errors out of {num_points} points.")
+class Trainer:
+    def __init__(self, xArray, yArray):
+        self.xArr = xArray
+        self.yArr = yArray
+        self.points = len(self.xArr)
+        self.learnc = 0.00001
+        self.weight = 0
+        self.bias = 1
+        self.cost = None
+
+    # Cost Function
+    def costError(self):
+        total = 0
+        for i in range(self.points):
+            total += (self.yArr[i] - (self.weight * self.xArr[i] + self.bias)) ** 2
+        return total / self.points
+
+    # Train Function
+    def train(self, iter):
+        for _ in range(iter):
+            self.updateWeights()
+        self.cost = self.costError()
+
+    # Update Weights Function
+    def updateWeights(self):
+        w_deriv = 0
+        b_deriv = 0
+        for i in range(self.points):
+            wx = self.yArr[i] - (self.weight * self.xArr[i] + self.bias)
+            w_deriv += -2 * wx * self.xArr[i]
+            b_deriv += -2 * wx
+        self.weight -= (w_deriv / self.points) * self.learnc
+        self.bias -= (b_deriv / self.points) * self.learnc
+
+
 #Main VVVVVVVV
 print("Welcome to the Mobile AI")
 print("Please choose a test to perform:")
 print("""1:Concert Perceptron
-2:Line Plotting Preceptron""")
+2:Line Plotting Preceptron
+3:Exit""")
 match input("Please input the number of the test you wish to perform:"):
     case "1":
         concert_perceptron()
@@ -170,6 +207,8 @@ match input("Please input the number of the test you wish to perform:"):
             iterations = int(iterations)
         print("Generating points...")
         line_plotting_perceptron(nump,lr,gradient,intercept,bias,iterations)
+    case "3":
+        print("Exiting Mobile AI...")
     case _:
         print("Invalid input")
         exit()  

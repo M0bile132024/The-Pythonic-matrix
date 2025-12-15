@@ -12,7 +12,7 @@ Interpreting distance time & velocity time compound meausures✅
 Calculate lengths of arcs & areas of sectors✅
 Calculate volume & surface area of prisms✅
 ---
-MOBILEAI (UPDATE 2):
+MOBILEAI (UPDATE 1.5:Trainers):
 Constructing cumulative frequency tables and graphs
 Constructing box and whisker plots
 Drawing scatter/correlation graphs✅
