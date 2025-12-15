@@ -1,4 +1,4 @@
-UPDATE 2.65
+UPDATE 2.7: THE OTHERS CATEGORY(OC) AWAKENING
 Topics:
 Writing and using equations for proportionality and indirect proportionality✅
 Finding and calculating with lower and upper bounds✅
@@ -6,17 +6,13 @@ Transformations; reflection, rotation, translation✅
 Transformations; enlargement✅
 Calculating averages from a (grouped) frequency table✅
 Calculating moving averages✅
-Constructing cumulative frequency tables and graphs✅
-Calculating the median and interquartile range (6)
-Video 50 - 52
-Constructing box and whisker plots (6)
-Video 149 - 150
-Drawing scatter graphs and identifying types of correlation (4)
-Video 165 - 166
-Drawing and interpreting distance time & velocity time (6/7)
-Video 171
-Calculate lengths of arcs & areas of sectors (6)
-Video 58, 63
-Calculate volume & surface area of prisms (4/5)
-Video 355 - 358
-
+Calculating the median and interquartile range✅
+identifying types of correlation
+Interpreting distance time & velocity time compound meausures✅
+Calculate lengths of arcs & areas of sectors✅
+Calculate volume & surface area of prisms✅
+---
+MOBILEAI (UPDATE 2):
+Constructing cumulative frequency tables and graphs
+Constructing box and whisker plots
+Drawing scatter/correlation graphs✅

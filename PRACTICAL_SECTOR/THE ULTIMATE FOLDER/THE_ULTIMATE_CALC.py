@@ -1,7 +1,7 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 07/12/25
-#Version: 2.65
+#Date: 15/12/25
+#Version: 2.7
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
@@ -77,23 +77,6 @@ def calc(name,options,operation_or_calc):
         print(f"{i}. {option}")
     operation = int(input("Enter the number of the operation you want to perform: "))
     return operation
-def convert_units(value, from_unit, to_unit):
-    """Converts a value from one unit to another."""
-    units = {
-        'm': 1,
-        'cm': 0.01,
-        'mm': 0.001,
-        'km': 1000,
-        'in': 0.0254,
-        'ft': 0.3048,
-        'yd': 0.9144,
-        'mi': 1609.34
-    }
-    if from_unit not in units or to_unit not in units:
-        raise ValueError("Unsupported unit")
-    value_in_meters = value * units[from_unit]
-    converted_value = value_in_meters / units[to_unit]
-    return converted_value
 def rotate_point_2d(x, y, angle, clockwise, center_x, center_y):
     angle_rad = math.radians(angle)
     if clockwise:
@@ -130,17 +113,34 @@ def simplify_surd(expression):
 # Example usage
 #print(reciprocal(5))  # Output: 0.2
 
-#Alt functions
+#Alt/Unused functions
 def find_x_intercept(m, b):
     if m == 0:
         print("The slope (m) cannot be zero for a valid x-intercept.")
         return None
     x_intercept = -b / m
     return x_intercept
+def convert_units(value, from_unit, to_unit):
+    """Converts a value from one unit to another."""
+    units = {
+        'm': 1,
+        'cm': 0.01,
+        'mm': 0.001,
+        'km': 1000,
+        'in': 0.0254,
+        'ft': 0.3048,
+        'yd': 0.9144,
+        'mi': 1609.34
+    }
+    if from_unit not in units or to_unit not in units:
+        raise ValueError("Unsupported unit")
+    value_in_meters = value * units[from_unit]
+    converted_value = value_in_meters / units[to_unit]
+    return converted_value
 
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.65
+version = 2.7
 line_count = count_lines(file_path)
 lenght_units = "Line units"
 angle_units = "Angle units"
@@ -148,6 +148,10 @@ volume_units = "Cubic units"
 area_units = "Area units"
 money_units = "Money units"
 time_units = "Time units"
+speed_units = "Speed units"
+mass_units = "Mass units"
+pressure_units = "Pressure units"
+force_units = "Force units"
 try:
     copy_to_keyboard_true = True
     copy_to_keyboard("Test",copy_to_keyboard_true)
@@ -174,7 +178,7 @@ if __name__ == "__main__":
         11. Lines
         12. Equations(beta)
         13. Circles/Spheres
-        14. Others(coming soon)
+        14. Others
         15. Legal/Other Info on ULTIMATE CALC™
         16. Settings
         More functions are coming soon!!!!!""")
@@ -1687,7 +1691,7 @@ if __name__ == "__main__":
                 print("Invalid shape!Please try again.")
                 continue
         elif category == 14:
-            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc(indev)","Probability calc","Surds calc","Unit conversion calc","Coordinates/Transformation calc","Miscellaneous calc"],2)
+            operation = calc("Others",["Chemistry/Physics calc","Ratio calc","Statistics calc","Probability calc","Surds calc","Compound meausures calc","Coordinates/Transformation calc","Miscellaneous calc(Coming soon...)"],2)
             if operation == 1:
                 operation = calc("Chemistry/Physics calc",["Relative mass calc","Atomic weight using relative mass calc","Moles calc","Thermodynamics calc","Electrochemistry calc","SVT calc"],1)
                 if operation == 1:
@@ -1895,7 +1899,7 @@ if __name__ == "__main__":
                     continue
             elif operation == 3:
                 print("You have selected Statistics calc(indev)!")
-                operation = calc("Statistics calc",["Proprtionality calc","Mean","Median","Mode","Range","Standard Deviation","Variance","Calcuating averages from grouped data","Calcuating moving averages","Calcuating averages from cumulative data"],2)
+                operation = calc("Statistics calc",["Proprtionality calc","Mean","Median","Mode","Range","Standard Deviation","Variance","Calcuating averages from grouped data","Calcuating moving averages","Calcuating averages from cumulative data","Identifiying correlation between one or multiple points"],2)
                 if operation == 1:
                     print("You have selected Proprtionality calc!")
                     sub_operation = calc("Proportionality calc",["Direct Proportionality","Inverse Proportionality"],1)
@@ -2079,6 +2083,29 @@ if __name__ == "__main__":
                         interquartile_range = upper_quartile - lower_quartile
                         print(f"The interquartile range is: {interquartile_range}")
                         copy_to_keyboard(interquartile_range, copy_to_keyboard_true)
+                elif operation == 11:
+                    print("You have selected Identifiying correlation between one or multiple points!")
+                    data_x = input("Enter the x data set separated by commas: ")
+                    data_y = input("Enter the y data set separated by commas: ")
+                    data_x_list = [float(x) for x in data_x.split(",")]
+                    data_y_list = [float(y) for y in data_y.split(",")]
+                    if len(data_x_list) != len(data_y_list):
+                        print("Error: The lengths of the x and y data sets must be the same.")
+                        continue
+                    n = len(data_x_list)
+                    sum_x = sum(data_x_list)
+                    sum_y = sum(data_y_list)
+                    sum_xy = sum(data_x_list[i] * data_y_list[i] for i in range(n))
+                    sum_x_squared = sum(x ** 2 for x in data_x_list)
+                    sum_y_squared = sum(y ** 2 for y in data_y_list)
+                    numerator = n * sum_xy - sum_x * sum_y
+                    denominator = math.sqrt((n * sum_x_squared - sum_x ** 2) * (n * sum_y_squared - sum_y ** 2))
+                    if denominator == 0:
+                        print("Error: Denominator is zero, cannot calculate correlation.")
+                        continue
+                    correlation_coefficient = numerator / denominator
+                    print(f"The correlation coefficient is: {correlation_coefficient}")
+                    copy_to_keyboard(correlation_coefficient, copy_to_keyboard_true)
                 else:
                     print("Invalid operation!Please try again.")
                     continue
@@ -2197,18 +2224,156 @@ if __name__ == "__main__":
                 else:
                     print("Invalid calculation!Please try again.")
                     continue
+            #elif operation == 6:
+            #    print("You have selected Unit conversion calc!")
+            #    value = float(input("Enter the value to convert: "))
+            #    from_unit = input("Enter the unit to convert from (e.g. m, cm, km): ")
+            #    to_unit = input("Enter the unit to convert to (e.g. m, cm, km): ")
+            #    try:
+            #        converted_value = convert_units(value, from_unit, to_unit)
+            #        print(f"The converted value is: {converted_value} {to_unit}")
+            #        copy_to_keyboard(converted_value, copy_to_keyboard_true)
+            #    except Exception as e:
+            #        print(f"Error in unit conversion: {e}")
+            #        continue
+            # Temporarily disabling Unit conversion calc due to incomplete implementation
             elif operation == 6:
-                print("You have selected Unit conversion calc!")
-                value = float(input("Enter the value to convert: "))
-                from_unit = input("Enter the unit to convert from (e.g. m, cm, km): ")
-                to_unit = input("Enter the unit to convert to (e.g. m, cm, km): ")
-                try:
-                    converted_value = convert_units(value, from_unit, to_unit)
-                    print(f"The converted value is: {converted_value} {to_unit}")
-                    copy_to_keyboard(converted_value, copy_to_keyboard_true)
-                except Exception as e:
-                    print(f"Error in unit conversion: {e}")
+                calculation = calc("Compound meausures calc",["Speed calc","Density calc","Pressure calc","Work done calc","Power calc"],2)
+                if calculation == 1:
+                    operation = calc("Speed calc",["Calculate speed","Calculate distance","Calculate time"],1)
+                    if operation == 1:
+                        print("You have selected Calculate speed!")
+                        distance = float(input("Enter the distance: "))
+                        time = float(input("Enter the time: "))
+                        speed = distance / time
+                        print(f"The speed is: {speed} {speed_units}")
+                        copy_to_keyboard(speed, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calculate distance!")
+                        speed = float(input("Enter the speed: "))
+                        time = float(input("Enter the time: "))
+                        distance = speed * time
+                        print(f"The distance is: {distance} {lenght_units}")
+                        copy_to_keyboard(distance, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calculate time!")
+                        distance = float(input("Enter the distance: "))
+                        speed = float(input("Enter the speed: "))
+                        time = distance / speed
+                        print(f"The time is: {time} seconds")
+                        copy_to_keyboard(time, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                elif calculation == 2:
+                    operation = calc("Density calc",["Calculate density","Calculate mass","Calculate volume"],1)
+                    if operation == 1:
+                        print("You have selected Calculate density!")
+                        mass = float(input("Enter the mass: "))
+                        volume = float(input("Enter the volume: "))
+                        density = mass / volume
+                        print(f"The density is: {density} {mass_units}/{volume_units}")
+                        copy_to_keyboard(density, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calculate mass!")
+                        density = float(input("Enter the density: "))
+                        volume = float(input("Enter the volume: "))
+                        mass = density * volume
+                        print(f"The mass is: {mass} {mass_units}")
+                        copy_to_keyboard(mass, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calculate volume!")
+                        mass = float(input("Enter the mass: "))
+                        density = float(input("Enter the density: "))
+                        volume = mass / density
+                        print(f"The volume is: {volume} {volume_units}")
+                        copy_to_keyboard(volume, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                elif calculation == 3:
+                    operation = calc("Pressure calc",["Calculate pressure","Calculate force","Calculate area"],1)
+                    if operation == 1:
+                        print("You have selected Calculate pressure!")
+                        force = float(input("Enter the force: "))
+                        area = float(input("Enter the area: "))
+                        pressure = force / area
+                        print(f"The pressure is: {pressure} {pressure_units}")
+                        copy_to_keyboard(pressure, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calculate force!")
+                        pressure = float(input("Enter the pressure: "))
+                        area = float(input("Enter the area: "))
+                        force = pressure * area
+                        print(f"The force is: {force} {force_units}")
+                        copy_to_keyboard(force, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calculate area!")
+                        force = float(input("Enter the force: "))
+                        pressure = float(input("Enter the pressure: "))
+                        area = force / pressure
+                        print(f"The area is: {area} {area_units}")
+                        copy_to_keyboard(area, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                elif calculation == 4:
+                    operation = calc("Work done calc",["Calculate work done","Calculate force","Calculate distance"],1)
+                    if operation == 1:
+                        print("You have selected Calculate work done!")
+                        force = float(input("Enter the force: "))
+                        distance = float(input("Enter the distance: "))
+                        work_done = force * distance
+                        print(f"The work done is: {work_done} Joules")
+                        copy_to_keyboard(work_done, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calculate force!")
+                        work_done = float(input("Enter the work done: "))
+                        distance = float(input("Enter the distance: "))
+                        force = work_done / distance
+                        print(f"The force is: {force} Newtons")
+                        copy_to_keyboard(force, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calculate distance!")
+                        work_done = float(input("Enter the work done: "))
+                        force = float(input("Enter the force: "))
+                        distance = work_done / force
+                        print(f"The distance is: {distance} meters")
+                        copy_to_keyboard(distance, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                elif calculation == 5:
+                    operation = calc("Power calc",["Calculate power","Calculate work done","Calculate time"],1)
+                    if operation == 1:
+                        print("You have selected Calculate power!")
+                        work_done = float(input("Enter the work done: "))
+                        time = float(input("Enter the time: "))
+                        power = work_done / time
+                        print(f"The power is: {power} Watts")
+                        copy_to_keyboard(power, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calculate work done!")
+                        power = float(input("Enter the power: "))
+                        time = float(input("Enter the time: "))
+                        work_done = power * time
+                        print(f"The work done is: {work_done} Joules")
+                        copy_to_keyboard(work_done, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calculate time!")
+                        work_done = float(input("Enter the work done: "))
+                        power = float(input("Enter the power: "))
+                        time = work_done / power
+                        print(f"The time is: {time} seconds")
+                        copy_to_keyboard(time, copy_to_keyboard_true)
+                    else:
+                        print("Invalid operation!Please try again.")
+                        continue
+                else:
+                    print("Invalid calculation!Please try again.")
                     continue
+                
+
             elif operation == 7:
                 calculation = calc("Coordinates/Transformation calc",["2D Coordinate transformation","3D Coordinate transformation","Distance between two points in 3D","Midpoint between two points in 3D"],2)
                 if calculation == 1:
@@ -2328,25 +2493,30 @@ if __name__ == "__main__":
             print(f"File path: {file_path}")
             copy_to_keyboard(f"ULTIMATE CALC™(Version {version}) is a trademark of M0bile132022.© 2025 M0bile132022. All rights reserved. This program is protected by the GNU General Public License v3.0. This program is provided as is with no warranty. For more information, visit https://www.ultimatecalc.com. Other statstics: Lines of code: {count_lines(file_path)} Size:{file_size} bytes Version: {version} File path: {file_path}", copy_to_keyboard_true)
             print("""Credits:
-            1. M0bile132022 for code
-            2. OpenAI for aid
-            3. Python community for possiblity
-            4. SymPy for the real complicated stuff
-            5. Math community for purpose
-            6. Stack Overflow for help
-            7. GitHub community for storage
-            8. Wikipedia for knowledge
-            9. Yzfargo for 3rd party subroutines
-            10. You for using it!!!""")
+1. M0bile132022 for code
+2. OpenAI for aid
+3. Python community for possiblity
+4. SymPy for the real complicated stuff
+5. Math community for purpose
+6. Stack Overflow for help
+7. GitHub community for storage
+8. Wikipedia for knowledge
+9. Yzfargo for 3rd party subroutines
+10. You for using it!!!""")
             
         elif category == 16:
             print("Welcome to settings!")
             print("Please select an operation:")
             print("""1. Change the lenght units
-    2. Change the area units
-    3. Change the volume units
-    4. Change the money units
-    5.Copy to keyboard setting""")
+2. Change the area units
+3. Change the volume units
+4. Change the money units
+5. Change the time units
+6. Change the speed units
+7. Change the mass units
+8. Change the pressure units
+9. Change the force units
+10.Copy to keyboard setting""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Change the lenght units!")
@@ -2383,13 +2553,13 @@ if __name__ == "__main__":
                 print("You have selected Change the area units!")
                 print("Please select a unit:")
                 print("""1. Square metres
-                    2.Square centimetres
-                    3. Square millimetres
-                    4. Square kilometres
-                    5. Square inches
-                    6. Square feet
-                    7. Square yards
-                    8. Square miles""")
+2.Square centimetres
+3. Square millimetres
+4. Square kilometres
+5. Square inches
+6. Square feet
+7. Square yards
+8. Square miles""")
                 unit = int(input("Enter the number of the unit you want to use: "))
                 if unit == 1:
                     area_units = "m²"
@@ -2414,13 +2584,13 @@ if __name__ == "__main__":
                 print("You have selected Change the volume units!")
                 print("Please select a unit:")
                 print("""1. Cubic metres
-                    2. Cubic centimetres
-                    3. Cubic millimetres
-                    4. Cubic kilometres
-                    5. Cubic inches
-                    6. Cubic feet
-                    7. Cubic yards
-                    8. Cubic miles""")
+2. Cubic centimetres
+3. Cubic millimetres
+4. Cubic kilometres
+5. Cubic inches
+6. Cubic feet
+7. Cubic yards
+8. Cubic miles""")
                 unit = int(input("Enter the number of the unit you want to use: "))
                 if unit == 1:
                     volume_units = "m³"
@@ -2445,12 +2615,12 @@ if __name__ == "__main__":
                 print("You have selected Change the money units!")
                 print("Please select a unit:")
                 print("""1. Pounds
-                    2. Dollars
-                    3. Euros
-                    4. Yen/Yuan
-                    5. Rupees
-                    6. Ruble
-                    7. Won""")
+2. Dollars
+3. Euros
+4. Yen/Yuan
+5. Rupees
+6. Ruble
+7. Won""")
                 unit = int(input("Enter the number of the unit you want to use: "))
                 if unit == 1:
                     money_units = "£"
@@ -2470,10 +2640,114 @@ if __name__ == "__main__":
                     print("Invalid unit!Please try again.")
                     continue
             elif operation == 5:
+                print("You have selected Change the time units!")
+                print("Please select a unit:")
+                print("""1. Seconds
+2. Minutes
+3. Hours
+4. Days
+5. Weeks
+6. Months
+7. Years""")
+                unit = int(input("Enter the number of the unit you want to use: "))
+                if unit == 1:
+                    time_units = "seconds"
+                elif unit == 2:
+                    time_units = "minutes"
+                elif unit == 3:
+                    time_units = "hours"
+                elif unit == 4:
+                    time_units = "days"
+                elif unit == 5:
+                    time_units = "weeks"
+                elif unit == 6:
+                    time_units = "months"
+                elif unit == 7:
+                    time_units = "years"
+                else:
+                    print("Invalid unit!Please try again.")
+                    continue
+            elif operation == 6:
+                print("You have selected Change the speed units!")
+                print("Please select a unit:")
+                print("""1. Meters per second
+2. Kilometers per hour
+3. Miles per hour
+4. Feet per second""")
+                unit = int(input("Enter the number of the unit you want to use: "))
+                if unit == 1:
+                    speed_units = "m/s"
+                elif unit == 2:
+                    speed_units = "km/h"
+                elif unit == 3:
+                    speed_units = "mph"
+                elif unit == 4:
+                    speed_units = "ft/s"
+                else:
+                    print("Invalid unit!Please try again.")
+                    continue
+            elif operation == 7:
+                print("You have selected Change the mass units!")
+                print("Please select a unit:")
+                print("""1. Kilograms
+2. Grams
+3. Milligrams
+4. Pounds
+5. Ounces""")
+                unit = int(input("Enter the number of the unit you want to use: "))
+                if unit == 1:
+                    mass_units = "kg"
+                elif unit == 2:
+                    mass_units = "g"
+                elif unit == 3:
+                    mass_units = "mg"
+                elif unit == 4:
+                    mass_units = "lb"
+                elif unit == 5:
+                    mass_units = "oz"
+                else:
+                    print("Invalid unit!Please try again.")
+                    continue
+            elif operation == 8:
+                print("You have selected Change the pressure units!")
+                print("Please select a unit:")
+                print("""1. Pascals
+2. Kilopascals
+3. Bars
+4. Pounds per square inch""")
+                unit = int(input("Enter the number of the unit you want to use: "))
+                if unit == 1:
+                    pressure_units = "Pa"
+                elif unit == 2:
+                    pressure_units = "kPa"
+                elif unit == 3:
+                    pressure_units = "bar"
+                elif unit == 4:
+                    pressure_units = "psi"
+                else:
+                    print("Invalid unit!Please try again.")
+                    continue
+            elif operation == 9:
+                print("You have selected Change the force units!")
+                print("Please select a unit:")
+                print("""1. Newtons
+2. Kilonewtons
+3. Pounds-force""")
+                unit = int(input("Enter the number of the unit you want to use: "))
+                if unit == 1:
+                    force_units = "N"
+                elif unit == 2:
+                    force_units = "kN"
+                elif unit == 3:
+                    force_units = "lbf"
+                else:
+                    print("Invalid unit!Please try again.")
+                    continue
+            elif operation == 10:
                 print("You have selected Copy to keyboard setting!")
                 print("Please select an operation:")
                 print("""1. Enable
-    2. Disable""")
+2. Disable""")
                 operation = int(input("Enter the number of the operation you want to perform: "))
                 if operation == 1:
                     copy_to_keyboard_true = True
