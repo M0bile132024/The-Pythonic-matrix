@@ -1,18 +1,15 @@
-UPDATE 2.7: THE OTHERS CATEGORY(OC) AWAKENING
+UPDATE 2.8:ALGEBERIC PROFICENCY BONUS
 Topics:
-Writing and using equations for proportionality and indirect proportionality✅
-Finding and calculating with lower and upper bounds✅
-Transformations; reflection, rotation, translation✅
-Transformations; enlargement✅
-Calculating averages from a (grouped) frequency table✅
-Calculating moving averages✅
-Calculating the median and interquartile range✅
-identifying types of correlation
-Interpreting distance time & velocity time compound meausures✅
-Calculate lengths of arcs & areas of sectors✅
-Calculate volume & surface area of prisms✅
----
-MOBILEAI (UPDATE 1.5:Trainers):
-Constructing cumulative frequency tables and graphs
-Constructing box and whisker plots
-Drawing scatter/correlation graphs✅
+- Calculate density and pressure ✅
+- Calculate volume & surface area of cones, pyramids & spheres ✅
+- Calculate rates of flow in/out of containers ✅
+- Enlarging similar shapes – use of volume & SA scale factors ✅
+- Be able to draw quadratic graphs and use them to solve quadratic equations 🚫
+- Determining the equations of straight-line graphs ✅
+- Finding the equations of parallel and perpendicular lines ✅
+- Be able to expand triple brackets✅
+- Factorising quadratic expressions and solving quadratic equations by factorising, completing the square or by quadratic formula ✅
+
+
+
+

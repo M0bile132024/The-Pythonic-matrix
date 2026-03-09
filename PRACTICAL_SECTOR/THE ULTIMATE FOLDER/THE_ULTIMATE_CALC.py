@@ -1,31 +1,63 @@
 #THE ULTIMATE CALC 
 #By: @M0bile132022
-#Date: 15/12/25
-#Version: 2.7
+#Date: 09/03/26
+#Version: 2.8
 #Milestones:
 #UPDATE 2.0:01/05/2025
 '''Description: This is a ULTIMATE calculator that can perform ULTIMATE operations such as SA:VOL, 
-PHYSIC EQUATIONS, 
-pythagoras therom,
-Perimiter/Area,
-The basics,
-Ordering,
-Scale factors,
-Decimal to fraction to percentage conversions,
-Planetary time and arcs/sectors/chords(included in others(in a future update)),
-intrest
-trigomentry
-Standard form and more!
+- Surface Area and Volume (SA:VOL ratio)
+- Physics equations
+- Pythagoras theorem
+- Perimeter and Area calculations
+- Basic arithmetic operations
+- Ordering and mass operations
+- Scale factors
+- Decimal to fraction to percentage conversions
+- Interest calculations
+- Trigonometry
+- Standard form conversions
+- And more!
+
+Actual docs:
+Modules:
+- math: Provides mathematical functions and constants.
+- time: Used for time-related functions.
+- os: Provides functions for interacting with the operating system.
+- fractions: Used for handling rational numbers.
+- pyperclip: Used for copying text to the clipboard.
+- equations (custom module): Provides additional equation-solving utilities.
+- sympy: A Python library for symbolic mathematics.
+Functions:
+- operation_dialogue(): Displays and handles user input for selecting operations.
+- twod_operation_dialogue(shape): Handles operations for 2D shapes.
+- count_lines(file_path): Counts the number of lines in a file.
+- copy_to_keyboard(text, true_or_false): Copies text to the clipboard if enabled.
+- reciprocal(number): Returns the reciprocal of a number.
+- subtract_list(values): Subtracts a list of numbers sequentially.
+- multiply_list(values): Multiplies a list of numbers sequentially.
+- divide_list(values): Divides a list of numbers sequentially.
+- calc(name, options, operation_or_calc): Displays a menu for selecting calculations or methods.
+- rotate_point_2d(x, y, angle, clockwise, center_x, center_y): Rotates a point in 2D space.
+- factor_pairs(n): Returns factor pairs of a number.
+- factorise_quadratic(a, b, c): Factorizes a quadratic equation into two brackets.
+- calculate_displacement(initial_velocity, acceleration, time): Calculates displacement using the SVT equation.
+- calculate_final_velocity(initial_velocity, acceleration, time): Calculates final velocity using the SVT equation.
+- calculate_time(initial_velocity, final_velocity, acceleration): Calculates time using the SVT equation.
+- simplify_surd(expression): Simplifies a surd expression.
+- find_x_intercept(m, b): Finds the x-intercept of a line.
+- convert_units(value, from_unit, to_unit): Converts a value between units.
+Notes:
+- This calculator is designed to handle a wide variety of mathematical and scientific calculations.
+- Some features are marked as coming in future updates.
+- The program includes error handling for invalid inputs and unsupported operations.
 '''
-#Note: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
+#P.S: This is a calculator that can do a lot of things, so don't be surprised if you see a lot of code.
 import math
 import time
 import os
 import fractions
 import pyperclip
-import equations as eq
 import sympy as sp
-
 def operation_dialogue():
     print("Please select an operation:")
     print("1. Surface Area")
@@ -85,7 +117,68 @@ def rotate_point_2d(x, y, angle, clockwise, center_x, center_y):
     translated_y = y - center_y
     rotated_x = translated_x * math.cos(angle_rad) - translated_y * math.sin(angle_rad)
     rotated_y = translated_x * math.sin(angle_rad) + translated_y * math.cos(angle_rad)
-    return rotated_x + center_x, rotated_y + center_y    
+    return rotated_x + center_x, rotated_y + center_y  
+def factor_pairs(n):
+    """
+    Returns factor pairs (a, b) such that a * b = n.
+    Only positive and negative integer pairs are returned.
+    """
+    pairs = []
+    for i in range(1, int(math.isqrt(abs(n))) + 1):
+        if n % i == 0:
+            j = n // i
+            pairs.append((i, j))
+            pairs.append((-i, -j))
+    return pairs
+
+def factorise_quadratic(a, b, c):
+    """
+    Factorises ax^2 + bx + c into two brackets if possible.
+    Returns a string representation or a message if not factorable over integers.
+    """
+    if a == 0:
+        return "Not a quadratic equation."
+
+    # Step 1: Find product a*c
+    product = a * c
+
+    # Step 2: Find factor pair of product that sums to b
+    for m, n in factor_pairs(product):
+        if m + n == b:
+            # Step 3: Split middle term and factor by grouping
+            # ax^2 + m*x + n*x + c
+            g1 = math.gcd(a, m)
+            g2 = math.gcd(n, c)
+
+            # First bracket
+            p = g1
+            q = a // g1
+            # Second bracket
+            r = g2
+            s = c // g2
+
+            # Factor by grouping
+            # Group 1: ax^2 + m*x
+            factor1 = math.gcd(a, m)
+            # Group 2: n*x + c
+            factor2 = math.gcd(n, c)
+
+            # Common binomial factor
+            bracket1 = f"{a//factor1}x + {m//factor1}"
+            bracket2 = f"{n//factor2}x + {c//factor2}"
+
+            # Ensure both brackets match
+            if bracket1 == bracket2:
+                return f"({factor1}x + {n//factor2})({bracket1})"
+
+            # Simpler approach: directly return factors
+            return f"({a}x + {m})({1}x + {n})"
+
+    return "Cannot be factorised over integers."
+
+
+
+  
 
 #3rd party subroutines
 #yzfargo/yu https://github.com/yzfargo/yu
@@ -140,7 +233,7 @@ def convert_units(value, from_unit, to_unit):
 
 file_path = os.path.abspath(__file__)
 file_size = os.path.getsize(file_path)
-version = 2.7
+version = 2.8
 line_count = count_lines(file_path)
 lenght_units = "Line units"
 angle_units = "Angle units"
@@ -166,17 +259,17 @@ if __name__ == "__main__":
         print(f"Welcome to the ULTIMATE calc Ver {version}!")
         print("""Please select a category:
         1. Surface Area and Volume(SA:VOL ratio)
-        2. Pythagoras therom
-        3. Perimiter and Area(P:A ratio)
+        2. Pythagoras theorem
+        3. Perimeter and Area(P:A ratio)
         4. Standard form
         5. The Basics
         6. Ordering/Mass operations
         7. Scale factors
         8. Decimal to fraction to percentage conversions
-        9. Intrest
-        10. Trigomentry
+        9. Interest
+        10. Trigonometry
         11. Lines
-        12. Equations(beta)
+        12. Equations
         13. Circles/Spheres
         14. Others
         15. Legal/Other Info on ULTIMATE CALC™
@@ -1019,33 +1112,76 @@ if __name__ == "__main__":
                 print("Invalid operation!Please try again.")
                 continue
         elif category == 7:
-            print("Welcome to the Scale factors category!")
-            print("Please select an operation:")
-            print("""1. Calculate the scale factor
-            2. Calculate the new length
-            3. Calcuate the original length""")
-            operation = int(input("Enter the number of the operation you want to perform: "))
-            if operation == 1:
-                print("You have selected Calculate the scale factor!")
-                original_length = float(input("Enter the original length: "))
-                new_length = float(input("Enter the new length: "))
-                scale_factor = new_length / original_length
-                print(f"The scale factor is {scale_factor}.")
-                copy_to_keyboard(scale_factor, copy_to_keyboard_true)
-            elif operation == 2:
-                print("You have selected Calculate the new length!")
-                original_length = float(input("Enter the original length: "))
-                scale_factor = float(input("Enter the scale factor: "))
-                new_length = original_length * scale_factor
-                print(f"The new length is {new_length} {lenght_units}.")
-                copy_to_keyboard(new_length, copy_to_keyboard_true)
-            elif operation == 3:
-                print("You have selected Calculate the original length!")
-                new_length = float(input("Enter the new length: "))
-                scale_factor = float(input("Enter the scale factor: "))
-                original_length = new_length / scale_factor
-                print(f"The original length is {original_length} {lenght_units}.")
-                copy_to_keyboard(original_length, copy_to_keyboard_true)
+            method = calc("Scale Factors",["Using length","Using area","Using Volume"],3)
+            if method == 1:
+                operation = calc("Using length",["Finding the scale factor","Finding the original length","Finding the new length"],1)
+                if operation == 1:
+                    print("You have selected Finding the scale factor!")
+                    original_length = float(input("Enter the original length: "))
+                    new_length = float(input("Enter the new length: "))
+                    scale_factor = new_length / original_length
+                    print(f"The scale factor is {scale_factor}.")
+                    copy_to_keyboard(scale_factor, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Finding the original length!")
+                    new_length = float(input("Enter the new length: "))
+                    scale_factor = float(input("Enter the scale factor: "))
+                    original_length = new_length / scale_factor
+                    print(f"The original length is {original_length}.")
+                    copy_to_keyboard(original_length, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Finding the new length!")
+                    original_length = float(input("Enter the original length: "))
+                    scale_factor = float(input("Enter the scale factor: "))
+                    new_length = original_length * scale_factor
+                    print(f"The new length is {new_length}.")
+                    copy_to_keyboard(new_length, copy_to_keyboard_true)
+            elif method == 2:
+                operation = calc("Using area",["Finding the scale factor","Finding the original area","Finding the new area"],1)
+                if operation == 1:
+                    print("You have selected Finding the scale factor!")
+                    original_area = float(input("Enter the original area: "))
+                    new_area = float(input("Enter the new area: "))
+                    scale_factor = math.sqrt(new_area / original_area)
+                    print(f"The scale factor is {scale_factor}.")
+                    copy_to_keyboard(scale_factor, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Finding the original area!")
+                    new_area = float(input("Enter the new area: "))
+                    scale_factor = float(input("Enter the scale factor: "))
+                    original_area = new_area / (scale_factor ** 2)
+                    print(f"The original area is {original_area}.")
+                    copy_to_keyboard(original_area, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Finding the new area!")
+                    original_area = float(input("Enter the original area: "))
+                    scale_factor = float(input("Enter the scale factor: "))
+                    new_area = original_area * (scale_factor ** 2)
+                    print(f"The new area is {new_area}.")
+                    copy_to_keyboard(new_area, copy_to_keyboard_true)
+            elif method == 3:
+                operation = calc("Using volume",["Finding the scale factor","Finding the original volume","Finding the new volume"],1)
+                if operation == 1:
+                    print("You have selected Finding the scale factor!")
+                    original_volume = float(input("Enter the original volume: "))
+                    new_volume = float(input("Enter the new volume: "))
+                    scale_factor = (new_volume / original_volume) ** (1/3)
+                    print(f"The scale factor is {scale_factor}.")
+                    copy_to_keyboard(scale_factor, copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Finding the original volume!")
+                    new_volume = float(input("Enter the new volume: "))
+                    scale_factor = float(input("Enter the scale factor: "))
+                    original_volume = new_volume / (scale_factor ** 3)
+                    print(f"The original volume is {original_volume}.")
+                    copy_to_keyboard(original_volume, copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Finding the new volume!")
+                    original_volume = float(input("Enter the original volume: "))
+                    scale_factor = float(input("Enter the scale factor: "))
+                    new_volume = original_volume * (scale_factor ** 3)
+                    print(f"The new volume is {new_volume}.")
+                    copy_to_keyboard(new_volume, copy_to_keyboard_true)
             else:
                 print("Invalid operation!Please try again.")
                 continue
@@ -1297,15 +1433,15 @@ if __name__ == "__main__":
             print("You have selected the Line category!")
             print("Please select an operation:")
             print("""1. Calculate the gradient/slope
-    2. Calculate the y-intercept
-    3. Calculate the x-intercept
-    4. Calculate the equation of the line
-    5. Calculate the distance between two points
-    6.Calcuate the midpoint of two points
-    7. Calcuate gradient of perpendicular line
-    8. Calcuate gradient of parallel line
-    9. Calcuate the equation of a perpendicular line
-    10. Calcuate the equation of a parrellel line""")
+2. Calculate the y-intercept
+3. Calculate the x-intercept
+4. Calculate the distance between two points
+5. Calculate the midpoint of two points
+6. Calculate gradient of perpendicular line
+7. Calculate gradient of parallel line
+8. Calculate the equation of a perpendicular line
+9. Calculate the equation of a parallel line
+10. Line graph calculator(alpha)""")
             operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
                 print("You have selected Calculate the gradient/slope!")
@@ -1333,16 +1469,6 @@ if __name__ == "__main__":
                 print(f"The x-intercept is {x_intercept}.")
                 copy_to_keyboard(x_intercept, copy_to_keyboard_true)
             elif operation == 4:
-                print("You have selected Calculate the equation of the line!")
-                x1 = float(input("Enter the x-coordinate of the first point: "))
-                y1 = float(input("Enter the y-coordinate of the first point: "))
-                x2 = float(input("Enter the x-coordinate of the second point: "))
-                y2 = float(input("Enter the y-coordinate of the second point: "))
-                gradient = (y2 - y1) / (x2 - x1)
-                y_intercept = y1 - (gradient * x1)#what if y-intercept negiative?
-                print(f"The equation of the line is y = {gradient}x{y_intercept:+}.")
-                copy_to_keyboard(f"The equation of the line is y = {gradient}x{y_intercept:+}.", copy_to_keyboard_true)
-            elif operation == 5:
                 print("You have selected Calculate the distance between two points!")
                 x1 = float(input("Enter the x-coordinate of the first point: "))
                 y1 = float(input("Enter the y-coordinate of the first point: "))
@@ -1351,7 +1477,7 @@ if __name__ == "__main__":
                 distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
                 print(f"The distance between the two points is {distance} {lenght_units}.")
                 copy_to_keyboard(distance, copy_to_keyboard_true)
-            elif operation == 6:
+            elif operation == 5:
                 print("You have selected Calculate the midpoint of two points!")
                 x1 = float(input("Enter the x-coordinate of the first point: "))
                 y1 = float(input("Enter the y-coordinate of the first point: "))
@@ -1361,14 +1487,14 @@ if __name__ == "__main__":
                 midpoint_y = (y1 + y2) / 2
                 print(f"The midpoint of the two points is ({midpoint_x},{midpoint_y}).")
                 copy_to_keyboard(f"The midpoint of the two points is ({midpoint_x},{midpoint_y}).", copy_to_keyboard_true)
-            elif operation == 7:
+            elif operation == 6:
                 print("You have selected Calculate gradient of perpendicular line!")
                 gradient = float(input("Enter the gradient of the other line: "))
                 perpendicular_gradient = -1 / gradient
                 print(f"The gradient of the perpendicular line is {perpendicular_gradient}(Fraction=-1/{gradient}).")
-            elif operation == 8:
+            elif operation == 7:
                 print("The gradient of the parallel line is the same as the other line!")
-            elif operation == 9:
+            elif operation == 8:
                 print("You have selected Calculate the equation of a perpendicular line!")
                 gradient = float(input("Enter the gradient of the other line: "))
                 y_intercept = float(input("Enter the y-intercept of the other line: "))
@@ -1378,37 +1504,129 @@ if __name__ == "__main__":
                 y_intercept = y2 - (perpendicular_gradient * x2)
                 print(f"The equation of the perpendicular line is y = {perpendicular_gradient}x{y_intercept:+}.")
                 copy_to_keyboard(f"The equation of the perpendicular line is y = {perpendicular_gradient}x{y_intercept:+}.", copy_to_keyboard_true)
-            elif operation == 10:
+            elif operation == 9:
                 print("You have selected Calculate the equation of a parallel line!")
                 gradient = float(input("Enter the gradient of the other line: "))
                 x2 = float(input("Enter the x-coordinate of a point the parallel line passes through: "))
                 y2 = float(input("Enter the y-coordinate of a point the parallel line passes through: "))
                 parallel_gradient = gradient
                 y_intercept = y2 - (parallel_gradient * x2)
-                print("The equation of the parallel line is y = {parallel_gradient}x{y_intercept:+}.")
+                print(f"The equation of the parallel line is y = {parallel_gradient}x{y_intercept:+}.")
                 copy_to_keyboard(f"The equation of the parallel line is y = {parallel_gradient}x{y_intercept:+}.", copy_to_keyboard_true)
-
+            elif operation == 10:
+                operation = calc("Line graph(alpha)",["Determining the equations of straight-line graphs(using a parallel equation + point)","Determining the equations of straight-line graphs (using a perpendicular equation and a point)","Determining the equations of straight-line graphs(using two points)"],2)
+                if operation == 1:
+                    print("You have selected Determining the equations of straight-line graphs(using a parallel equation + point)!")
+                    gradient = float(input("Enter the gradient of the parallel line: "))
+                    x2 = float(input("Enter the x-coordinate of a point the line passes through: "))
+                    y2 = float(input("Enter the y-coordinate of a point the line passes through: "))
+                    y_intercept = y2 - (gradient * x2)
+                    print(f"The equation of the line is y = {gradient}x{y_intercept:+}.")
+                    copy_to_keyboard(f"The equation of the line is y = {gradient}x{y_intercept:+}.", copy_to_keyboard_true)
+                elif operation == 2:
+                    print("You have selected Determining the equations of straight-line graphs (using a perpendicular equation and a point)!")
+                    gradient = float(input("Enter the gradient of the perpendicular line: "))
+                    x2 = float(input("Enter the x-coordinate of a point the line passes through: "))
+                    y2 = float(input("Enter the y-coordinate of a point the line passes through: "))
+                    perpendicular_gradient = -1 / gradient
+                    y_intercept = y2 - (perpendicular_gradient * x2)
+                    print(f"The equation of the line is y = {perpendicular_gradient}x{y_intercept:+}.")
+                    copy_to_keyboard(f"The equation of the line is y = {perpendicular_gradient}x{y_intercept:+}.", copy_to_keyboard_true)
+                elif operation == 3:
+                    print("You have selected Determining the equations of straight-line graphs(using two points)!")
+                    x1 = float(input("Enter the x-coordinate of the first point: "))
+                    y1 = float(input("Enter the y-coordinate of the first point: "))
+                    x2 = float(input("Enter the x-coordinate of the second point: "))
+                    y2 = float(input("Enter the y-coordinate of the second point: "))
+                    gradient = (y2 - y1) / (x2 - x1)
+                    y_intercept = y1 - (gradient * x1)
+                    print(f"The equation of the line is y = {gradient}x{y_intercept:+}.")
+                    copy_to_keyboard(f"The equation of the line is y = {gradient}x{y_intercept:+}.", copy_to_keyboard_true)
 
             else:
                 print("Invalid operation!Please try again.")
                 continue
 
         elif category == 12:
+            #Note to self:eq being discontinued,need to recode at some point
             print("Welcome to the Equation category!")
             print("Please select an operation:")
-            print("""1. Solve a equation
-2.Solve two simultaoenous equations""")
-            operation = int(input("Enter the number of the operation you want to perform(note:only supports x/y as vars): "))
+            print("""1. Expanding triple brackets
+2. Factorising a quadratic expression
+3. Solving a quadratic equation
+4. Completing the square""")
+            operation = int(input("Enter the number of the operation you want to perform: "))
             if operation == 1:
-                print("You have selected Solve a equation!")
-                eq.equation_calc()
+                print("Note:This calc supports expanding triple brackets in the form of (ax + b)(cx + d)(ex + f) only!")
+                method = calc("Expanding triple brackets",["With coefficients","Without coefficients"],3)
+                if method == 1:
+                    print("You have selected Expanding triple brackets with coefficients!")
+                    coeficient1 = float(input("Enter the coefficient of the first bracket(a): "))
+                    value1 = float(input("Enter the constant of the first bracket(b): "))
+                    coeficient2 = float(input("Enter the coefficient of the second bracket(c): "))
+                    value2 = float(input("Enter the constant of the second bracket(d): "))
+                    coeficient3 = float(input("Enter the coefficient of the third bracket(e): "))
+                    value3 = float(input("Enter the constant of the third bracket(f): "))
+                    a = coeficient1 * coeficient2 * coeficient3
+                    b = (coeficient1 * coeficient2 * value3) + (coeficient1 * value2 * coeficient3) + (value1 * coeficient2 * coeficient3)
+                    c = (coeficient1 * value2 * value3) + (value1 * coeficient2 * value3) + (value1 * value2 * coeficient3)
+                    d = value1 * value2 * value3
+                    print(f"The expanded form of the triple brackets is {a}x^3 {b:+}x^2 {c:+}x {d:+}.")
+                    copy_to_keyboard(f"{a}x^3 {b:+}x^2 {c:+}x {d:+}", copy_to_keyboard_true)
+                elif method == 2:
+                    print("You have selected Expanding triple brackets without coefficients!")
+                    value1 = float(input("Enter the constant of the first bracket(b): "))
+                    value2 = float(input("Enter the constant of the second bracket(d): "))
+                    value3 = float(input("Enter the constant of the third bracket(f): "))
+                    a = 1
+                    b = value1 + value2 + value3
+                    c = (value1 * value2) + (value1 * value3) + (value2 * value3)
+                    d = value1 * value2 * value3
+                    print(f"The expanded form of the triple brackets is {a}x^3 {b:+}x^2 {c:+}x {d:+}.")
+                    copy_to_keyboard(f"{a}x^3 {b:+}x^2 {c:+}x {d:+}", copy_to_keyboard_true)
+                else:
+                    print("Invalid method!Please try again.")
+                    continue
             elif operation == 2:
-                print("You have selected Solve two simultaoenous equations!")
-                eq.simultanous_calc()
-                
+                print("You have selected Factorising a quadratic expression!")
+                print("Please enter the coefficients of the quadratic expression in the form ax^2 + bx + c:")
+                a = int(input("Enter coefficient a: "))
+                b = int(input("Enter coefficient b: "))
+                c = int(input("Enter coefficient c: "))
+                print(f"The factorised form is {factorise_quadratic(a, b, c)}")
+                copy_to_keyboard(factorise_quadratic(a, b, c), copy_to_keyboard_true)
+            elif operation == 3:
+                print("You have selected Solving a quadratic equation!")
+                print("Please enter the coefficients of the quadratic equation in the form ax^2 + bx + c = 0:")
+                a = float(input("Enter the coefficient a: "))
+                b = float(input("Enter the coefficient b: "))
+                c = float(input("Enter the coefficient c: "))
+                # Solving the quadratic equation
+                discriminant = (b ** 2) - (4 * a * c)
+                if discriminant > 0:
+                    root1 = (-b + math.sqrt(discriminant)) / (2 * a)
+                    root2 = (-b - math.sqrt(discriminant)) / (2 * a)
+                    print(f"The roots of the quadratic equation are {root1} and {root2}.")
+                elif discriminant == 0:
+                    root = -b / (2 * a)
+                    print(f"The root of the quadratic equation is {root}.")
+                else:
+                    print("The quadratic equation has no real roots.")
+            elif operation == 4:
+                print("You have selected Completing the square!")
+                print("Please enter the coefficients of the quadratic expression in the form ax^2 + bx + c:")
+                a = float(input("Enter coefficient a: "))
+                b = float(input("Enter coefficient b: "))
+                c = float(input("Enter coefficient c: "))
+                h = -b / (2 * a)
+                k = c - (b ** 2) / (4 * a)
+                print(f"The completed square form of the quadratic expression is {a}(x {-h:+})^2 + {k}.")
+                print(f"The turning point of the quadratic expression is ({h},{k}).")
+                copy_to_keyboard(f"{a}(x - {h})^2 + {k} , ({h},{k})", copy_to_keyboard_true)
             else:
                 print("Invalid operation!Please try again.")
                 continue
+
         elif category == 13:
             pi = math.pi
             print("Welcome to the Circles/Sphere category!")
@@ -2238,7 +2456,7 @@ if __name__ == "__main__":
             #        continue
             # Temporarily disabling Unit conversion calc due to incomplete implementation
             elif operation == 6:
-                calculation = calc("Compound meausures calc",["Speed calc","Density calc","Pressure calc","Work done calc","Power calc"],2)
+                calculation = calc("Compound meausures calc",["Speed calc","Density calc","Pressure calc","Work done calc","Power calc","Rate of flow calc"],2)
                 if calculation == 1:
                     operation = calc("Speed calc",["Calculate speed","Calculate distance","Calculate time"],1)
                     if operation == 1:
@@ -2369,6 +2587,29 @@ if __name__ == "__main__":
                     else:
                         print("Invalid operation!Please try again.")
                         continue
+                elif calculation == 6:
+                    operation = calc("Rate of flow calc",["Calculate rate of flow","Calculate volume","Calculate time"],1)
+                    if operation == 1:
+                        print("You have selected Calculate rate of flow!")
+                        volume = float(input("Enter the volume: "))
+                        time = float(input("Enter the time: "))
+                        rate_of_flow = volume / time
+                        print(f"The rate of flow is: {rate_of_flow} {volume_units}/second")
+                        copy_to_keyboard(rate_of_flow, copy_to_keyboard_true)
+                    elif operation == 2:
+                        print("You have selected Calculate volume!")
+                        rate_of_flow = float(input("Enter the rate of flow: "))
+                        time = float(input("Enter the time: "))
+                        volume = rate_of_flow * time
+                        print(f"The volume is: {volume} {volume_units}")
+                        copy_to_keyboard(volume, copy_to_keyboard_true)
+                    elif operation == 3:
+                        print("You have selected Calculate time!")
+                        rate_of_flow = float(input("Enter the rate of flow: "))
+                        volume = float(input("Enter the volume: "))
+                        time = volume / rate_of_flow
+                        print(f"The time is: {time} seconds")
+                        copy_to_keyboard(time, copy_to_keyboard_true)
                 else:
                     print("Invalid calculation!Please try again.")
                     continue

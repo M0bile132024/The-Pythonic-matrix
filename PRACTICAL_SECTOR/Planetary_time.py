@@ -120,18 +120,15 @@ try:
         print("Uranus date:", planet_date(517/720,30769.5))
         print("Neptune date:", planet_date(16/24,60225))
         print("Pluto date:", planet_date(6.4,90560))
+        print("Press Ctrl+C to exit.")
         time.sleep(1) # Sleep for 1 second to avoid busy waiting
 except KeyboardInterrupt:
-    print("Exiting the program.")
-except Exception as e:
-    print(f"An error occurred: {e}")
-finally:
     print("Cleaning up...")
     # Perform any necessary cleanup here
     # For example, closing files or releasing resources
     print("Cleanup complete.")
     # Exit the program
-    exit(0)
+    exit()
 #End of code
 #Planetary time v.Beta 0.1
 
