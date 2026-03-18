@@ -1,39 +1,305 @@
-#Number_ART_REBOOT
+#Number_art_REBOOT v1.0
+#Date:18/03/26
 #Made by: @M0bile132022
-#Don't remove credit
-#Description: A program that makes satisfiying infinite art with turtle
+#NOTICE:Don't remove credit
+'''Description: A program that makes satisfiying infinite art with turtle'''
+
+#Imports#
 from turtle import *
 from random import *
 from time import *
+from os import *
+from admin_cmd import *
+#Varibles+set default speed#
 infintyvarbilbe = 1
-speed("fastest")
+speed(1000)
+colour_libary = '''aliceblue
+antiquewhite
+aqua
+aquamarine
+azure
+beige
+bisque
+black
+blanchedalmond
+blue
+blueviolet
+brown
+burlywood
+cadetblue
+chartreuse
+chocolate
+coral
+cornflowerblue
+cornsilk
+crimson
+cyan
+darkblue
+darkcyan
+darkgoldenrod
+darkgray
+darkgreen
+darkgrey
+darkkhaki
+darkmagenta
+darkolivegreen
+darkorange
+darkorchid
+darkred
+darksalmon
+darkseagreen
+darkslateblue
+darkslategray
+darkslategrey
+darkturquoise
+darkviolet
+deeppink
+deepskyblue
+dimgray
+dimgrey
+dodgerblue
+firebrick
+floralwhite
+forestgreen
+fuchsia
+gainsboro
+ghostwhite
+gold
+goldenrod
+gray
+green
+greenyellow
+grey
+honeydew
+hotpink
+indianred
+indigo
+ivory
+khaki
+lavender
+lavenderblush
+lawngreen
+lemonchiffon
+lightblue
+lightcoral
+lightcyan
+lightgoldenrodyellow
+lightgray
+lightgreen
+lightgrey
+lightpink
+lightsalmon
+lightseagreen
+lightskyblue
+lightslategray
+lightslategrey
+lightsteelblue
+lightyellow
+lime
+limegreen
+linen
+magenta
+maroon
+mediumaquamarine
+mediumblue
+mediumorchid
+mediumpurple
+mediumseagreen
+mediumslateblue
+mediumspringgreen
+mediumturquoise
+mediumvioletred
+midnightblue
+mintcream
+mistyrose
+moccasin
+navajowhite
+navy
+oldlace
+olive
+olivedrab
+orange
+orangered
+orchid
+palegoldenrod
+palegreen
+paleturquoise
+palevioletred
+papayawhip
+peachpuff
+peru
+pink
+plum
+powderblue
+purple
+red
+rosybrown
+royalblue
+saddlebrown
+salmon
+sandybrown
+seagreen
+seashell
+sienna
+silver
+skyblue
+slateblue
+slategray
+slategrey
+snow
+springgreen
+steelblue
+tan
+teal
+thistle
+tomato
+turquoise
+violet
+wheat
+white
+whitesmoke
+yellow
+yellowgreen
+'''
 
+#Check if it supports OS#
+if is_cmd_disabled() != (False , "Command Prompt enabled."):
+    supported = False
+    print("NOTICE:This machine does not allow use of the command prompt,and thus some features of this program has been disabled\n\n\n\n\n\n")
+else:
+    supported = True
+
+#Functions#
 def set_speed(spd=1000):
+    '''Adjust speed'''
     spd = int(spd)
     speed(spd)
-a = int(input("A number from 1 to 23:"))
-art_speed_value = input("Chose speed of art(leave nothing for default 10)")
+def clear_screen():
+    '''Clears screen'''
+    if supported:
+        system('cls' if name == 'nt' else 'clear')
+    else:
+        print("\n\n\n\n\n")
+def colour_function():
+    colour = 0
+    while colour == 0:
+        colour = input("Please input a colour (or type 'list' to see all our avavible colours(we pretty much support all of them,so there's no need to worry yourself :D )):").strip()
+        if colour == "list":
+            print("The Number Art REBOOT colour libary:",colour_libary,sep="\n")
+            colour = 0
+            print("\n\n\n\n\n")
+        else:
+            try:
+                color(colour)
+            except:
+                print("We're sorry,but unfortunately that color is not in our colour libary.Please try again")
+                colour = 0
+                print("\n\n\n\n\n")
+    return colour
+def raduis_function():
+    raduis = 0
+    while raduis == 0:
+        raduis = int(input("Please enter a raduis value:"))
+        if raduis < 1:
+            print("Sorry,but you can't have negiative or zero radii.Please try again")
+            raduis = 0
+    return raduis
+def offset_function():
+    offset = int(input("Please enter a offset(to the left) value:"))
+    return offset
+def number_art_one(colour="red",raduis=100,offset=1):
+    '''Executes number art 1'''
+    while infintyvarbilbe != 100:
+        color(colour)
+        circle(raduis)
+        left(offset)
+def number_art_two(colour="orange",raduis=100,left_offset=1,forward_offset=1):
+    '''Executes number art 2'''
+    #Consants#
+    EXTENT = 180
+    ANGLE = 90
+    #Main code#
+    while infintyvarbilbe != 100:
+        color(colour)
+        circle(raduis , EXTENT)
+        left(ANGLE)
+        forward(forward_offset)
+        left(left_offset)
+
+#Main code#
+
+##Intro##
+print("Welcome to Number Art Reboot,where your number's can paint images quite literally beyond your wildest imagination!")
+sleep(2)
+a = int(input("Please enter the number of the art you wish to witness(1-23):"))
+art_speed_value = input("Enter a value of speed in which you wish to see your art be formed in....not that it will really matter...(leave nothing for the default 1000):")
+omega_mode = None
+while omega_mode != True and omega_mode != False:
+    omega_mode = input("And finally,do you wish to enable our new O M E G A  P A I N T I N G  M O D E (y/n) (comes with more customisation functionality):").strip().lower()
+    if omega_mode == "y":
+        omega_mode = True
+        print("Alright then,activating O M E G A  P A I N T I N G  M O D E...")
+        sleep(2)
+        break
+    elif omega_mode == "n":
+            omega_mode = False
+            print("No then.Well then don't worry then,for you can change this setting as many times as you want!")
+            sleep(2)
+    else:
+        print("What?...You know what,let's try that again.")
+        sleep(2)
+
+##Set speed##
 if art_speed_value != "":
     set_speed(art_speed_value)
 
+##Clear screen##
+clear_screen()
 
-
-print("Look at turtle window to experience I N F I N I T Y",end="")
-
+#print("Look at turtle window to experience I N F I N I T Y")
+#Individual number arts#
 if a == 1:
-    print(" Number 1:Circle of circles")
-    while infintyvarbilbe != 100:
-        color("red")
-        circle(100)
-        left(1)
+    print("Number 1:Circle of circles")
+    if omega_mode:
+        colour = colour_function()
+        raduis = raduis_function()
+        offset = offset_function()
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_one(colour,raduis,offset)
+    else:
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_one()
 if a == 2:
-    print(" Number 2:Semiflower")
-    while infintyvarbilbe != 100:
-        color("orange")
-        circle(100 , 180)
-        left(90)
-        forward(1)
-        left(1)
+    print("Number 2:Semiflower")
+    if omega_mode:
+        colour = 0
+        raduis = 0
+        left_offset = 0
+        forward_offset = 0
+        while colour == 0:
+            colour = input("Please input a colour (or type 'list' to see all our avavible colours(we pretty much support all of them,so there's no need to worry yourself :D ))").strip()
+            if colour == "list":
+                print("The Number Art REBOOT colour libary:",colour_libary,sep="\n")
+                colour = 0
+                print("\n\n\n\n\n")
+            else:
+                try:
+                    color(colour)
+                except:
+                    print("We're sorry,but unfortunately that color is not in our colour libary.Please try again")
+                    colour = 0
+                    print("\n\n\n\n\n")
+        while raduis == 0:
+            raduis = int(input("Please enter a raduis value:"))
+            if raduis < 1:
+                print("Sorry,but you can't have negiative or zero radii.Please trya again")
+                raduis = 0
+        offset = int(input("Please enter a offset(to the left) value:"))
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_one(colour,raduis,offset)
+    else:
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_one()
 
 if a == 3:
     print(" Number 3:l e m o n")
@@ -1943,8 +2209,6 @@ if a == 23 :
     ht()
     done()
     exitonclick()
-
-
 
 
 
