@@ -1,8 +1,15 @@
-#Number_art_REBOOT v1.0
-#Date:18/03/26
+#Number_art_REBOOT v1.4
+#Date:27/03/26
 #Made by: @M0bile132022
 #NOTICE:Don't remove credit
-'''Description: A program that makes satisfiying infinite art with turtle'''
+'''Description: A program that makes satisfiying infinite art with the Turtle Module!
+
+
+
+
+Tool Tip 1:Try putting numbers that share common factors to get some pretty sastifying results!
+Tool Tip 2:The best number art uses a mixture of extremely big numbers againist small ones(try to keep the offset values smaller than the lenght values)
+Tool Tip 3:By making the offset values negiative,you can invert the direction of the art formation'''
 
 #Imports#
 from turtle import *
@@ -12,6 +19,10 @@ from os import *
 from admin_cmd import *
 #Varibles+set default speed#
 infintyvarbilbe = 1
+tips = ["Tool Tip 1:Try putting numbers that share common factors to get some pretty sastifying results!",
+"Tool Tip 2:The best number arts uses a mixture of extremely big numbers againist small ones(try to keep the offset values smaller than the lenght values...)!",
+"Tool Tip 3:By making the offset values negiative,you can invert the direction of the art formation!",
+"Tool Tip 4:Art is a verstatile form of media,so don't be disheartend if your not sastified the frist time!"]
 speed(1000)
 colour_libary = '''aliceblue
 antiquewhite
@@ -181,6 +192,7 @@ def clear_screen():
     else:
         print("\n\n\n\n\n")
 def colour_function():
+    '''Asks for colour'''
     colour = 0
     while colour == 0:
         colour = input("Please input a colour (or type 'list' to see all our avavible colours(we pretty much support all of them,so there's no need to worry yourself :D )):").strip()
@@ -197,23 +209,32 @@ def colour_function():
                 print("\n\n\n\n\n")
     return colour
 def raduis_function():
+    '''Asks for raduis'''
     raduis = 0
     while raduis == 0:
         raduis = int(input("Please enter a raduis value:"))
         if raduis < 1:
             print("Sorry,but you can't have negiative or zero radii.Please try again")
             raduis = 0
+            print("\n\n\n\n\n")
     return raduis
 def offset_function():
-    offset = int(input("Please enter a offset(to the left) value:"))
+    '''Asks for offset'''
+    offset = int(input("Please enter an offset value:"))
     return offset
+def distance_function():
+    '''Asks for distance'''
+    distance = 0
+    while distance == 0:
+        distance = int(input("Please enter a distance value:"))
+    return distance
 def number_art_one(colour="red",raduis=100,offset=1):
     '''Executes number art 1'''
     while infintyvarbilbe != 100:
         color(colour)
         circle(raduis)
         left(offset)
-def number_art_two(colour="orange",raduis=100,left_offset=1,forward_offset=1):
+def number_art_two(colour="orange",raduis=100,offset=1):
     '''Executes number art 2'''
     #Consants#
     EXTENT = 180
@@ -221,11 +242,30 @@ def number_art_two(colour="orange",raduis=100,left_offset=1,forward_offset=1):
     #Main code#
     while infintyvarbilbe != 100:
         color(colour)
-        circle(raduis , EXTENT)
+        circle(raduis,EXTENT)
         left(ANGLE)
-        forward(forward_offset)
-        left(left_offset)
-
+        forward(offset)
+        left(offset)
+def number_art_three(colour="yellow",distance=100,offset=1):
+    #Consants#
+    ANGLE = 120
+    #Main code#
+    while infintyvarbilbe != 100:
+        color(colour)
+        for i in range(3):
+            forward(distance)
+            left(ANGLE)
+        left(offset)
+def number_art_four(colour="lime",distance=100,offset=1):
+    #Consants#
+    ANGLE = 90
+    while infintyvarbilbe != 100:
+        color(colour)
+        for i in range(4):
+            forward(distance)
+            right(ANGLE)
+        left(offset)
+goto(0,0)
 #Main code#
 
 ##Intro##
@@ -256,10 +296,13 @@ if art_speed_value != "":
 ##Clear screen##
 clear_screen()
 
-#print("Look at turtle window to experience I N F I N I T Y")
+##Random tool tip##
+print(choice(tips))
+print("\n\n\n")
+
 #Individual number arts#
 if a == 1:
-    print("Number 1:Circle of circles")
+    print("     Number 1:Circle of circles")
     if omega_mode:
         colour = colour_function()
         raduis = raduis_function()
@@ -270,53 +313,38 @@ if a == 1:
         print("Now just look at turtle window to experience I N F I N I T Y...")
         number_art_one()
 if a == 2:
-    print("Number 2:Semiflower")
+    print("     Number 2:Semiflower")
     if omega_mode:
-        colour = 0
-        raduis = 0
-        left_offset = 0
-        forward_offset = 0
-        while colour == 0:
-            colour = input("Please input a colour (or type 'list' to see all our avavible colours(we pretty much support all of them,so there's no need to worry yourself :D ))").strip()
-            if colour == "list":
-                print("The Number Art REBOOT colour libary:",colour_libary,sep="\n")
-                colour = 0
-                print("\n\n\n\n\n")
-            else:
-                try:
-                    color(colour)
-                except:
-                    print("We're sorry,but unfortunately that color is not in our colour libary.Please try again")
-                    colour = 0
-                    print("\n\n\n\n\n")
-        while raduis == 0:
-            raduis = int(input("Please enter a raduis value:"))
-            if raduis < 1:
-                print("Sorry,but you can't have negiative or zero radii.Please trya again")
-                raduis = 0
-        offset = int(input("Please enter a offset(to the left) value:"))
+        colour = colour_function()
+        raduis = raduis_function()
+        offset = offset_function()
         print("Now just look at turtle window to experience I N F I N I T Y...")
-        number_art_one(colour,raduis,offset)
+        number_art_two(colour,raduis,offset)
     else:
         print("Now just look at turtle window to experience I N F I N I T Y...")
-        number_art_one()
-
+        number_art_two()
 if a == 3:
-    print(" Number 3:l e m o n")
-    while infintyvarbilbe != 100:
-        color("yellow")
-        for i in range(3):
-            forward(100)
-            left(120)
-        left(1)
+    print("     Number 3:l e m o n")
+    if omega_mode:
+        colour = colour_function()
+        distance = distance_function()
+        offset = offset_function()
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_three(colour,distance,offset)
+    else:
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_three()
 if a == 4:
-    print(" Number 4:Twist Tower")
-    while infintyvarbilbe != 100:
-        color("lime")
-        for i in range(4):
-            forward(100)
-            right(90)
-        left(1)
+    print("     Number 4:Twist Tower")
+    if omega_mode:
+        colour = colour_function()
+        distance = distance_function()
+        offset = offset_function()
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_four(colour,distance,offset)
+    else:
+        print("Now just look at turtle window to experience I N F I N I T Y...")
+        number_art_four()
 if a == 5:
     print(" Number 5:Blue Metroid creature thing")
     while infintyvarbilbe != 100:
@@ -2209,7 +2237,6 @@ if a == 23 :
     ht()
     done()
     exitonclick()
-
 
 
 
