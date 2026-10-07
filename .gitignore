@@ -162,3 +162,20 @@ PRACTICAL_SECTOR/THE ULTIMATE FOLDER/XP Boost for Tuesday 15th April 10pm.json
 sparks for print.txt
 PRACTICAL_SECTOR/THE ULTIMATE FOLDER/THE_ULTIMATE_CALC.py
 PRACTICAL_SECTOR/THE ULTIMATE FOLDER/THE ULTIMATE LOG.txt
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db

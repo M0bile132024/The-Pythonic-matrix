@@ -5,9 +5,9 @@ import sys
 import random
 from typing import Text
 from typing import List
-from Internet_lore_Text_adventure_1 import know_alexa_escaped,was_it_alexa
-from Internet_lore_Text_adventure_1 import q1,q2,q3,q4
-from Internet_lore_Text_adventure_1 import name
+from src.games.internet_lore_adventure.adventure_v1 import know_alexa_escaped,was_it_alexa
+from src.games.internet_lore_adventure.adventure_v1 import q1,q2,q3,q4
+from src.games.internet_lore_adventure.adventure_v1 import name
 
 print("Hello " + name + ", welcome to the Internet Lore text adventure game (PT.2)!")
 print("RECAP: You are a new user in the Internet Lore universe.")

@@ -246,8 +246,8 @@ mass_units = "Mass units"
 pressure_units = "Pressure units"
 force_units = "Force units"
 try:
+    pyperclip.copy("Test")
     copy_to_keyboard_true = True
-    copy_to_keyboard("Test",copy_to_keyboard_true)
 except:
     print("Pyperclip not installed or not working,copy to clipboard function has been disabled.\n\n\n")
     copy_to_keyboard_true = False

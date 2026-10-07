@@ -16,7 +16,7 @@ from turtle import *
 from random import *
 from time import *
 from os import *
-from admin_cmd import *
+from src.utilities.admin_cmd import *
 #Varibles+set default speed#
 infintyvarbilbe = 1
 tips = ["Tool Tip 1:Try putting numbers that share common factors to get some pretty sastifying results!",

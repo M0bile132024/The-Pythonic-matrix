@@ -5,7 +5,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import random
-import Perceptron_Lib as Perceptron_Lib
+import src.libraries.Perceptron_Lib as Perceptron_Lib
 #Functions VVVVVVVV
 def activate(activate_inputs,activate_weights,threshold=1.5):
     sum_value = 0
